@@ -1,0 +1,15 @@
+{
+  /*
+    1. For all files except JS files:
+        Format file on save with prettier extension
+  */
+  "editor.formatOnSave": true,
+  "[javascript]": {
+    "editor.formatOnSave": false,
+    /* 2. For JS files:
+        Lint with eslint, format with prettier configured within eslint */
+    "editor.codeActionsOnSave": {
+      "source.fixAll.eslint": true
+    }
+  }
+}
