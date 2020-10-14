@@ -1,0 +1,13 @@
+#!/bin/bash
+
+FILES=$(git diff --cached --name-only --diff-filter=d "*.js" | sed 's/ /\\ /g')
+
+if [ -z "$FILES" ]; then
+    exit 0
+fi
+
+echo "$FILES" | xargs npx prettier --check
+
+if [ $? -ne 0 ]; then
+    exit 1
+fi
