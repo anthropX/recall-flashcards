@@ -6,7 +6,9 @@ function Dashboard() {
   return (
     <div className='dashboard'>
       <Container className='text-light'>
-        <h1 className='display-4 pt-5 mb-0'>Recall flashcards</h1>
+        <h1 className='display-4 pt-5 mb-0'>
+          <span className='accented'>Recall</span> flashcards
+        </h1>
         <p className='lead w-75 mb-4'>
           Create flashcards for free! Break down your study material into small
           digestible bits of information. Learn until you reach mastery. No ads

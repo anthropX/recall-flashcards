@@ -8,7 +8,9 @@ function CustomNavbar() {
   return (
     <Navbar variant='dark' bg='danger' expand='lg'>
       <Container>
-        <Navbar.Brand href='#home'>Recall</Navbar.Brand>
+        <Navbar.Brand href='#home' className='navbar__brand accented'>
+          recall
+        </Navbar.Brand>
         <Navbar.Toggle aria-controls='basic-navbar-nav' />
         <Navbar.Collapse id='basic-navbar-nav'>
           <Nav className='mr-auto'>
