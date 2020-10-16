@@ -1,2 +1,9 @@
 /* import bootstrap to set changes */
-@import "../node_modules/bootstrap/scss/bootstrap";
+@import '../node_modules/bootstrap/scss/bootstrap';
+
+.dashboard {
+  background: url('./img/dashboard-background.jpg');
+  background-size: cover;
+  background-position: center;
+  height: calc(100vh - 56px);
+}
