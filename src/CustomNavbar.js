@@ -3,6 +3,7 @@ import Container from 'react-bootstrap/Container'
 import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
 import Button from 'react-bootstrap/Button'
+import { Link } from 'react-router-dom'
 
 function CustomNavbar() {
   return (
@@ -17,7 +18,10 @@ function CustomNavbar() {
             <Nav.Link href='#home'>Decks</Nav.Link>
             <Nav.Link href='#link'>Create Deck</Nav.Link>
           </Nav>
-          <div>
+          <div className='d-flex flex-column flex-lg-row'>
+            <Link to='/about' className='d-flex my-2 my-lg-0'>
+              <i className='navbar__about__icon fas fa-question-circle text-light align-self-center mr-3' />
+            </Link>
             <Button
               className='text-danger px-3 mt-2 mt-lg-0 w-100 w-lg-auto'
               variant='light'
