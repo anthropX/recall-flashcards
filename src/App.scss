@@ -2,7 +2,8 @@
 @import '../node_modules/bootstrap/scss/bootstrap';
 
 .dashboard {
-  background: url('./img/dashboard-background.jpg');
+  background: linear-gradient(#2f2f2fb5, #2f2f2f59),
+    url('./img/dashboard-background.jpg');
   background-size: cover;
   background-position: left 0px;
   height: calc(100vh - 56px);
