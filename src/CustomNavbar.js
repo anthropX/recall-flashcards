@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom'
 
 function CustomNavbar() {
   return (
-    <Navbar variant='dark' bg='danger' expand='lg'>
+    <Navbar variant='dark' bg='danger' expand='md'>
       <Container>
         <Navbar.Brand
           href='#home'
@@ -21,12 +21,12 @@ function CustomNavbar() {
             <Nav.Link href='#link'>Create Deck</Nav.Link>
           </Nav>
           <p className='mr-5 m-0 text-light'>Hello, Vimal!</p>
-          <div className='d-flex flex-column flex-lg-row'>
-            <Link to='/about' className='d-flex my-2 my-lg-0'>
+          <div className='d-flex flex-column flex-md-row'>
+            <Link to='/about' className='d-flex my-2 my-md-0'>
               <i className='navbar__about__icon fas fa-question-circle text-light align-self-center mr-3' />
             </Link>
             <Button
-              className='text-danger px-3 mt-2 mt-lg-0 w-100 w-lg-auto'
+              className='text-danger px-3 mt-2 mt-md-0 w-100 w-md-auto'
               variant='light'
               size='sm'>
               Log In
