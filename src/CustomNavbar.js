@@ -18,6 +18,7 @@ function CustomNavbar() {
             <Nav.Link href='#home'>Decks</Nav.Link>
             <Nav.Link href='#link'>Create Deck</Nav.Link>
           </Nav>
+          <p className='mr-5 m-0 text-light'>Hello, Vimal!</p>
           <div className='d-flex flex-column flex-lg-row'>
             <Link to='/about' className='d-flex my-2 my-lg-0'>
               <i className='navbar__about__icon fas fa-question-circle text-light align-self-center mr-3' />
