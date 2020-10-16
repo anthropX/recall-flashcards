@@ -33,6 +33,7 @@ function CustomNavbar() {
           <div className='d-flex flex-column flex-md-row'>
             <Link to='/about' className='d-flex mb-3 mt-2 my-md-0'>
               <i className='navbar__about__icon fas fa-question-circle text-light align-self-center mr-3' />
+              <span className='sr-only'>About</span>
             </Link>
             <Button
               className='text-danger px-3 mt-2 mt-md-0 w-100 w-md-auto'
