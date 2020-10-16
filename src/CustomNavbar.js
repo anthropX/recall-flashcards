@@ -4,6 +4,7 @@ import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
 import Button from 'react-bootstrap/Button'
 import { Link } from 'react-router-dom'
+import DarkModeSwitch from './DarkModeSwitch'
 
 function CustomNavbar() {
   return (
@@ -21,13 +22,16 @@ function CustomNavbar() {
         <Navbar.Collapse id='basic-navbar-nav'>
           <Nav className='mr-auto'>
             <Nav.Link href='#home'>Decks</Nav.Link>
-            <Nav.Link href='#link'>Create Deck</Nav.Link>
+            <Nav.Link href='#link' className='mr-2'>
+              Create Deck
+            </Nav.Link>
+            <DarkModeSwitch />
           </Nav>
           <p className='navbar--expanded__welcome mr-5 m-0 text-light d-none d-md-block'>
             Hello, Vimal!
           </p>
           <div className='d-flex flex-column flex-md-row'>
-            <Link to='/about' className='d-flex my-2 my-md-0'>
+            <Link to='/about' className='d-flex mb-3 mt-2 my-md-0'>
               <i className='navbar__about__icon fas fa-question-circle text-light align-self-center mr-3' />
             </Link>
             <Button
