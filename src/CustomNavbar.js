@@ -18,7 +18,10 @@ function CustomNavbar() {
             <Nav.Link href='#link'>Create Deck</Nav.Link>
           </Nav>
           <div>
-            <Button className='text-danger' variant='light' size='sm'>
+            <Button
+              className='text-danger px-3 mt-2 mt-lg-0 w-100 w-lg-auto'
+              variant='light'
+              size='sm'>
               Log In
             </Button>
           </div>
