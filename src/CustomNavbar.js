@@ -9,7 +9,9 @@ function CustomNavbar() {
   return (
     <Navbar variant='dark' bg='danger' expand='lg'>
       <Container>
-        <Navbar.Brand href='#home' className='navbar__brand accented'>
+        <Navbar.Brand
+          href='#home'
+          className='navbar__brand position-relative accented'>
           recall
         </Navbar.Brand>
         <Navbar.Toggle aria-controls='basic-navbar-nav' />
