@@ -18,9 +18,15 @@
   top: 0.15rem;
 }
 
-.navbar__about__icon {
-  font-size: 28px;
-  margin-top: 0.1rem;
+.navbar__about {
+  &:hover {
+    text-decoration: none;
+  }
+
+  .navbar__about__icon {
+    font-size: 28px;
+    margin-top: 0.1rem;
+  }
 }
 
 @media only screen and (max-width: 540px) {

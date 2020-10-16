@@ -31,7 +31,9 @@ function CustomNavbar() {
             Hello, Vimal!
           </p>
           <div className='d-flex flex-column flex-md-row'>
-            <Link to='/about' className='d-flex mb-3 mt-2 my-md-0'>
+            <Link
+              to='/about'
+              className='navbar__about d-flex mb-3 mt-2 my-md-0'>
               <i className='navbar__about__icon fas fa-question-circle text-light align-self-center mr-3' />
               <span className='sr-only'>About</span>
             </Link>
