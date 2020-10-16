@@ -16,3 +16,13 @@
   position: relative;
   top: 0.15rem;
 }
+
+@media only screen and (max-width: 540px) {
+  .dashboard__heading {
+    font-size: 2.2rem;
+  }
+
+  .dashboard__text {
+    width: 100% !important;
+  }
+}
