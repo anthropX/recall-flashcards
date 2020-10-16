@@ -14,13 +14,18 @@ function CustomNavbar() {
           className='navbar__brand position-relative accented'>
           recall
         </Navbar.Brand>
+        <p className='navbar--collapsed__welcome mr-5 m-0 text-light d-md-none'>
+          Hello, Vimal!
+        </p>
         <Navbar.Toggle aria-controls='basic-navbar-nav' />
         <Navbar.Collapse id='basic-navbar-nav'>
           <Nav className='mr-auto'>
             <Nav.Link href='#home'>Decks</Nav.Link>
             <Nav.Link href='#link'>Create Deck</Nav.Link>
           </Nav>
-          <p className='mr-5 m-0 text-light'>Hello, Vimal!</p>
+          <p className='navbar--expanded__welcome mr-5 m-0 text-light d-none d-md-block'>
+            Hello, Vimal!
+          </p>
           <div className='d-flex flex-column flex-md-row'>
             <Link to='/about' className='d-flex my-2 my-md-0'>
               <i className='navbar__about__icon fas fa-question-circle text-light align-self-center mr-3' />
