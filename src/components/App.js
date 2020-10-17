@@ -5,7 +5,7 @@ import CustomNavbar from './CustomNavbar'
 import Dashboard from './Dashboard'
 import Footer from './Footer'
 
-function App() {
+const App = () => {
   return (
     <div className='App min-vh-100 d-flex flex-column position-relative'>
       <CustomNavbar />

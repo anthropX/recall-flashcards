@@ -6,7 +6,7 @@ import Button from 'react-bootstrap/Button'
 import { Link } from 'react-router-dom'
 import DarkModeSwitch from './DarkModeSwitch'
 
-function CustomNavbar() {
+const CustomNavbar = () => {
   return (
     <Navbar variant='dark' bg='danger' expand='md'>
       <Container>

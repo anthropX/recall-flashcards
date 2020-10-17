@@ -1,7 +1,7 @@
 import React from 'react'
 import Button from 'react-bootstrap/Button'
 
-function Dashboard() {
+const Dashboard = () => {
   return (
     <div className='dashboard'>
       <h1 className='dashboard__heading display-4 pt-5 mb-0'>
