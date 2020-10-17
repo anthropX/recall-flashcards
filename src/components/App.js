@@ -3,6 +3,8 @@ import { Switch, Route, useLocation } from 'react-router-dom'
 import Container from 'react-bootstrap/Container'
 import CustomNavbar from './CustomNavbar'
 import Dashboard from './Dashboard'
+import Login from './Login'
+import Register from './Register'
 import About from './About'
 import Footer from './Footer'
 
@@ -22,6 +24,12 @@ const App = () => {
             </Route>
             <Route path='/about'>
               <About />
+            </Route>
+            <Route path='/login'>
+              <Login />
+            </Route>
+            <Route path='/register'>
+              <Register />
             </Route>
           </Switch>
         </Container>

@@ -88,6 +88,13 @@ footer {
   text-decoration: underline;
 }
 
+// LOGIN
+
+.login__form,
+.register__form {
+  margin-top: 2rem;
+}
+
 @media only screen and (max-width: 540px) {
   .dashboard__heading {
     font-size: 2.2rem;

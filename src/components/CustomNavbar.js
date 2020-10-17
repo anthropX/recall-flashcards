@@ -2,7 +2,6 @@ import React from 'react'
 import Container from 'react-bootstrap/Container'
 import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
-import Button from 'react-bootstrap/Button'
 import { Link } from 'react-router-dom'
 import DarkModeSwitch from './DarkModeSwitch'
 
@@ -37,12 +36,11 @@ const CustomNavbar = () => {
               <i className='navbar__about__icon fas fa-question-circle text-light align-self-center mr-3' />
               <span className='sr-only'>About</span>
             </Link>
-            <Button
-              className='text-danger px-3 mt-2 mt-md-0 w-100 w-md-auto'
-              variant='light'
-              size='sm'>
+            <Link
+              to='/login'
+              className='btn btn sm btn-light text-danger px-3 mt-2 mt-md-0 w-100 w-md-auto'>
               Log In
-            </Button>
+            </Link>
           </div>
         </Navbar.Collapse>
       </Container>
