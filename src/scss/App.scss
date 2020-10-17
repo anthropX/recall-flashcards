@@ -1,5 +1,5 @@
 /* import bootstrap to set changes */
-@import '../node_modules/bootstrap/scss/bootstrap';
+@import '../../node_modules/bootstrap/scss/bootstrap';
 @import './Switch.scss';
 
 .App {
@@ -7,12 +7,11 @@
 }
 
 .main-content {
-
   padding-bottom: 7.5rem;
 
   &--wall {
     background: linear-gradient(#2f2f2fb5, #2f2f2f59),
-      url('./img/dashboard-background.jpg');
+      url('../img/dashboard-background.jpg');
     background-size: cover;
     background-position: left 0px;
   }
