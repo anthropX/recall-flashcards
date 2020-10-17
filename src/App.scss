@@ -2,6 +2,10 @@
 @import '../node_modules/bootstrap/scss/bootstrap';
 @import './Switch.scss';
 
+body {
+  font-family: 'Open Sans', sans-serif;
+}
+
 .dashboard {
   background: linear-gradient(#2f2f2fb5, #2f2f2f59),
     url('./img/dashboard-background.jpg');
