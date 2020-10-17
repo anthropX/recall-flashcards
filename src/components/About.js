@@ -10,9 +10,9 @@ const About = () => {
         href='https://vimalpa.tel'
         target='_blank'
         rel='noreferrer'
-        className='about__link'>
+        className='link--accented text-dark'>
         Developer: Vimal Patel
-        <i className='about__link__icon fas fa-external-link-alt fa-sm ml-1' />
+        <i className='fas fa-external-link-alt fa-sm ml-1' />
       </a>
       <hr className='hr ml-0' />
 
