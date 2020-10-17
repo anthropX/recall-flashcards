@@ -5,7 +5,7 @@ import Dashboard from './Dashboard'
 
 function App() {
   return (
-    <div className='App'>
+    <div className='App min-vh-100 d-flex flex-column'>
       <CustomNavbar />
 
       <Switch>

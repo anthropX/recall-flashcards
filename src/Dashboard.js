@@ -4,7 +4,7 @@ import Button from 'react-bootstrap/Button'
 
 function Dashboard() {
   return (
-    <div className='dashboard'>
+    <div className='dashboard flex-grow-1'>
       <Container className='text-light'>
         <h1 className='dashboard__heading display-4 pt-5 mb-0'>
           <span className='accented'>Recall </span> flashcards
@@ -14,7 +14,9 @@ function Dashboard() {
           digestible bits of information. Learn until you reach mastery. No ads
           whatsoever for full immersive learning.
         </p>
-        <Button variant='danger'>Get Started</Button>
+        <Button variant='danger' className='mb-5'>
+          Get Started
+        </Button>
       </Container>
     </div>
   )
