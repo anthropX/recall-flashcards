@@ -9,7 +9,7 @@ const About = () => {
       <a
         href='https://vimalpa.tel'
         target='_blank'
-        rel='noreferrer'
+        rel='noopener noreferrer'
         className='link--accented text-dark'>
         Developer: Vimal Patel
         <i className='fas fa-external-link-alt fa-sm ml-1' />
