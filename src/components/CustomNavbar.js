@@ -11,7 +11,7 @@ const CustomNavbar = () => {
       <Container>
         <Navbar.Brand
           href='#home'
-          className='navbar__brand position-relative accented'>
+          className='navbar__brand position-relative text--accented'>
           recall
         </Navbar.Brand>
         <p className='navbar--collapsed__welcome mr-5 m-0 text-light d-md-none'>

@@ -26,6 +26,14 @@
   max-width: 30rem;
 }
 
+.text--accented {
+  font-family: 'Homemade Apple', cursive;
+}
+
+.link--accented {
+  text-decoration: underline;
+}
+
 // OVERRIDE DEFAULTS
 
 textarea {
@@ -58,10 +66,6 @@ textarea {
   }
 }
 
-.accented {
-  font-family: 'Homemade Apple', cursive;
-}
-
 .navbar__brand {
   top: 0.15rem;
 }
@@ -83,10 +87,6 @@ footer {
 }
 
 // PAGES - ABOUT
-
-.link--accented {
-  text-decoration: underline;
-}
 
 // LOGIN
 
