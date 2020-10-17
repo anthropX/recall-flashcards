@@ -11,6 +11,10 @@
     url('./img/dashboard-background.jpg');
   background-size: cover;
   background-position: left 0px;
+
+  .dashboard__button {
+    margin-bottom: 7.5rem;
+  }
 }
 
 .accented {
@@ -30,6 +34,11 @@
     font-size: 28px;
     margin-top: 0.1rem;
   }
+}
+
+footer {
+  bottom: 0;
+  font-size: 0.75rem;
 }
 
 @media only screen and (max-width: 540px) {

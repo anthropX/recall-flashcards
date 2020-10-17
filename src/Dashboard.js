@@ -14,7 +14,7 @@ function Dashboard() {
           digestible bits of information. Learn until you reach mastery. No ads
           whatsoever for full immersive learning.
         </p>
-        <Button variant='danger' className='mb-5'>
+        <Button variant='danger' className='dashboard__button'>
           Get Started
         </Button>
       </Container>
