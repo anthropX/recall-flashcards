@@ -3,6 +3,7 @@ import { Switch, Route, useLocation } from 'react-router-dom'
 import Container from 'react-bootstrap/Container'
 import CustomNavbar from './CustomNavbar'
 import Dashboard from './Dashboard'
+import About from './About'
 import Footer from './Footer'
 
 const App = () => {
@@ -18,6 +19,9 @@ const App = () => {
           <Switch>
             <Route exact path='/'>
               <Dashboard />
+            </Route>
+            <Route path='/about'>
+              <About />
             </Route>
           </Switch>
         </Container>

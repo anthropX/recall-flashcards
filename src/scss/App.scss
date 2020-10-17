@@ -2,6 +2,43 @@
 @import '../../node_modules/bootstrap/scss/bootstrap';
 @import './Switch.scss';
 
+// UTILITY
+
+.display {
+  &-5 {
+    margin-top: 1.5rem !important;
+    font-size: 2.75rem;
+    font-weight: 300;
+  }
+
+  &-6 {
+    font-size: 1.5rem;
+    font-weight: 400;
+  }
+}
+
+.hr {
+  margin-top: 2rem;
+  max-width: 30rem;
+}
+
+.form {
+  max-width: 30rem;
+}
+
+// OVERRIDE DEFAULTS
+
+textarea {
+  resize: none;
+}
+
+.form-control:focus {
+  border-color: #dc354590;
+  box-shadow: 0 0 0 3px #dc354535;
+}
+
+// SKELETON
+
 .App {
   font-family: 'Open Sans', sans-serif;
 }
@@ -43,6 +80,13 @@
 footer {
   bottom: 0;
   font-size: 0.75rem;
+}
+
+// PAGES - ABOUT
+
+.about__link {
+  color: $dark;
+  text-decoration: underline;
 }
 
 @media only screen and (max-width: 540px) {
