@@ -3,27 +3,31 @@ import Container from 'react-bootstrap/Container'
 import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
 import { Link } from 'react-router-dom'
+import { LinkContainer } from 'react-router-bootstrap'
 import DarkModeSwitch from './DarkModeSwitch'
 
 const CustomNavbar = () => {
   return (
     <Navbar variant='dark' bg='danger' expand='md'>
       <Container>
-        <Navbar.Brand
-          href='#home'
-          className='navbar__brand position-relative text--accented'>
-          recall
-        </Navbar.Brand>
+        <LinkContainer to='/'>
+          <Navbar.Brand className='navbar__brand position-relative text--accented'>
+            recall
+          </Navbar.Brand>
+        </LinkContainer>
         <p className='navbar--collapsed__welcome mr-5 m-0 text-light d-md-none'>
           Hello, Vimal!
         </p>
         <Navbar.Toggle aria-controls='basic-navbar-nav' />
         <Navbar.Collapse id='basic-navbar-nav'>
           <Nav className='mr-auto'>
-            <Nav.Link href='#home'>Decks</Nav.Link>
-            <Nav.Link href='#link' className='mr-2'>
-              Create Deck
-            </Nav.Link>
+            <LinkContainer to='/decks'>
+              <Nav.Link>Decks</Nav.Link>
+            </LinkContainer>
+            <LinkContainer to='/decks/new'>
+              <Nav.Link className='mr-2'>Create Deck</Nav.Link>
+            </LinkContainer>
+
             <DarkModeSwitch />
           </Nav>
           <p className='navbar--expanded__welcome mr-5 m-0 text-light d-none d-md-block'>

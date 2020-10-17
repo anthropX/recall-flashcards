@@ -1,5 +1,5 @@
 import React from 'react'
-import Button from 'react-bootstrap/Button'
+import { Link } from 'react-router-dom'
 
 const Dashboard = () => {
   return (
@@ -12,9 +12,9 @@ const Dashboard = () => {
         digestible bits of information. Learn until you reach mastery. No ads
         whatsoever for full immersive learning.
       </p>
-      <Button variant='danger' className='dashboard__button'>
+      <Link to='/decks' className='dashboard__button btn btn-danger'>
         Get Started
-      </Button>
+      </Link>
     </div>
   )
 }
