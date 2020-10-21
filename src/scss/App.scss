@@ -69,7 +69,16 @@ textarea {
     }
 
     .hr {
-      background-color: $secondary;
+      background-color: #f8f9fa7f;
+    }
+
+    .form-control {
+      color: $light;
+      background-color: transparent;
+    }
+
+    .form-control::placeholder {
+      color: #f8f9fa7a;
     }
   }
 }
