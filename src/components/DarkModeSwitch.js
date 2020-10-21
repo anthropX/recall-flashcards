@@ -18,7 +18,7 @@ const DarkModeSwitch = ({ toggleDark, isDark }) => {
         id='switch__input'
         className='switch__input'
         onChange={handleChange}
-        value={isDark}
+        checked={isDark}
       />
       <div className='switch__slider'>
         <div className='switch__knob'>
