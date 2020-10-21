@@ -1,10 +1,17 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import toggleDark from '../actions/switch'
 
 const DarkModeSwitch = ({ toggleDark, isDark }) => {
+  useEffect(() => {
+    console.log('DarkModeSwitch useEffect!')
+    if (localStorage.isDark === 'true') toggleDark()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
   const handleChange = () => {
+    localStorage.setItem('isDark', !isDark)
     toggleDark()
   }
 
