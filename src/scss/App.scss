@@ -2,6 +2,13 @@
 @import '../../node_modules/bootstrap/scss/bootstrap';
 @import './Switch.scss';
 
+// VARIABLES
+
+$text-secondary-dark-mode: #f8f9fa7a;
+$bg-dark-mode: #302d2d;
+$wall-overlay-1: #302d2db5;
+$wall-overlay-2: #302d2d59;
+
 // UTILITY
 
 .display {
@@ -56,20 +63,20 @@ textarea {
   padding-bottom: 7.5rem;
 
   &--wall {
-    background: linear-gradient(#302d2db5, #302d2d59),
+    background: linear-gradient($wall-overlay-1, $wall-overlay-2),
       url('../img/dashboard-background.jpg');
     background-size: cover;
     background-position: left 0px;
   }
 
   &--dark {
-    background: #302d2d;
+    background: $bg-dark-mode;
     .link--accented {
       color: $light;
     }
 
     .hr {
-      background-color: #f8f9fa7f;
+      background-color: $text-secondary-dark-mode;
     }
 
     .form-control {
@@ -78,7 +85,7 @@ textarea {
     }
 
     .form-control::placeholder {
-      color: #f8f9fa7a;
+      color: $text-secondary-dark-mode;
     }
   }
 }
