@@ -8,6 +8,7 @@ const Register = () => {
     <div className='register'>
       <h1 className='display-5 mb-1'>Register</h1>
       <p>Please enter details for registration</p>
+      <hr className='hr ml-0' />
 
       <Form className='register__form form'>
         <div className='d-flex'>

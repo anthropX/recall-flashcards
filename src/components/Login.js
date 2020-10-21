@@ -8,6 +8,7 @@ const Login = () => {
     <div className='login'>
       <h1 className='display-5 mb-1'>Sign in</h1>
       <p>Enter your login details</p>
+      <hr className='hr ml-0' />
 
       <Form className='login__form form'>
         <Form.Group controlId='form__email'>
