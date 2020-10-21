@@ -5,7 +5,7 @@ import Button from 'react-bootstrap/Button'
 
 const Login = () => {
   return (
-    <div className='login text-dark'>
+    <div className='login'>
       <h1 className='display-5 mb-1'>Sign in</h1>
       <p>Enter your login details</p>
 
@@ -37,7 +37,7 @@ const Login = () => {
 
       <p>
         Don&apos;t have an account?{' '}
-        <Link to='/register' className='link--accented text-dark'>
+        <Link to='/register' className='link--accented'>
           Register
         </Link>
       </p>

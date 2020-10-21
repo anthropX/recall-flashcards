@@ -4,13 +4,13 @@ import Button from 'react-bootstrap/Button'
 
 const About = () => {
   return (
-    <div className='about text-dark'>
+    <div className='about'>
       <h1 className='display-5 mb-1'>About</h1>
       <a
         href='https://vimalpa.tel'
         target='_blank'
         rel='noopener noreferrer'
-        className='link--accented text-dark'>
+        className='link--accented'>
         Developer: Vimal Patel
         <i className='fas fa-external-link-alt fa-sm ml-1' />
       </a>

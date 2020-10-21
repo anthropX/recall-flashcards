@@ -5,7 +5,7 @@ import Button from 'react-bootstrap/Button'
 
 const Register = () => {
   return (
-    <div className='register text-dark'>
+    <div className='register'>
       <h1 className='display-5 mb-1'>Register</h1>
       <p>Please enter details for registration</p>
 
@@ -53,7 +53,7 @@ const Register = () => {
       </Form>
       <p>
         Don&apos;t have an account?{' '}
-        <Link to='/login' className='link--accented text-dark'>
+        <Link to='/login' className='link--accented'>
           Sign in
         </Link>
       </p>

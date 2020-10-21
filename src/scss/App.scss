@@ -31,6 +31,7 @@
 }
 
 .link--accented {
+  color: $dark;
   text-decoration: underline;
 }
 
@@ -55,14 +56,21 @@ textarea {
   padding-bottom: 7.5rem;
 
   &--wall {
-    background: linear-gradient(#2f2f2fb5, #2f2f2f59),
+    background: linear-gradient(#302d2db5, #302d2d59),
       url('../img/dashboard-background.jpg');
     background-size: cover;
     background-position: left 0px;
   }
 
-  &--solid {
-    background: white;
+  &--dark {
+    background: #302d2d;
+    .link--accented {
+      color: $light;
+    }
+
+    .hr {
+      background-color: $secondary;
+    }
   }
 }
 
