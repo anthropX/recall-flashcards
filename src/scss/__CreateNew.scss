@@ -1,0 +1,41 @@
+// Deck New Link
+.create-new__link {
+  display: block;
+  width: $deck-width;
+  height: $deck-height + 3.6rem;
+  z-index: 1;
+
+  // Don't enable hover on mobile
+  @media only screen and (min-width: 540px) {
+    &:hover + .create-new__graphic-box .create-new__graphic {
+      object {
+        visibility: hidden;
+      }
+      & + .create-new__graphic--hover object {
+        display: block;
+      }
+    }
+  }
+}
+
+// Set SVG dimensions
+.create-new__graphic-box {
+  width: $deck-width;
+  height: $deck-height;
+  .create-new__graphic object {
+    width: $deck-width;
+    height: $deck-height;
+  }
+  .create-new__graphic--hover object {
+    width: $deck-width;
+    height: $deck-height;
+    display: none;
+  }
+}
+
+// Deck New Title
+.create-new__title {
+  width: $deck-width;
+  font-size: 0.8rem;
+  margin-top: 1rem;
+}

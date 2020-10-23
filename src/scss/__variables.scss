@@ -1,4 +1,19 @@
+// dark mode colors
 $text-secondary-dark-mode: #f8f9fa7a;
 $bg-dark-mode: #302d2d;
+
+// overlay colors
 $wall-overlay-1: #302d2db5;
 $wall-overlay-2: #302d2d59;
+
+// deck dimensions
+$deck-card-width: 6.67rem;
+$deck-card-height: 4rem;
+$deck-card-offset: 0.5rem;
+$deck-width: $deck-card-width + 2 * $deck-card-offset;
+$deck-height: $deck-card-height + 2 * $deck-card-offset;
+
+// deck card colors
+$deck-card-dark-border: #00000028;
+$deck-card-light-border: #00000077;
+$deck-card-shadow: #00000079;

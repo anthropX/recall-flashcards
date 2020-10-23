@@ -9,6 +9,7 @@ import Login from './Login'
 import Register from './Register'
 import About from './About'
 import Footer from './Footer'
+import DecksPage from './DecksPage'
 
 const App = ({ isDark }) => {
   const ColorStyle = () => {
@@ -35,6 +36,9 @@ const App = ({ isDark }) => {
             </Route>
             <Route path='/register'>
               <Register />
+            </Route>
+            <Route exact path='/decks'>
+              <DecksPage />
             </Route>
           </Switch>
         </Container>

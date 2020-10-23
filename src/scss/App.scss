@@ -2,6 +2,8 @@
 @import '../../node_modules/bootstrap/scss/bootstrap';
 @import './__variables';
 @import './__DarkModeSwitch';
+@import './__CreateNew';
+@import './__Aside';
 
 // UTILITY
 
@@ -18,6 +20,18 @@
   }
 }
 
+.h6 {
+  font-size: 1.075rem;
+}
+
+.p1 {
+  font-size: 0.9rem;
+}
+
+.p2 {
+  font-size: 0.8rem;
+}
+
 .hr {
   margin-top: 2rem;
   max-width: 30rem;
@@ -25,6 +39,10 @@
 
 .form {
   max-width: 30rem;
+}
+
+.progress {
+  height: 0.9rem !important;
 }
 
 .text--accented {
@@ -81,6 +99,10 @@ textarea {
     .form-control::placeholder {
       color: $text-secondary-dark-mode;
     }
+
+    .text-muted {
+      color: $text-secondary-dark-mode !important;
+    }
   }
 }
 
@@ -102,6 +124,49 @@ textarea {
 footer {
   bottom: 0;
   font-size: 0.75rem;
+}
+
+// PAGES: DECKSPAGE
+
+// decks main
+.decks-main {
+  max-width: 44rem;
+}
+
+// deck
+.deck-graphic__cards {
+  width: $deck-width;
+  height: $deck-height;
+
+  .deck-graphic__card {
+    width: $deck-card-width;
+    height: $deck-card-height;
+    border: $deck-card-light-border 1px solid;
+
+    &:first-of-type {
+      bottom: 0;
+      right: 0;
+    }
+    &:nth-of-type(2) {
+      bottom: -1 * $deck-card-offset;
+      right: $deck-card-offset;
+    }
+    &:last-of-type {
+      bottom: -2 * $deck-card-offset;
+      right: 2 * $deck-card-offset;
+    }
+  }
+}
+
+.main-content--dark .deck-graphic__card {
+  border: $deck-card-dark-border 1px solid;
+  box-shadow: 0 3px 4px $deck-card-shadow;
+}
+
+.deck-graphic__name {
+  width: $deck-card-width;
+  font-size: 0.8rem;
+  margin-top: 2.25rem;
 }
 
 @media only screen and (max-width: 540px) {
