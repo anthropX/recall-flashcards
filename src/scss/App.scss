@@ -1,13 +1,7 @@
 /* import bootstrap to set changes */
 @import '../../node_modules/bootstrap/scss/bootstrap';
-@import './Switch.scss';
-
-// VARIABLES
-
-$text-secondary-dark-mode: #f8f9fa7a;
-$bg-dark-mode: #302d2d;
-$wall-overlay-1: #302d2db5;
-$wall-overlay-2: #302d2d59;
+@import './__variables';
+@import './Switch';
 
 // UTILITY
 
