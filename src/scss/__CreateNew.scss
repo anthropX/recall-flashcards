@@ -1,59 +1,81 @@
-// Deck New Link
-
 .create-new {
-  width: $deck-width;
+  width: max-content;
+  height: max-content;
   padding: 10px;
   margin: -10px;
   border: 1.25px transparent solid;
-}
 
-.create-new__link {
-  display: block;
-  width: $deck-width;
-  height: $deck-height + 3.75rem;
-  z-index: 1;
+  .create-new__link {
+    width: $deck-width;
 
-  // Don't enable hover on mobile
-  @media only screen and (min-width: 540px) {
-    &:hover + .create-new__graphic-box .create-new__graphic {
-      object {
-        visibility: hidden;
+    .create-new__rect {
+      width: $deck-width;
+      height: $deck-height;
+      border: 1px $dark solid;
+      border-radius: 10px;
+      margin-bottom: 1rem;
+
+      .create-new__circle {
+        width: 2.5rem;
+        height: 2.5rem;
+        border: inherit;
+        border-radius: 50%;
+
+        .create-new__plus {
+          width: 1rem;
+          height: 1px;
+          background: $dark;
+        }
+
+        .create-new__plus::after {
+          content: '';
+          display: block;
+          width: 1rem;
+          height: 1px;
+          background: inherit;
+          transform: rotate(90deg);
+        }
       }
-      & + .create-new__graphic--hover object {
-        display: block;
-      }
-    }
-
-    &:hover ~ .create-new__title {
-      color: $link-light-hover;
     }
   }
 }
 
-@media only screen and (min-width: 540px) {
-  .main-content--dark .create-new__link:hover ~ .create-new__title {
+.main-content--dark .create-new__link {
+  .create-new__rect {
+    border-color: $white;
+
+    .create-new__circle {
+      border-color: inherit;
+
+      .create-new__plus {
+        background: $white;
+
+        &::after {
+          background: inherit;
+        }
+      }
+    }
+  }
+
+  &:hover {
     color: $link-dark-hover;
   }
 }
 
-// Set SVG dimensions
-.create-new__graphic-box {
-  width: $deck-width;
-  height: $deck-height;
-  .create-new__graphic object {
-    width: $deck-width;
-    height: $deck-height;
-  }
-  .create-new__graphic--hover object {
-    width: $deck-width;
-    height: $deck-height;
-    display: none;
-  }
-}
+@media only screen and (min-width: 540px) {
+  .create-new__link:hover .create-new__rect {
+    border-color: $danger-hover;
 
-// Deck New Title
-.create-new__title {
-  width: $deck-width;
-  font-size: 0.8rem;
-  margin-top: 1rem;
+    .create-new__circle {
+      border-color: inherit;
+
+      .create-new__plus {
+        background: $danger-hover;
+
+        &::after {
+          background: inherit;
+        }
+      }
+    }
+  }
 }

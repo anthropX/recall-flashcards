@@ -1,51 +1,21 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
-import deckNewLightImg from '../img/create-light.svg'
-import deckNewDarkImg from '../img/create-dark.svg'
-import deckNewHLImg from '../img/create-highlight.svg'
 
-const DeckNew = ({ isDark }) => {
+const DeckNew = () => {
   return (
-    <div className='create-new position-relative'>
+    <div className='create-new d-flex flex-column my-3'>
       <Link
         to='/decks/new'
-        className='create-new__link position-absolute text-center order-last'
-      />
-      <div className='create-new__graphic-box position-relative mt-4 mb-2'>
-        <div className='create-new__graphic position-absolute'>
-          <object
-            preserveAspectRatio='xMidYMid meet'
-            data={isDark ? deckNewDarkImg : deckNewLightImg}
-            type='image/svg+xml'
-            aria-label='create-new__graphic'
-          />
+        className='create-new__link p2 link--accented text-center order-last'>
+        <div className='create-new__rect mt-2 d-flex justify-content-center align-items-center'>
+          <div className='create-new__circle d-flex justify-content-center align-items-center'>
+            <div className='create-new__plus' />
+          </div>
         </div>
-        <div className='create-new__graphic--hover position-absolute'>
-          <object
-            preserveAspectRatio='xMidYMid meet'
-            data={deckNewHLImg}
-            type='image/svg+xml'
-            aria-label='create-new__graphic--hover'
-          />
-        </div>
-      </div>
-      <p className='create-new__title link--accented text-center'>
         Create new deck
-      </p>
+      </Link>
     </div>
   )
 }
 
-DeckNew.propTypes = {
-  isDark: PropTypes.bool.isRequired,
-}
-
-function mapStateToProps(state) {
-  return {
-    isDark: state.isDark,
-  }
-}
-
-export default connect(mapStateToProps)(DeckNew)
+export default DeckNew
