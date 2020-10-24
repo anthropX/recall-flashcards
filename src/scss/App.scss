@@ -2,6 +2,7 @@
 @import '../../node_modules/bootstrap/scss/bootstrap';
 @import './__variables';
 @import './__DarkModeSwitch';
+@import './__DecksPage';
 @import './__CreateNew';
 @import './__Aside';
 
@@ -149,61 +150,6 @@ textarea {
 footer {
   bottom: 0;
   font-size: 0.75rem;
-}
-
-// PAGES: DECKSPAGE
-
-// decks main
-.decks-main {
-  max-width: 44rem;
-}
-
-// deck
-.deck-graphic {
-  width: max-content;
-  height: max-content;
-  padding: 10px;
-  margin: -10px;
-  border: 1px transparent solid;
-  &:hover {
-    border: 1px $danger-hover solid;
-    border-radius: 5px;
-  }
-}
-
-.deck-graphic__cards {
-  width: $deck-width;
-  height: $deck-height;
-
-  .deck-graphic__card {
-    width: $deck-card-width;
-    height: $deck-card-height;
-    border: $deck-card-light-border 1px solid;
-
-    &:first-of-type {
-      top: 0;
-      right: 0;
-    }
-    &:nth-of-type(2) {
-      top: $deck-card-offset;
-      right: $deck-card-offset;
-    }
-    &:last-of-type {
-      top: 2 * $deck-card-offset;
-      right: 2 * $deck-card-offset;
-    }
-  }
-}
-
-.main-content--dark .deck-graphic__card {
-  border: $deck-card-dark-border 1px solid;
-  box-shadow: 0 3px 4px $deck-card-shadow;
-}
-
-.deck-graphic__name {
-  width: $deck-card-width;
-  font-size: 0.8rem;
-  margin-top: 1rem;
 }
 
 @media only screen and (max-width: 540px) {
