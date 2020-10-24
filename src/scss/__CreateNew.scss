@@ -1,4 +1,12 @@
 // Deck New Link
+
+.create-new {
+  width: $deck-width;
+  padding: 10px;
+  margin: -10px;
+  border: 1.25px transparent solid;
+}
+
 .create-new__link {
   display: block;
   width: $deck-width;

@@ -8,7 +8,7 @@ import deckNewHLImg from '../img/create-highlight.svg'
 
 const DeckNew = ({ isDark }) => {
   return (
-    <div className='create-new position-relative mt-2'>
+    <div className='create-new position-relative'>
       <Link
         to='/decks/new'
         className='create-new__link position-absolute text-center order-last'
