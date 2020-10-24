@@ -44,7 +44,7 @@ const App = ({ isDark }) => {
         </Container>
       </div>
 
-      <Footer />
+      <Footer isDark={isDark} />
     </div>
   )
 }
