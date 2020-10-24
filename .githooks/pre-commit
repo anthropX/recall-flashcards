@@ -1,6 +1,6 @@
 #!/bin/bash
 
-FILES=$(git diff --cached --name-only --diff-filter=d "*.js" | sed 's/ /\\ /g')
+FILES=$(git diff --cached --name-only --diff-filter=d "*.js" | sed 's/ /\\ /g' | awk '!/^public\// {print $0}')
 
 if [ -z "$FILES" ]; then
     exit 0
