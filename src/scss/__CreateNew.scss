@@ -40,6 +40,7 @@
   }
 }
 
+// Dark mode colors
 .main-content--dark .create-new__link {
   .create-new__rect {
     border-color: $white;
@@ -62,20 +63,25 @@
   }
 }
 
-@media only screen and (min-width: 540px) {
-  .create-new__link:hover .create-new__rect {
-    border-color: $danger-hover;
+// Hover, Focus
+.create-new__link:hover .create-new__rect,
+.create-new__link:focus .create-new__rect {
+  border-color: $danger-hover;
 
-    .create-new__circle {
-      border-color: inherit;
+  .create-new__circle {
+    border-color: inherit;
 
-      .create-new__plus {
-        background: $danger-hover;
+    .create-new__plus {
+      background: $danger-hover;
 
-        &::after {
-          background: inherit;
-        }
+      &::after {
+        background: inherit;
       }
     }
   }
+}
+
+// Focus
+.create-new__link:focus {
+  outline: none;
 }

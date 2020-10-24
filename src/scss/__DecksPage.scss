@@ -1,18 +1,29 @@
-// decks main
 .decks-main {
   max-width: 44rem;
 }
 
-// deck-graphic
 .deck-graphic {
   width: max-content;
   height: max-content;
   padding: 10px;
   margin: -10px;
   border: 1px transparent solid;
-  &:hover {
-    border: 1px #d9534f solid;
+
+  // Focus
+  &:focus {
+    border: 1px $danger-hover solid;
     border-radius: 5px;
+    outline: none;
+  }
+}
+
+// Hover
+@media only screen and (min-width: 768px) {
+  .deck-graphic {
+    &:hover {
+      border: 1px $danger-hover solid;
+      border-radius: 5px;
+    }
   }
 }
 
@@ -40,6 +51,7 @@
   }
 }
 
+// Dark Mode
 .main-content--dark .deck-graphic__card {
   border: $deck-card-dark-border 1px solid;
   box-shadow: 0 3px 4px $deck-card-shadow;
