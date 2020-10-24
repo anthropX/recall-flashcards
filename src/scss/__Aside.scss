@@ -10,6 +10,21 @@
 
 .aside__option {
   width: max-content;
+  border: 1px transparent solid;
+  padding: 0 0.5rem;
+  border-radius: 5px;
+}
+
+// Hover
+.aside__option {
+  &:hover {
+    border: 1px $dark solid;
+  }
+}
+.main-content--dark .aside__option {
+  &:hover {
+    border: 1px $white solid;
+  }
 }
 
 .aside__icon {

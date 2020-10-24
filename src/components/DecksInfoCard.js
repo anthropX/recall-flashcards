@@ -20,21 +20,23 @@ const DecksInfoCard = ({ deck: { name, desc, mastered, total } }) => {
           <ProgressBar striped variant='danger' now={40} />
           <p className='p1 mt-3 mb-0'>{desc}</p>
           <hr className='hr mt-2 mb-4' />
-          <Row className='pl-1'>
-            <Col xs='3'>
-              <i className='aside__icon fas fa-play' />
-              <p className='p2 mt-2'>Play</p>
-            </Col>
-            <Col xs='3' className='pl-0 pr-md-3'>
-              <div className='aside__option d-flex flex-column align-items-center'>
-                <i className='aside__icon fas fa-cog' />
-                <p className='p2 mt-2'>Configure</p>
+          <Row>
+            <Col xs='3' className='pl-2 pr-0'>
+              <div className='aside__option d-flex flex-column align-items-center p-2'>
+                <i className='aside__icon fas fa-play' />
+                <p className='p2 mt-2 mb-0'>Play</p>
               </div>
             </Col>
             <Col xs='3' className='pl-0 pr-md-3'>
-              <div className='aside__option d-flex flex-column align-items-center'>
+              <div className='aside__option d-flex flex-column align-items-center p-2'>
+                <i className='aside__icon fas fa-cog' />
+                <p className='p2 mt-2 mb-0'>Configure</p>
+              </div>
+            </Col>
+            <Col xs='3' className='pl-0 pr-md-3'>
+              <div className='aside__option d-flex flex-column align-items-center p-2'>
                 <i className='aside__icon fas fa-sync-alt' />
-                <p className='p2 mt-2 text-nowrap'>Reset Progress</p>
+                <p className='p2 mt-2 mb-0 text-nowrap'>Reset Progress</p>
               </div>
             </Col>
           </Row>
