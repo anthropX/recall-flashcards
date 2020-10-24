@@ -2,7 +2,7 @@
 .create-new__link {
   display: block;
   width: $deck-width;
-  height: $deck-height + 3.6rem;
+  height: $deck-height + 3.75rem;
   z-index: 1;
 
   // Don't enable hover on mobile
@@ -15,6 +15,16 @@
         display: block;
       }
     }
+
+    &:hover ~ .create-new__title {
+      color: $link-light-hover;
+    }
+  }
+}
+
+@media only screen and (min-width: 540px) {
+  .main-content--dark .create-new__link:hover ~ .create-new__title {
+    color: $link-dark-hover;
   }
 }
 

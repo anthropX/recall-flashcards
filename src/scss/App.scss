@@ -72,7 +72,7 @@ textarea {
 .nav-link {
   color: $white !important;
   &:hover {
-    color: $link-hover !important;
+    color: $link-dark-hover !important;
   }
 }
 
@@ -96,6 +96,9 @@ textarea {
     background: $bg-dark-mode;
     .link--accented {
       color: $light;
+      &:hover {
+        color: $link-dark-hover;
+      }
     }
 
     .hr {
@@ -125,7 +128,7 @@ textarea {
   &:hover {
     text-decoration: none;
     .navbar__about__icon {
-      color: $icon-hover !important;
+      color: $icon-dark-hover !important;
     }
   }
 
