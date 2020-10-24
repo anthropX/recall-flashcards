@@ -50,7 +50,6 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: $light;
     border-radius: 34px;
 
     .switch__knob {
@@ -68,8 +67,6 @@
       border-radius: 50%;
 
       .switch__image {
-        color: $light;
-
         &--dark {
           transform: rotate(-30deg) scale(0.9) translate(0.5px, 0.5px);
         }

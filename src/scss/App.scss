@@ -65,6 +65,17 @@ textarea {
   box-shadow: 0 0 0 3px #dc354535;
 }
 
+.btn-light {
+  background: $white;
+}
+
+.nav-link {
+  color: $white !important;
+  &:hover {
+    color: $link-hover !important;
+  }
+}
+
 // SKELETON
 
 .App {
@@ -113,6 +124,9 @@ textarea {
 .navbar__about {
   &:hover {
     text-decoration: none;
+    .navbar__about__icon {
+      color: $icon-hover !important;
+    }
   }
 
   .navbar__about__icon {

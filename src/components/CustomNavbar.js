@@ -15,7 +15,7 @@ const CustomNavbar = () => {
             recall
           </Navbar.Brand>
         </LinkContainer>
-        <p className='navbar--collapsed__welcome mr-5 m-0 text-light d-md-none'>
+        <p className='navbar--collapsed__welcome mr-5 m-0 text-white d-md-none'>
           Hello, Vimal!
         </p>
         <Navbar.Toggle aria-controls='basic-navbar-nav' />
@@ -30,14 +30,14 @@ const CustomNavbar = () => {
 
             <DarkModeSwitch />
           </Nav>
-          <p className='navbar--expanded__welcome mr-5 m-0 text-light d-none d-md-block'>
+          <p className='navbar--expanded__welcome mr-5 m-0 text-white d-none d-md-block'>
             Hello, Vimal!
           </p>
           <div className='d-flex flex-column flex-md-row'>
             <Link
               to='/about'
               className='navbar__about d-flex mb-3 mt-2 my-md-0'>
-              <i className='navbar__about__icon fas fa-question-circle text-light align-self-center mr-3' />
+              <i className='navbar__about__icon fas fa-question-circle text-white align-self-center mr-3' />
               <span className='sr-only'>About</span>
             </Link>
             <Link
