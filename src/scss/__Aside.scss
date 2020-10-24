@@ -13,17 +13,18 @@
   border: 1px transparent solid;
   padding: 0 0.5rem;
   border-radius: 5px;
-}
+  color: $dark;
 
-// Hover
-.aside__option {
+  // Hover
   &:hover {
+    color: $dark;
     border: 1px $dark solid;
   }
 }
 .main-content--dark .aside__option {
+  color: $light;
   &:hover {
-    border: 1px $white solid;
+    border: 1px $light solid;
   }
 }
 

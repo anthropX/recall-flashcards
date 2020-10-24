@@ -4,6 +4,7 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 
 const DecksInfoCard = ({ deck: { name, desc, mastered, total } }) => {
   return (
@@ -22,22 +23,28 @@ const DecksInfoCard = ({ deck: { name, desc, mastered, total } }) => {
           <hr className='hr mt-2 mb-4' />
           <Row>
             <Col xs='3' className='pl-2 pr-0'>
-              <div className='aside__option d-flex flex-column align-items-center p-2'>
+              <Link
+                to='/play'
+                className='aside__option text-decoration-none d-flex flex-column align-items-center p-2'>
                 <i className='aside__icon fas fa-play' />
                 <p className='p2 mt-2 mb-0'>Play</p>
-              </div>
+              </Link>
             </Col>
             <Col xs='3' className='pl-0 pr-md-3'>
-              <div className='aside__option d-flex flex-column align-items-center p-2'>
+              <Link
+                to='/deck/{id}'
+                className='aside__option text-decoration-none d-flex flex-column align-items-center p-2'>
                 <i className='aside__icon fas fa-cog' />
                 <p className='p2 mt-2 mb-0'>Configure</p>
-              </div>
+              </Link>
             </Col>
             <Col xs='3' className='pl-0 pr-md-3'>
-              <div className='aside__option d-flex flex-column align-items-center p-2'>
+              <a
+                href='/decks'
+                className='aside__option text-decoration-none d-flex flex-column align-items-center p-2'>
                 <i className='aside__icon fas fa-sync-alt' />
                 <p className='p2 mt-2 mb-0 text-nowrap'>Reset Progress</p>
-              </div>
+              </a>
             </Col>
           </Row>
         </aside>
