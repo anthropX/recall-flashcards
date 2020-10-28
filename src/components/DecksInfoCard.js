@@ -8,13 +8,7 @@ import { Link } from 'react-router-dom'
 import Button from 'react-bootstrap/Button'
 
 const DecksInfoCard = ({ deck: { name, desc, mastered, total } }) => {
-  const showReset = () =>
-    document.querySelector('.fluid-box').classList.add('fluid-box--reset')
-
-  const hideReset = () =>
-    document.querySelector('.fluid-box').classList.remove('fluid-box--reset')
-
-  const closeSidebar = () => {
+  function closeSidebar() {
     // Close Sidebar
     document
       .querySelector('.fluid-overlay')
@@ -27,7 +21,7 @@ const DecksInfoCard = ({ deck: { name, desc, mastered, total } }) => {
     hideReset()
   }
 
-  const handleSidebarClick = (event) => {
+  function handleSidebarClick(event) {
     const { classList } = event.target
     if (
       classList.contains('fluid-overlay') ||
@@ -35,6 +29,14 @@ const DecksInfoCard = ({ deck: { name, desc, mastered, total } }) => {
       classList.contains('fa-times')
     )
       closeSidebar()
+  }
+
+  function showReset() {
+    document.querySelector('.fluid-box').classList.add('fluid-box--reset')
+  }
+
+  function hideReset() {
+    document.querySelector('.fluid-box').classList.remove('fluid-box--reset')
   }
 
   return (
