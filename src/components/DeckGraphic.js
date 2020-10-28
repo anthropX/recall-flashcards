@@ -14,6 +14,8 @@ const DeckGraphic = ({ setSelectedDeck, index, name, decks }) => {
       .forEach((graphic) => graphic.classList.remove('deck-graphic--opened'))
     // Add deck-graphic--opened to currently focused deck-graphic
     event.target.classList.add('deck-graphic--opened')
+    // Hide Reset
+    document.querySelector('.fluid-box').classList.remove('fluid-box--reset')
     // Set selected deck
     setSelectedDeck(decks[index])
   }
