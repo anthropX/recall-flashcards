@@ -39,6 +39,11 @@ const DecksInfoCard = ({ selectedDeck: { name, desc, mastered, total } }) => {
     document.querySelector('.fluid-box').classList.remove('fluid-box--reset')
   }
 
+  function getProgressPercentage() {
+    if (total === 0) return 0
+    return Math.floor((mastered / total) * 100)
+  }
+
   return (
     // eslint-disable-next-line jsx-a11y/no-static-element-interactions, jsx-a11y/click-events-have-key-events
     <div
@@ -58,7 +63,13 @@ const DecksInfoCard = ({ selectedDeck: { name, desc, mastered, total } }) => {
           <p className='p2 my-2 text-muted'>
             Mastered {mastered} of {total} cards
           </p>
-          <ProgressBar striped variant='danger' now={40} />
+          <ProgressBar
+            striped
+            variant='danger'
+            now={getProgressPercentage()}
+            label={`${getProgressPercentage()}%`}
+            srOnly={getProgressPercentage() < 6}
+          />
           <p className='p1 mt-3 mb-0'>{desc}</p>
           <hr className='hr mt-2 mb-4' />
           <Row>
