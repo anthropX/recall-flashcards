@@ -7,13 +7,38 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 
 const DecksInfoCard = ({ deck: { name, desc, mastered, total } }) => {
+  const closeSidebar = () => {
+    document
+      .querySelector('.fluid-overlay')
+      .classList.remove('fluid-overlay--overlaid')
+    // Blur previously focused deck-graphic
+    document
+      .querySelectorAll('.decks .deck-graphic')
+      .forEach((graphic) => graphic.blur())
+  }
+
+  const handleSidebarClick = (event) => {
+    const { classList } = event.target
+    if (
+      classList.contains('fluid-overlay') ||
+      classList.contains('aside__close') ||
+      classList.contains('fa-times')
+    )
+      closeSidebar()
+  }
+
   return (
-    <div className='fluid-overlay'>
-      <div className='fluid-box pl-md-3 pr-md-0 '>
+    // eslint-disable-next-line jsx-a11y/no-static-element-interactions, jsx-a11y/click-events-have-key-events
+    <div
+      className='fluid-overlay'
+      onClick={handleSidebarClick}
+      onWheel={closeSidebar}
+      onTouchMove={closeSidebar}>
+      <div className='fluid-box pl-md-3 pr-md-0' tabIndex='-1'>
         <aside className='decks-infocard aside pl-md-3 pr-md-0'>
           <h6 className='h6 mt-0'>{name}</h6>
           <div className='aside__close'>
-            <i className=' fas fa-times text-muted' />
+            <i className='fas fa-times text-muted' />
           </div>
           <p className='p2 my-2 text-muted'>
             Mastered {mastered} of {total} cards

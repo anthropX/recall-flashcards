@@ -16,6 +16,20 @@
     outline: none;
   }
 }
+@media only screen and (max-width: 767px) {
+  .decks {
+    -moz-user-select: -moz-none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+  .deck-graphic.deck-graphic--opened {
+    border: 1px $danger-hover solid;
+    border-radius: 5px;
+    outline: none;
+  }
+}
 
 // Hover
 @media only screen and (min-width: 768px) {

@@ -6,6 +6,15 @@
 
 .aside__close {
   display: none;
+  &:hover > i {
+    color: $dark !important;
+  }
+}
+
+.main-content--dark .aside__close {
+  &:hover > i {
+    color: $light !important;
+  }
 }
 
 .aside__option {
@@ -33,10 +42,6 @@
 }
 
 @media only screen and (max-width: 767px) {
-  body {
-    // overflow: hidden;
-  }
-
   .fluid-overlay {
     display: flex;
     align-items: flex-end;
@@ -44,17 +49,34 @@
     height: 100vh;
     overflow: hidden;
     position: fixed;
-    z-index: 1;
+    z-index: -1;
     left: 0;
     top: 0;
     background: #00000080;
 
     .fluid-box {
+      transition: height 0.5s ease-in-out;
       display: flex;
       justify-content: center;
       width: 100vw;
+      height: 0;
       position: relative;
       background: $white;
+    }
+
+    &.fluid-overlay--overlaid {
+      z-index: 1;
+      .fluid-box {
+        height: 20rem;
+        &:focus {
+          outline: none;
+        }
+      }
+      -moz-user-select: -moz-none;
+      -khtml-user-select: none;
+      -webkit-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
     }
   }
   .aside__close {
