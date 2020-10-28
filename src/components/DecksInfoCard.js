@@ -95,7 +95,7 @@ const DecksInfoCard = ({ selectedDeck: { name, desc, mastered, total } }) => {
           </div>
           <p className='p1'>
             Are you sure you want to reset progress for the deck,{' '}
-            <strong>Periodic Table</strong>? This action cannot be undone
+            <strong>{name}</strong>? This action cannot be undone
           </p>
           <Button
             variant='outline-secondary'
