@@ -2,6 +2,22 @@
   margin-top: 2rem;
   max-width: 20rem;
   min-width: 20rem;
+
+  &:first-of-type {
+    display: block;
+  }
+  &:last-of-type {
+    display: none !important;
+  }
+}
+
+.fluid-box.fluid-box--reset {
+  .aside:first-of-type {
+    display: none;
+  }
+  .aside:last-of-type {
+    display: flex !important;
+  }
 }
 
 .aside__close {
@@ -23,15 +39,22 @@
   padding: 0 0.5rem;
   border-radius: 5px;
   color: $dark;
+  background: $white;
 
   // Hover
   &:hover {
     color: $dark;
     border: 1px $dark solid;
   }
+
+  &:focus {
+    outline: none;
+  }
 }
 .main-content--dark .aside__option {
   color: $light;
+  background: $bg-dark-mode;
+
   &:hover {
     border: 1px $light solid;
   }
@@ -103,6 +126,10 @@
     position: relative;
     margin-top: 1rem;
     background: $white;
+
+    &:last-of-type p {
+      margin-top: 2.5rem;
+    }
   }
 
   .main-content--dark {
