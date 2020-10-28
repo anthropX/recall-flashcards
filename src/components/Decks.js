@@ -20,9 +20,9 @@ const Decks = ({ decks }) => {
         <DeckNew />
       </Col>
 
-      {decks.map(({ name }) => (
+      {decks.map(({ name }, index) => (
         <Col key={uuidv4()} lg='4' md='6' sm='4' xs='6'>
-          <DeckGraphic name={name} />
+          <DeckGraphic index={index} name={name} decks={decks} />
         </Col>
       ))}
     </Row>

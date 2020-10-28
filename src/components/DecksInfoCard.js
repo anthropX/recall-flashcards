@@ -7,7 +7,7 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import Button from 'react-bootstrap/Button'
 
-const DecksInfoCard = ({ deck: { name, desc, mastered, total } }) => {
+const DecksInfoCard = ({ selectedDeck: { name, desc, mastered, total } }) => {
   function closeSidebar() {
     // Close Sidebar
     document
@@ -47,7 +47,10 @@ const DecksInfoCard = ({ deck: { name, desc, mastered, total } }) => {
       onWheel={closeSidebar}
       onTouchMove={closeSidebar}>
       <div className='fluid-box pl-md-3 pr-md-0' tabIndex='-1'>
-        <aside className='decks-infocard aside pl-md-3 pr-md-0'>
+        <aside
+          className={`decks-infocard aside pl-md-3 pr-md-0 ${
+            name === '' ? 'invisible' : 'visible'
+          }`}>
           <h6 className='h6 mt-0'>{name}</h6>
           <div className='aside__close'>
             <i className='fas fa-times text-muted' />
@@ -69,7 +72,7 @@ const DecksInfoCard = ({ deck: { name, desc, mastered, total } }) => {
             </Col>
             <Col xs='3' className='pl-0 pr-md-3'>
               <Link
-                to='/deck/{id}'
+                to='/deck'
                 className='aside__option text-decoration-none d-flex flex-column align-items-center p-2'>
                 <i className='aside__icon fas fa-cog' />
                 <p className='p2 mt-2 mb-0'>Configure</p>
@@ -115,7 +118,7 @@ const DecksInfoCard = ({ deck: { name, desc, mastered, total } }) => {
 }
 
 DecksInfoCard.propTypes = {
-  deck: PropTypes.shape({
+  selectedDeck: PropTypes.shape({
     name: PropTypes.string.isRequired,
     desc: PropTypes.string.isRequired,
     mastered: PropTypes.number.isRequired,
@@ -124,7 +127,7 @@ DecksInfoCard.propTypes = {
 }
 
 const mapStateToProps = (state) => ({
-  deck: state.deck,
+  selectedDeck: state.selectedDeck,
 })
 
 export default connect(mapStateToProps)(DecksInfoCard)

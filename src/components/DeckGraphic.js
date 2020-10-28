@@ -1,7 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
+import setSelectedDeck from '../actions/selectedDeck'
 
-const DeckGraphic = ({ name }) => {
+const DeckGraphic = ({ setSelectedDeck, index, name, decks }) => {
   const handleFocus = (event) => {
     document
       .querySelector('.fluid-overlay')
@@ -12,6 +14,8 @@ const DeckGraphic = ({ name }) => {
       .forEach((graphic) => graphic.classList.remove('deck-graphic--opened'))
     // Add deck-graphic--opened to currently focused deck-graphic
     event.target.classList.add('deck-graphic--opened')
+    // Set selected deck
+    setSelectedDeck(decks[index])
   }
   return (
     <div className='deck-graphic my-3' tabIndex='-1' onFocus={handleFocus}>
@@ -26,7 +30,17 @@ const DeckGraphic = ({ name }) => {
 }
 
 DeckGraphic.propTypes = {
+  setSelectedDeck: PropTypes.func.isRequired,
+  index: PropTypes.number.isRequired,
   name: PropTypes.string.isRequired,
+  decks: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      desc: PropTypes.string.isRequired,
+      mastered: PropTypes.number.isRequired,
+      total: PropTypes.number.isRequired,
+    }).isRequired,
+  ).isRequired,
 }
 
-export default DeckGraphic
+export default connect(null, { setSelectedDeck })(DeckGraphic)
