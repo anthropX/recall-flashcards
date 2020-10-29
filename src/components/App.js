@@ -11,6 +11,7 @@ import About from './About'
 import Footer from './Footer'
 import DecksPage from './decks/DecksPage'
 import DeckPage from './deck/DeckPage'
+import CreateDeck from './CreateDeck'
 
 const App = ({ isDark }) => {
   const ColorStyle = () => {
@@ -40,6 +41,9 @@ const App = ({ isDark }) => {
             </Route>
             <Route exact path='/decks'>
               <DecksPage />
+            </Route>
+            <Route exact path='/decks/new'>
+              <CreateDeck />
             </Route>
             <Route exact path='/decks/:id'>
               <DeckPage />
