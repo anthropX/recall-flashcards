@@ -12,6 +12,7 @@ import Footer from './Footer'
 import DecksPage from './decks/DecksPage'
 import DeckPage from './deck/DeckPage'
 import CreateDeck from './CreateDeck'
+import RenameDeck from './RenameDeck'
 
 const App = ({ isDark }) => {
   const ColorStyle = () => {
@@ -47,6 +48,9 @@ const App = ({ isDark }) => {
             </Route>
             <Route exact path='/decks/:id'>
               <DeckPage />
+            </Route>
+            <Route exact path='/decks/:id/update'>
+              <RenameDeck />
             </Route>
           </Switch>
         </Container>
