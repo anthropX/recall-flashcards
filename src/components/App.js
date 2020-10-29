@@ -10,6 +10,7 @@ import Register from './Register'
 import About from './About'
 import Footer from './Footer'
 import DecksPage from './DecksPage'
+import DeckPage from './DeckPage'
 
 const App = ({ isDark }) => {
   const ColorStyle = () => {
@@ -39,6 +40,9 @@ const App = ({ isDark }) => {
             </Route>
             <Route exact path='/decks'>
               <DecksPage />
+            </Route>
+            <Route exact path='/deck'>
+              <DeckPage />
             </Route>
           </Switch>
         </Container>

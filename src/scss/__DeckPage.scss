@@ -1,0 +1,19 @@
+.icon-button {
+  font-size: $icon-size;
+  background: transparent;
+  color: $dark;
+  border: none !important;
+  outline: none !important;
+
+  &:hover {
+    color: $text-light-hover;
+  }
+}
+
+.main-content--dark .icon-button {
+  color: $light;
+
+  &:hover {
+    color: $icon-dark-hover;
+  }
+}

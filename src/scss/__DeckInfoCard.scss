@@ -1,0 +1,8 @@
+.fluid-box.fluid-box--delete {
+  .aside:first-of-type {
+    display: none;
+  }
+  .aside:last-of-type {
+    display: flex !important;
+  }
+}
