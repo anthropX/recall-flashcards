@@ -77,32 +77,30 @@ const DeckInfoCard = ({ deck: { name, desc, total } }) => {
           <div className='aside__close'>
             <i className='fas fa-times text-muted' />
           </div>
-          <p className='p1 mr-5 mr-md-0'>
+          <p className='mr-5 mr-md-0'>
             Are you sure you want to{' '}
             <strong className='text-danger'>permanently delete</strong> this
             deck, including all cards and progress info?
           </p>
           <Form>
-            <Form.Group controlId='formBasicEmail'>
+            <Form.Group controlId='formBasicEmail' className='mb-1'>
               <Form.Label className='p1'>
                 Type <strong>{name}</strong> to confirm
               </Form.Label>
-              <Form.Control type='text' size='sm' />
+              <Form.Control type='text' />
             </Form.Group>
             <Button
               variant='outline-secondary'
               type='submit'
               className='px-4 mt-2 mb-3 mr-2'
-              onClick={hideDelete}
-              size='sm'>
+              onClick={hideDelete}>
               Cancel
             </Button>
             <Button
               variant='outline-danger'
               type='submit'
               className='px-4 mt-2 mb-3'
-              onClick={hideDelete}
-              size='sm'>
+              onClick={hideDelete}>
               Confirm
             </Button>
           </Form>
