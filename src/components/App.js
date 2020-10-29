@@ -41,7 +41,7 @@ const App = ({ isDark }) => {
             <Route exact path='/decks'>
               <DecksPage />
             </Route>
-            <Route exact path='/deck'>
+            <Route exact path='/decks/:id'>
               <DeckPage />
             </Route>
           </Switch>

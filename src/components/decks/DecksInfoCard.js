@@ -75,7 +75,7 @@ const DecksInfoCard = ({ selectedDeck: { name, desc, mastered, total } }) => {
           <Row>
             <Col xs='3' className='pl-2 pr-0'>
               <Link
-                to='/play'
+                to='/decks/0/play'
                 className='aside__option text-decoration-none d-flex flex-column align-items-center p-2'>
                 <i className='aside__icon fas fa-play' />
                 <p className='p2 mt-2 mb-0'>Play</p>
@@ -83,7 +83,7 @@ const DecksInfoCard = ({ selectedDeck: { name, desc, mastered, total } }) => {
             </Col>
             <Col xs='3' className='pl-0 pr-md-3'>
               <Link
-                to='/deck'
+                to='/decks/0'
                 className='aside__option text-decoration-none d-flex flex-column align-items-center p-2'>
                 <i className='aside__icon fas fa-cog' />
                 <p className='p2 mt-2 mb-0'>Configure</p>

@@ -56,7 +56,7 @@ const DeckInfoCard = ({ deck: { name, desc, total } }) => {
           <Row>
             <Col xs='3' md='4' className='pl-2 pr-0 flex-grow-0'>
               <Link
-                to='/deck/id/edit'
+                to='/decks/0/update'
                 className='aside__option text-decoration-none d-flex flex-column align-items-center p-2'>
                 <i className='aside__icon fas fa-edit' />
                 <p className='p2 mt-2 mb-0'>Rename</p>
