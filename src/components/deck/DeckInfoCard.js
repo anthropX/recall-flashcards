@@ -79,16 +79,15 @@ const DeckInfoCard = ({ deck: { name, desc, total } }) => {
           </div>
           <p className='p1 mr-5 mr-md-0'>
             Are you sure you want to{' '}
-            <strong className='text-danger'>permanently delete</strong> the
-            deck, <strong>{name}?</strong> You&apos;ll lose access to{' '}
-            <strong>{total} cards and any associated progress.</strong>
+            <strong className='text-danger'>permanently delete</strong> this
+            deck, including all cards and progress info?
           </p>
           <Form>
             <Form.Group controlId='formBasicEmail'>
               <Form.Label className='p1'>
                 Type <strong>{name}</strong> to confirm
               </Form.Label>
-              <Form.Control type='email' size='sm' />
+              <Form.Control type='text' size='sm' />
             </Form.Group>
             <Button
               variant='outline-secondary'
