@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import setSelectedDeck from '../actions/selectedDeck'
+import setSelectedDeck from '../../actions/selectedDeck'
 
 const DeckGraphic = ({ setSelectedDeck, index, name, decks }) => {
   const handleFocus = (event) => {

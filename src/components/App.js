@@ -9,8 +9,8 @@ import Login from './Login'
 import Register from './Register'
 import About from './About'
 import Footer from './Footer'
-import DecksPage from './DecksPage'
-import DeckPage from './DeckPage'
+import DecksPage from './decks/DecksPage'
+import DeckPage from './deck/DeckPage'
 
 const App = ({ isDark }) => {
   const ColorStyle = () => {
