@@ -104,7 +104,7 @@ const DecksInfoCard = ({ selectedDeck: { name, desc, mastered, total } }) => {
           <div className='aside__close'>
             <i className='fas fa-times text-muted' />
           </div>
-          <p className='p1'>
+          <p className='p1 mr-5 mr-md-0'>
             Are you sure you want to{' '}
             <strong className='text-danger'>reset progress</strong> for the
             deck, <strong>{name}</strong>? This action cannot be undone.
