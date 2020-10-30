@@ -20,22 +20,17 @@ const About = () => {
       <Form className='form mt-3'>
         <Form.Group controlId='form__name'>
           <Form.Label>Name</Form.Label>
-          <Form.Control type='name' placeholder="What's your name?" size='sm' />
+          <Form.Control type='name' placeholder="What's your name?" />
         </Form.Group>
         <Form.Group controlId='form__email'>
           <Form.Label>Email address</Form.Label>
-          <Form.Control
-            type='email'
-            placeholder="What's your email?"
-            size='sm'
-          />
+          <Form.Control type='email' placeholder="What's your email?" />
         </Form.Group>
         <Form.Group controlId='form__message'>
           <Form.Label>Message</Form.Label>
           <Form.Control
             as='textarea'
             rows={4}
-            size='sm'
             placeholder='What do you have to say?'
           />
         </Form.Group>

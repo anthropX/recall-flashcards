@@ -15,7 +15,6 @@ const RenameDeck = () => {
           <Form.Control
             type='text'
             placeholder='What do you want to call your deck?'
-            size='sm'
           />
         </Form.Group>
         <Form.Group controlId='form__desc'>
@@ -23,7 +22,6 @@ const RenameDeck = () => {
           <Form.Control
             type='text'
             placeholder='Describe how how’ll use your this deck'
-            size='sm'
           />
         </Form.Group>
 

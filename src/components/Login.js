@@ -13,19 +13,11 @@ const Login = () => {
       <Form className='login__form form'>
         <Form.Group controlId='form__email'>
           <Form.Label>Email address</Form.Label>
-          <Form.Control
-            type='email'
-            placeholder="What's your email?"
-            size='sm'
-          />
+          <Form.Control type='email' placeholder="What's your email?" />
         </Form.Group>
         <Form.Group controlId='form__password'>
           <Form.Label>Password</Form.Label>
-          <Form.Control
-            type='password'
-            placeholder='Enter your password'
-            size='sm'
-          />
+          <Form.Control type='password' placeholder='Enter your password' />
         </Form.Group>
 
         <Button

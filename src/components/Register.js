@@ -14,35 +14,26 @@ const Register = () => {
         <div className='d-flex'>
           <Form.Group controlId='form__first' className='flex-grow-1 mr-4'>
             <Form.Label>First Name</Form.Label>
-            <Form.Control type='text' placeholder='Your first name' size='sm' />
+            <Form.Control type='text' placeholder='Your first name' />
           </Form.Group>
           <Form.Group controlId='form__last' className='flex-grow-1'>
             <Form.Label>Last Name</Form.Label>
-            <Form.Control type='text' placeholder='Your last name' size='sm' />
+            <Form.Control type='text' placeholder='Your last name' />
           </Form.Group>
         </div>
         <Form.Group controlId='form__email'>
           <Form.Label>Email address</Form.Label>
-          <Form.Control
-            type='email'
-            placeholder="What's your email?"
-            size='sm'
-          />
+          <Form.Control type='email' placeholder="What's your email?" />
         </Form.Group>
         <Form.Group controlId='form__password'>
           <Form.Label>Password</Form.Label>
-          <Form.Control
-            type='password'
-            placeholder='Enter a password'
-            size='sm'
-          />
+          <Form.Control type='password' placeholder='Enter a password' />
         </Form.Group>
         <Form.Group controlId='form__confirm'>
           <Form.Label>Confirm Password</Form.Label>
           <Form.Control
             type='password'
             placeholder='Enter the password again'
-            size='sm'
           />
         </Form.Group>
         <Button
