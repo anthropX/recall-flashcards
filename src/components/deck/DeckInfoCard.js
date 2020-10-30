@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import PropTypes from 'prop-types'
@@ -8,6 +8,21 @@ import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
 
 const DeckInfoCard = ({ deck: { name, desc, total } }) => {
+  const [confirmValue, setConfirmValue] = useState('')
+  const [validated, setValidated] = useState(false)
+
+  function handleChange(event) {
+    setConfirmValue(event.target.value)
+    setValidated(false)
+  }
+
+  function handleSubmit(event) {
+    event.preventDefault()
+    event.stopPropagation()
+    const form = event.currentTarget
+    if (form.checkValidity() && confirmValue === name) setValidated(true)
+  }
+
   function closeSidebar() {
     document
       .querySelector('.fluid-overlay')
@@ -82,16 +97,23 @@ const DeckInfoCard = ({ deck: { name, desc, total } }) => {
             <strong className='text-danger'>permanently delete</strong> this
             deck, including all cards and progress info?
           </p>
-          <Form>
+          <Form noValidate validated={validated} onSubmit={handleSubmit}>
             <Form.Group controlId='formBasicEmail' className='mb-1'>
-              <Form.Label className='p1'>
-                Type <strong>{name}</strong> to confirm
-              </Form.Label>
-              <Form.Control type='text' />
+              <Form.Control
+                type='text'
+                value={confirmValue}
+                onChange={handleChange}
+                required
+                isInvalid={confirmValue !== name}
+                isValid={confirmValue === name}
+              />
+              <Form.Control.Feedback type='invalid'>
+                Please type <strong>{name}</strong> to confirm
+              </Form.Control.Feedback>
             </Form.Group>
             <Button
               variant='outline-secondary'
-              type='submit'
+              type='button'
               className='px-4 mt-2 mb-3 mr-2'
               onClick={hideDelete}>
               Cancel
@@ -99,8 +121,7 @@ const DeckInfoCard = ({ deck: { name, desc, total } }) => {
             <Button
               variant='outline-danger'
               type='submit'
-              className='px-4 mt-2 mb-3'
-              onClick={hideDelete}>
+              className='px-4 mt-2 mb-3'>
               Confirm
             </Button>
           </Form>
