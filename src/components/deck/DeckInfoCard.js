@@ -3,11 +3,11 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
 
-const DeckInfoCard = ({ deck: { name, desc, total } }) => {
+const DeckInfoCard = ({ history, deck: { name, desc, total } }) => {
   const [confirmValue, setConfirmValue] = useState('')
   const [validated, setValidated] = useState(false)
 
@@ -20,7 +20,10 @@ const DeckInfoCard = ({ deck: { name, desc, total } }) => {
     event.preventDefault()
     event.stopPropagation()
     const form = event.currentTarget
-    if (form.checkValidity() && confirmValue === name) setValidated(true)
+    if (form.checkValidity() && confirmValue === name) {
+      setValidated(true)
+      history.push('/decks')
+    }
   }
 
   function closeSidebar() {
@@ -138,10 +141,13 @@ DeckInfoCard.propTypes = {
     mastered: PropTypes.number.isRequired,
     total: PropTypes.number.isRequired,
   }).isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+  }).isRequired,
 }
 
 const mapStateToProps = (state) => ({
   deck: state.deck,
 })
 
-export default connect(mapStateToProps)(DeckInfoCard)
+export default withRouter(connect(mapStateToProps)(DeckInfoCard))
