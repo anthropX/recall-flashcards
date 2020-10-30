@@ -7,19 +7,19 @@ $wall-overlay-1: #302d2db5;
 $wall-overlay-2: #302d2d59;
 
 // deck dimensions
-$deck-card-width: 6.67rem;
-$deck-card-height: 4rem;
-$deck-card-offset: 0.5rem;
-$deck-width: $deck-card-width + 2 * $deck-card-offset;
-$deck-height: $deck-card-height + 2 * $deck-card-offset;
+$card-graphic-width: 6.67rem;
+$card-graphic-height: 4rem;
+$card-graphic-offset: 0.5rem;
+$deck-width: $card-graphic-width + 2 * $card-graphic-offset;
+$deck-height: $card-graphic-height + 2 * $card-graphic-offset;
 
 // icon size
 $icon-size: 28px;
 
-// deck card colors
-$deck-card-dark-border: #00000028;
-$deck-card-light-border: #00000077;
-$deck-card-shadow: #00000079;
+// card graphic colors
+$card-graphic-dark-border: #00000028;
+$card-graphic-light-border: #00000077;
+$card-graphic-shadow: #00000079;
 
 // Hover color
 $link-dark-hover: #ffffffbf;

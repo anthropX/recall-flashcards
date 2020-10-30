@@ -9,16 +9,12 @@
   margin: -10px;
   border: 1px transparent solid;
   &.deck-graphic--opened {
-    border: 1px $danger-hover solid;
-    border-radius: 5px;
-    outline: none;
+    @extend %deck-graphic--hover;
   }
 
   // Focus
   &:focus {
-    border: 1px $danger-hover solid;
-    border-radius: 5px;
-    outline: none;
+    @extend %deck-graphic--hover;
   }
 }
 @media only screen and (max-width: 767px) {
@@ -46,33 +42,32 @@
   height: $deck-height;
 
   .deck-graphic__card {
-    width: $deck-card-width;
-    height: $deck-card-height;
-    border: $deck-card-light-border 1px solid;
+    width: $card-graphic-width;
+    height: $card-graphic-height;
+    @extend %card-graphic;
 
     &:first-of-type {
       top: 0;
       right: 0;
     }
     &:nth-of-type(2) {
-      top: $deck-card-offset;
-      right: $deck-card-offset;
+      top: $card-graphic-offset;
+      right: $card-graphic-offset;
     }
     &:last-of-type {
-      top: 2 * $deck-card-offset;
-      right: 2 * $deck-card-offset;
+      top: 2 * $card-graphic-offset;
+      right: 2 * $card-graphic-offset;
     }
   }
 }
 
 // Dark Mode
 .main-content--dark .deck-graphic__card {
-  border: $deck-card-dark-border 1px solid;
-  box-shadow: 0 3px 4px $deck-card-shadow;
+  @extend %card-graphic--dark;
 }
 
 .deck-graphic__name {
-  width: $deck-card-width;
+  width: $card-graphic-width;
   font-size: 0.8rem;
   margin-top: 1rem;
 }

@@ -22,9 +22,9 @@ const DeckGraphic = ({ setSelectedDeck, index, name, decks }) => {
   return (
     <div className='deck-graphic my-3' tabIndex='-1' onFocus={handleFocus}>
       <div className='deck-graphic__cards position-relative mt-2'>
-        <div className='deck-graphic__card bg-white position-absolute' />
-        <div className='deck-graphic__card bg-white position-absolute' />
-        <div className='deck-graphic__card bg-white position-absolute' />
+        <div className='deck-graphic__card position-absolute' />
+        <div className='deck-graphic__card position-absolute' />
+        <div className='deck-graphic__card position-absolute' />
       </div>
       <p className='deck-graphic__name text-center mb-0'>{name}</p>
     </div>
