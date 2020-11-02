@@ -19,24 +19,37 @@
 }
 
 // Cards
-.cards__card > .card__sides > .card__side {
-  @extend %card--light;
-  width: 100%;
-  min-height: 20rem;
+.cards__card {
+  .card__sides > .card__side {
+    @extend %card--light;
+    width: 100%;
+    min-height: 20rem;
 
-  .card-back__title {
-    width: 70%;
-  }
-  .card-back__image {
-    width: 30%;
-    padding-top: 18%;
-    background-size: contain;
-    background-position: center;
-    background-repeat: no-repeat;
+    .card-back__title {
+      width: 70%;
+    }
+    .card-back__image {
+      width: 30%;
+      padding-top: 18%;
+      background-size: contain;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+
+    .card-back__desc {
+      @extend %box-border;
+    }
   }
 
-  .card-back__desc {
-    @extend %box-border;
+  .card__buttons {
+    transition: all 0.4s ease-in-out;
+    opacity: 0;
+    height: 2rem;
+  }
+  &:hover {
+    .card__buttons {
+      opacity: 1;
+    }
   }
 }
 
