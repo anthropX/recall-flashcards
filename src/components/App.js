@@ -25,7 +25,7 @@ const App = ({ isDark }) => {
     <div className='App min-vh-100 d-flex flex-column position-relative'>
       <CustomNavbar />
 
-      <div className={`main-content ${ColorStyle()} flex-grow-1`}>
+      <div className={`main-content ${ColorStyle()} flex-grow-1 text-break`}>
         <Container>
           <Switch>
             <Route exact path='/'>

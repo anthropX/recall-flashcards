@@ -17,3 +17,73 @@
     color: $icon-dark-hover;
   }
 }
+
+// Cards
+.cards__card > .card__sides > .card__side {
+  @extend %card--light;
+  width: 100%;
+  min-height: 20rem;
+
+  .card-back__title {
+    width: 70%;
+  }
+  .card-back__image {
+    width: 30%;
+    padding-top: 18%;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  .card-back__desc {
+    @extend %box-border;
+  }
+}
+
+// Side - lg
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+  .cards__card .card__sides .card__side {
+    min-height: 17.5rem;
+  }
+}
+// md
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .cards__card .card__sides .card__side {
+    min-height: 22.5rem;
+  }
+}
+// sm
+@media only screen and (min-width: 576px) and (max-width: 767px) {
+  .cards__card .card__sides .card__side {
+    min-height: 16rem;
+  }
+}
+
+// xs1
+@media only screen and (min-width: 400px) and (max-width: 576px) {
+  .cards__card .card__sides .card__side {
+    min-height: 12rem;
+  }
+}
+
+// xs2
+@media only screen and (max-width: 399px) {
+  .cards__card .card__sides .card__side {
+    min-height: 10.75rem;
+  }
+}
+
+// Dark
+.main-content--dark .cards__card > .card__sides {
+  color: $dark;
+
+  .card__side {
+    @extend %card--dark;
+  }
+}
+
+@media only screen and (max-width: 991px) {
+  .main-content--dark .card__side {
+    margin-bottom: 2px !important;
+  }
+}

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 const CardsNew = () => {
   return (
-    <div className='create-new d-flex flex-column my-3'>
+    <div className='create-new d-flex flex-column mt-3'>
       <Link
         to='/decks/0/cards/new'
         className='create-new__link p2 link--accented text-center order-last'>
