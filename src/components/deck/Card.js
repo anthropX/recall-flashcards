@@ -25,7 +25,7 @@ const Card = ({
                 style={{ backgroundImage: `url(${answerImage})` }}
               />
             </div>
-            <div className='card-back__desc flex-grow-1 d-flex flex-column justify-content-center p-1'>
+            <div className='card-back__desc flex-grow-1 d-flex flex-column justify-content-center pt-1'>
               <p>{answerDesc}</p>
             </div>
           </div>
