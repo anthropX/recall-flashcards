@@ -2,6 +2,9 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Button from 'react-bootstrap/Button'
 import { Link } from 'react-router-dom'
+import { CKEditor } from '@ckeditor/ckeditor5-react'
+import BalloonEditor from '@ckeditor/ckeditor5-build-balloon'
+import editorConfig from '../../ckEditorConfig'
 
 const Card = ({
   index,
@@ -11,23 +14,39 @@ const Card = ({
     <div className='cards__card pb-4 mt-n2'>
       <p className='mb-1'>{index + 1}.</p>
       <div className='card__sides d-flex flex-column flex-lg-row mb-2'>
-        <div className='card__side card-front d-flex align-items-center mr-0 mr-md-3 mb-3 mb-lg-0'>
-          <div className='card-front__canvas d-flex justify-content-center align-items-center w-100 h-100 p-3'>
-            <p className='card-front__question mb-0'>{question}</p>
+        <div className='card__side card-front d-flex align-items-center mr-0 mr-md-3 mb-3 mb-lg-0 p-2'>
+          <div className='card-front__canvas d-flex justify-content-center align-items-center w-100 h-100'>
+            <CKEditor
+              id='card-front__question'
+              editor={BalloonEditor}
+              data={question}
+              config={editorConfig}
+              disabled
+            />
           </div>
         </div>
         <div className='card__side card-back d-flex flex-column'>
-          <div className='card-back__canvas flex-grow-1 d-flex flex-column w-100 h-100 p-3'>
-            <div className='card-back__row d-flex justify-content-between align-items-center mb-3'>
-              <p className='card-back__title pr-1 mb-0'>{answerTitle}</p>
+          <div className='card-back__canvas flex-grow-1 d-flex flex-column w-100 h-100'>
+            <div className='card-back__row d-flex justify-content-between align-items-stretch'>
+              <CKEditor
+                id='card-back__title'
+                editor={BalloonEditor}
+                data={answerTitle}
+                config={editorConfig}
+                disabled
+              />
               <div
-                className='card-back__image'
+                className='card-back__image mr-2 mt-2'
                 style={{ backgroundImage: `url(${answerImage})` }}
               />
             </div>
-            <div className='card-back__desc flex-grow-1 d-flex flex-column justify-content-center pt-1'>
-              <p>{answerDesc}</p>
-            </div>
+            <CKEditor
+              id='card-back__desc'
+              editor={BalloonEditor}
+              data={answerDesc}
+              config={editorConfig}
+              disabled
+            />
           </div>
         </div>
       </div>
