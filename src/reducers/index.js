@@ -1,12 +1,10 @@
 import { combineReducers } from 'redux'
 import switchReducer from './switch'
-import decksReducer from './decks'
-import selectedDeckReducer from './selectedDeck'
+import decksPageReducer from './decksPage'
 import deckReducer from './deck'
 
 export default combineReducers({
   isDark: switchReducer,
-  decks: decksReducer,
-  selectedDeck: selectedDeckReducer,
+  decksPage: decksPageReducer,
   deck: deckReducer,
 })

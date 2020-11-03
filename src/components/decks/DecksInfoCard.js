@@ -7,7 +7,8 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import Button from 'react-bootstrap/Button'
 
-const DecksInfoCard = ({ selectedDeck: { name, desc, mastered, total } }) => {
+const DecksInfoCard = ({ deckIndex, decks }) => {
+  const { name, desc, mastered, total } = deckIndex !== -1 && decks[deckIndex]
   function closeSidebar() {
     // Close Sidebar
     document
@@ -54,7 +55,7 @@ const DecksInfoCard = ({ selectedDeck: { name, desc, mastered, total } }) => {
       <div className='fluid-box pl-md-3 pr-md-0' tabIndex='-1'>
         <aside
           className={`decks-infocard aside pl-md-3 pr-md-0 ${
-            name === '' ? 'invisible' : 'visible'
+            typeof name === 'undefined' ? 'invisible' : 'visible'
           }`}>
           <h6 className='h6 mt-0'>{name}</h6>
           <div className='aside__close'>
@@ -130,16 +131,20 @@ const DecksInfoCard = ({ selectedDeck: { name, desc, mastered, total } }) => {
 }
 
 DecksInfoCard.propTypes = {
-  selectedDeck: PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    desc: PropTypes.string.isRequired,
-    mastered: PropTypes.number.isRequired,
-    total: PropTypes.number.isRequired,
-  }).isRequired,
+  deckIndex: PropTypes.number.isRequired,
+  decks: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      desc: PropTypes.string.isRequired,
+      mastered: PropTypes.number.isRequired,
+      total: PropTypes.number.isRequired,
+    }).isRequired,
+  ).isRequired,
 }
 
 const mapStateToProps = (state) => ({
-  selectedDeck: state.selectedDeck,
+  deckIndex: state.decksPage.deckIndex,
+  decks: state.decksPage.decks,
 })
 
 export default connect(mapStateToProps)(DecksInfoCard)

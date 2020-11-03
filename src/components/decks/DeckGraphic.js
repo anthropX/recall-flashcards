@@ -1,9 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import setSelectedDeck from '../../actions/selectedDeck'
+import setDeckIndex from '../../actions/decksPage'
 
-const DeckGraphic = ({ setSelectedDeck, index, name, decks }) => {
+const DeckGraphic = ({ setDeckIndex, index, name }) => {
   const handleFocus = (event) => {
     document
       .querySelector('.fluid-overlay')
@@ -17,7 +17,7 @@ const DeckGraphic = ({ setSelectedDeck, index, name, decks }) => {
     // Hide Reset
     document.querySelector('.fluid-box').classList.remove('fluid-box--reset')
     // Set selected deck
-    setSelectedDeck(decks[index])
+    setDeckIndex(index)
   }
   return (
     <div className='deck-graphic my-3' tabIndex='-1' onFocus={handleFocus}>
@@ -32,17 +32,9 @@ const DeckGraphic = ({ setSelectedDeck, index, name, decks }) => {
 }
 
 DeckGraphic.propTypes = {
-  setSelectedDeck: PropTypes.func.isRequired,
+  setDeckIndex: PropTypes.func.isRequired,
   index: PropTypes.number.isRequired,
   name: PropTypes.string.isRequired,
-  decks: PropTypes.arrayOf(
-    PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      desc: PropTypes.string.isRequired,
-      mastered: PropTypes.number.isRequired,
-      total: PropTypes.number.isRequired,
-    }).isRequired,
-  ).isRequired,
 }
 
-export default connect(null, { setSelectedDeck })(DeckGraphic)
+export default connect(null, { setDeckIndex })(DeckGraphic)

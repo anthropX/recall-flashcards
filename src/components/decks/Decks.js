@@ -41,7 +41,7 @@ Decks.propTypes = {
 }
 
 const mapStateToProps = (state) => ({
-  decks: state.decks,
+  decks: state.decksPage.decks,
 })
 
 export default connect(mapStateToProps)(Decks)
