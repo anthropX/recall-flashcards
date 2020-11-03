@@ -11,8 +11,8 @@ import About from './About'
 import Footer from './Footer'
 import DecksPage from './decks/DecksPage'
 import DeckPage from './deck/DeckPage'
-import CreateDeck from './CreateDeck'
-import RenameDeck from './RenameDeck'
+import CreateDeck from './deckActions/CreateDeck'
+import RenameDeck from './deckActions/RenameDeck'
 
 const App = ({ isDark }) => {
   const ColorStyle = () => {
