@@ -1,3 +1,5 @@
+import { SET_CARD } from '../actions/types'
+
 const initialState = {
   name: 'Asian Countries',
   desc: 'Learn capitals, flags, and other details about Asian countries',
@@ -31,8 +33,11 @@ const initialState = {
     },
   ],
 }
-export default function (state = initialState, { type }) {
+export default function (state = initialState, { type, payload }) {
   switch (type) {
+    case SET_CARD:
+      state.cards.splice(payload.cardIndex, 1, payload.card)
+      return state
     default:
       return state
   }

@@ -52,7 +52,7 @@ const Card = ({
       </div>
       <div className='card__buttons'>
         <Link
-          to='/decks/0/cards/0/update'
+          to={`/decks/0/cards/${index}/update`}
           className='btn btn-outline-danger mr-2'>
           Edit Card
         </Link>
