@@ -76,7 +76,7 @@ const DecksInfoCard = ({ deckIndex, decks }) => {
           <Row>
             <Col xs='3' className='pl-2 pr-0'>
               <Link
-                to='/decks/0/play'
+                to={`/decks/${deckIndex}/play`}
                 className='aside__option text-decoration-none d-flex flex-column align-items-center p-2'>
                 <i className='aside__icon fas fa-play' />
                 <p className='p2 mt-2 mb-0'>Play</p>
@@ -84,7 +84,7 @@ const DecksInfoCard = ({ deckIndex, decks }) => {
             </Col>
             <Col xs='3' className='pl-0 pr-md-3'>
               <Link
-                to='/decks/0'
+                to={`/decks/${deckIndex}`}
                 className='aside__option text-decoration-none d-flex flex-column align-items-center p-2'>
                 <i className='aside__icon fas fa-cog' />
                 <p className='p2 mt-2 mb-0'>Configure</p>
@@ -138,6 +138,14 @@ DecksInfoCard.propTypes = {
       desc: PropTypes.string.isRequired,
       mastered: PropTypes.number.isRequired,
       total: PropTypes.number.isRequired,
+      cards: PropTypes.arrayOf(
+        PropTypes.shape({
+          question: PropTypes.string.isRequired,
+          answerTitle: PropTypes.string.isRequired,
+          answerImage: PropTypes.string.isRequired,
+          answerDesc: PropTypes.string.isRequired,
+        }),
+      ).isRequired,
     }).isRequired,
   ).isRequired,
 }

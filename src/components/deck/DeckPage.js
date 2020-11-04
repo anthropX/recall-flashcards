@@ -5,7 +5,14 @@ import CardNew from './CardNew'
 import Cards from './Cards'
 import DeckInfoCard from './DeckInfoCard'
 
-const DeckPage = ({ deck: { name, desc, cards } }) => {
+const DeckPage = ({
+  match: {
+    params: { deckIndex },
+  },
+  decks,
+}) => {
+  const deck = decks[deckIndex]
+  const { name, desc, cards } = deck
   const handleClick = () => {
     document
       .querySelector('.fluid-overlay')
@@ -29,32 +36,39 @@ const DeckPage = ({ deck: { name, desc, cards } }) => {
           <p className='p1 mb-0 pr-0 pr-md-5'>{desc}</p>
           <CardNew />
         </div>
-        <DeckInfoCard />
+        <DeckInfoCard deck={deck} />
       </div>
-      <Cards cards={cards} />
+      <Cards deckIndex={deckIndex} cards={cards} />
     </>
   )
 }
 
 DeckPage.propTypes = {
-  deck: PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    desc: PropTypes.string.isRequired,
-    mastered: PropTypes.number.isRequired,
-    total: PropTypes.number.isRequired,
-    cards: PropTypes.arrayOf(
-      PropTypes.shape({
-        question: PropTypes.string.isRequired,
-        answerTitle: PropTypes.string.isRequired,
-        answerImage: PropTypes.string.isRequired,
-        answerDesc: PropTypes.string.isRequired,
-      }),
-    ).isRequired,
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      deckIndex: PropTypes.string.isRequired,
+    }).isRequired,
   }).isRequired,
+  decks: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      desc: PropTypes.string.isRequired,
+      mastered: PropTypes.number.isRequired,
+      total: PropTypes.number.isRequired,
+      cards: PropTypes.arrayOf(
+        PropTypes.shape({
+          question: PropTypes.string.isRequired,
+          answerTitle: PropTypes.string.isRequired,
+          answerImage: PropTypes.string.isRequired,
+          answerDesc: PropTypes.string.isRequired,
+        }),
+      ).isRequired,
+    }).isRequired,
+  ).isRequired,
 }
 
 const mapStateToProps = (state) => ({
-  deck: state.deck,
+  decks: state.decksPage.decks,
 })
 
 export default connect(mapStateToProps)(DeckPage)

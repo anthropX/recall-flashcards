@@ -47,9 +47,7 @@ const App = ({ isDark }) => {
             <Route exact path='/decks/new'>
               <CreateDeck />
             </Route>
-            <Route exact path='/decks/:id'>
-              <DeckPage />
-            </Route>
+            <Route exact path='/decks/:deckIndex' component={DeckPage} />
             <Route exact path='/decks/:id/update'>
               <RenameDeck />
             </Route>

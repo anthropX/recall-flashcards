@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-const CardsNew = () => {
+const CardNew = () => {
   return (
     <div className='create-new d-flex flex-column mt-3'>
       <Link
@@ -18,4 +18,4 @@ const CardsNew = () => {
   )
 }
 
-export default CardsNew
+export default CardNew

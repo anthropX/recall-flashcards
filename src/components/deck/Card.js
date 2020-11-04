@@ -7,12 +7,13 @@ import BalloonEditor from '@ckeditor/ckeditor5-build-balloon'
 import editorConfig from '../../ckEditorConfig'
 
 const Card = ({
-  index,
+  deckIndex,
+  cardIndex,
   card: { question, answerTitle, answerDesc, answerImage },
 }) => {
   return (
     <div className='cards__card pb-4 mt-n2'>
-      <p className='mb-1'>{index + 1}.</p>
+      <p className='mb-1'>{cardIndex + 1}.</p>
       <div className='card__sides d-flex flex-column flex-lg-row mb-2'>
         <div className='card__side card-front d-flex align-items-center mr-0 mr-md-3 mb-3 mb-lg-0 p-2'>
           <div className='card-front__canvas d-flex justify-content-center align-items-center w-100 h-100'>
@@ -52,7 +53,7 @@ const Card = ({
       </div>
       <div className='card__buttons'>
         <Link
-          to={`/decks/0/cards/${index}/update`}
+          to={`/decks/${deckIndex}/cards/${cardIndex}/update`}
           className='btn btn-outline-danger mr-2'>
           Edit Card
         </Link>
@@ -63,7 +64,8 @@ const Card = ({
 }
 
 Card.propTypes = {
-  index: PropTypes.number.isRequired,
+  deckIndex: PropTypes.string.isRequired,
+  cardIndex: PropTypes.number.isRequired,
   card: PropTypes.shape({
     question: PropTypes.string.isRequired,
     answerTitle: PropTypes.string.isRequired,

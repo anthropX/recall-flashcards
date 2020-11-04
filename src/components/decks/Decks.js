@@ -20,9 +20,9 @@ const Decks = ({ decks }) => {
         <DeckNew />
       </Col>
 
-      {decks.map(({ name }, index) => (
+      {decks.map(({ name }, deckIndex) => (
         <Col key={uuidv4()} lg='4' md='6' sm='4' xs='6'>
-          <DeckGraphic index={index} name={name} decks={decks} />
+          <DeckGraphic deckIndex={deckIndex} name={name} decks={decks} />
         </Col>
       ))}
     </Row>
@@ -36,6 +36,14 @@ Decks.propTypes = {
       desc: PropTypes.string.isRequired,
       mastered: PropTypes.number.isRequired,
       total: PropTypes.number.isRequired,
+      cards: PropTypes.arrayOf(
+        PropTypes.shape({
+          question: PropTypes.string.isRequired,
+          answerTitle: PropTypes.string.isRequired,
+          answerImage: PropTypes.string.isRequired,
+          answerDesc: PropTypes.string.isRequired,
+        }),
+      ).isRequired,
     }).isRequired,
   ).isRequired,
 }

@@ -5,16 +5,17 @@ import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import { CKEditor } from '@ckeditor/ckeditor5-react'
 import BalloonEditor from '@ckeditor/ckeditor5-build-balloon'
-import setCard from '../../actions/deck'
+import { setCard } from '../../actions/decksPage'
 import editorConfig from '../../ckEditorConfig'
 
 const EditCard = ({
   setCard,
-  deck: { name, desc, cards },
   match: {
-    params: { cardIndex },
+    params: { deckIndex, cardIndex },
   },
+  decks,
 }) => {
+  const { name, desc, cards } = decks[deckIndex]
   const { question, answerTitle, answerImage, answerDesc } = cards[cardIndex]
 
   const getEditorData = (selector) =>
@@ -22,6 +23,7 @@ const EditCard = ({
 
   const handleSave = () => {
     setCard({
+      deckIndex: parseInt(deckIndex, 10),
       cardIndex: parseInt(cardIndex, 10),
       card: {
         question: getEditorData('.card-front .ck'),
@@ -77,7 +79,9 @@ const EditCard = ({
           </div>
         </div>
         <div className='selected-card__buttons'>
-          <Link to='/decks/0/' className='btn btn-outline-secondary mr-2'>
+          <Link
+            to={`/decks/${deckIndex}/`}
+            className='btn btn-outline-secondary mr-2'>
             Back to Deck
           </Link>
           <Button variant='outline-danger' onClick={handleSave}>
@@ -91,27 +95,32 @@ const EditCard = ({
 
 EditCard.propTypes = {
   setCard: PropTypes.func.isRequired,
-  deck: PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    desc: PropTypes.string.isRequired,
-    cards: PropTypes.arrayOf(
-      PropTypes.shape({
-        question: PropTypes.string.isRequired,
-        answerTitle: PropTypes.string.isRequired,
-        answerImage: PropTypes.string.isRequired,
-        answerDesc: PropTypes.string.isRequired,
-      }).isRequired,
-    ).isRequired,
-  }).isRequired,
   match: PropTypes.shape({
     params: PropTypes.shape({
+      deckIndex: PropTypes.string.isRequired,
       cardIndex: PropTypes.string.isRequired,
     }).isRequired,
   }).isRequired,
+  decks: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      desc: PropTypes.string.isRequired,
+      mastered: PropTypes.number.isRequired,
+      total: PropTypes.number.isRequired,
+      cards: PropTypes.arrayOf(
+        PropTypes.shape({
+          question: PropTypes.string.isRequired,
+          answerTitle: PropTypes.string.isRequired,
+          answerImage: PropTypes.string.isRequired,
+          answerDesc: PropTypes.string.isRequired,
+        }),
+      ).isRequired,
+    }).isRequired,
+  ).isRequired,
 }
 
 const mapStateToProps = (state) => ({
-  deck: state.deck,
+  decks: state.decksPage.decks,
 })
 
 export default connect(mapStateToProps, { setCard })(EditCard)

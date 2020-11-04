@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
 import { Link, withRouter } from 'react-router-dom'
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
@@ -135,19 +134,23 @@ const DeckInfoCard = ({ history, deck: { name, desc, total } }) => {
 }
 
 DeckInfoCard.propTypes = {
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+  }).isRequired,
   deck: PropTypes.shape({
     name: PropTypes.string.isRequired,
     desc: PropTypes.string.isRequired,
     mastered: PropTypes.number.isRequired,
     total: PropTypes.number.isRequired,
-  }).isRequired,
-  history: PropTypes.shape({
-    push: PropTypes.func.isRequired,
+    cards: PropTypes.arrayOf(
+      PropTypes.shape({
+        question: PropTypes.string.isRequired,
+        answerTitle: PropTypes.string.isRequired,
+        answerImage: PropTypes.string.isRequired,
+        answerDesc: PropTypes.string.isRequired,
+      }),
+    ).isRequired,
   }).isRequired,
 }
 
-const mapStateToProps = (state) => ({
-  deck: state.deck,
-})
-
-export default withRouter(connect(mapStateToProps)(DeckInfoCard))
+export default withRouter(DeckInfoCard)
