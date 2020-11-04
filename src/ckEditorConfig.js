@@ -37,6 +37,9 @@ const editorConfig = {
       },
     ],
   },
+  link: {
+    addTargetToExternalLinks: true,
+  },
 }
 
 export default editorConfig
