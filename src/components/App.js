@@ -14,6 +14,7 @@ import DeckPage from './deck/DeckPage'
 import CreateDeck from './deckActions/CreateDeck'
 import RenameDeck from './deckActions/RenameDeck'
 import EditCard from './cardActions/EditCard'
+import CreateCard from './cardActions/CreateCard'
 
 const App = ({ isDark }) => {
   const ColorStyle = () => {
@@ -55,6 +56,11 @@ const App = ({ isDark }) => {
               exact
               path='/decks/:deckIndex/cards/:cardIndex/update'
               component={EditCard}
+            />
+            <Route
+              exact
+              path='/decks/:deckIndex/cards/new'
+              component={CreateCard}
             />
           </Switch>
         </Container>

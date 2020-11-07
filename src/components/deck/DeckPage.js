@@ -34,7 +34,7 @@ const DeckPage = ({
             </button>
           </h1>
           <p className='p1 mb-0 pr-0 pr-md-5'>{desc}</p>
-          <CardNew />
+          <CardNew deckIndex={deckIndex} />
         </div>
         <DeckInfoCard deck={deck} />
       </div>
