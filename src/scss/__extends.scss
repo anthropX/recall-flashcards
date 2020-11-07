@@ -29,6 +29,6 @@
 
 %card--dark {
   background: $light;
-  border: none;
+  border: $bg-dark-mode 1px solid;
   box-shadow: none;
 }
