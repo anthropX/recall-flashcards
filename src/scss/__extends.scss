@@ -27,3 +27,9 @@
   border: $bg-dark-mode 1px solid;
   box-shadow: none;
 }
+
+%field:focus {
+  border-color: $field-focus-border !important;
+  box-shadow: 0 0 0 3px $field-focus-shadow !important;
+  outline: none;
+}

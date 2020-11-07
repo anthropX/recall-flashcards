@@ -34,6 +34,7 @@
     }
 
     .image-upload-placeholder {
+      @extend %field;
       border: $img-upload-light-border 1px solid;
       border-radius: 2px;
     }
@@ -51,6 +52,7 @@
     }
 
     .ck {
+      @extend %field;
       padding: 0.5rem;
     }
 

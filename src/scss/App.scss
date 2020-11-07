@@ -64,9 +64,8 @@ textarea {
   resize: none;
 }
 
-.form-control:focus {
-  border-color: #dc354590;
-  box-shadow: 0 0 0 3px #dc354535;
+.form-control {
+  @extend %field;
 }
 
 .btn-light {
