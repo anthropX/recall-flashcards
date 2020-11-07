@@ -36,7 +36,7 @@ const EditCard = ({
 
   return (
     <>
-      <div className='about'>
+      <div className='edit-card'>
         <h1 className='display-5 mb-1'>{name} Deck</h1>
         <p className='p1 mb-0 pr-0 pr-md-5'>{desc}</p>
         <hr className='hr w-75 ml-0' />
