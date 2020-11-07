@@ -66,12 +66,23 @@ export default function (state = initialState, { type, payload }) {
     case SET_DECK_INDEX:
       return { ...state, deckIndex: payload }
     case SET_CARD:
-      state.decks[payload.deckIndex].cards.splice(
-        payload.cardIndex,
-        1,
-        payload.card,
-      )
-      return state
+      return {
+        ...state,
+        decks: state.decks.map((deck, deckIndex) =>
+          deckIndex === payload.deckIndex
+            ? {
+                ...deck,
+                cards: deck.cards.map((card, cardIndex) =>
+                  cardIndex === payload.cardIndex
+                    ? {
+                        ...payload.card,
+                      }
+                    : card,
+                ),
+              }
+            : deck,
+        ),
+      }
     default:
       return state
   }
