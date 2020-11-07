@@ -22,11 +22,6 @@
   box-shadow: 0 3px 4px $card-light-shadow;
 }
 
-%card--wire {
-  background: $white;
-  border: $dark 1px solid;
-}
-
 %card--dark {
   background: $light;
   border: $bg-dark-mode 1px solid;
