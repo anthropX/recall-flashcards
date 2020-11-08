@@ -1,4 +1,9 @@
-import { SET_DECK_INDEX, ADD_CARD, SET_CARD } from '../actions/types'
+import {
+  SET_DECK_INDEX,
+  ADD_CARD,
+  SET_CARD,
+  DELETE_CARD,
+} from '../actions/types'
 
 const initialState = {
   deckIndex: -1,
@@ -90,6 +95,20 @@ export default function (state = initialState, { type, payload }) {
                         ...payload.card,
                       }
                     : card,
+                ),
+              }
+            : deck,
+        ),
+      }
+    case DELETE_CARD:
+      return {
+        ...state,
+        decks: state.decks.map((deck, deckIndex) =>
+          deckIndex === payload.deckIndex
+            ? {
+                ...deck,
+                cards: deck.cards.filter(
+                  (card, cardIndex) => cardIndex !== payload.cardIndex,
                 ),
               }
             : deck,

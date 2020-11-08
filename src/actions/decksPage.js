@@ -1,4 +1,4 @@
-import { SET_DECK_INDEX, ADD_CARD, SET_CARD } from './types'
+import { SET_DECK_INDEX, ADD_CARD, SET_CARD, DELETE_CARD } from './types'
 
 export function setDeckIndex(deckIndex) {
   return {
@@ -18,5 +18,12 @@ export function setCard(card) {
   return {
     type: SET_CARD,
     payload: card,
+  }
+}
+
+export function deleteCard(payload) {
+  return {
+    type: DELETE_CARD,
+    payload,
   }
 }

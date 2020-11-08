@@ -38,7 +38,7 @@ const DeckPage = ({
         </div>
         <DeckInfoCard deck={deck} />
       </div>
-      <Cards deckIndex={deckIndex} cards={cards} />
+      <Cards deckIndex={deckIndex} deckName={name} cards={cards} />
     </>
   )
 }

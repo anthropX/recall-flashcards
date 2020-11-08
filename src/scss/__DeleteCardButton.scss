@@ -1,0 +1,60 @@
+@media only screen and (max-width: 767px) {
+  .modal-backdrop {
+    top: -1px;
+  }
+
+  .modal-dialog {
+    max-width: initial;
+    width: 100vw;
+    margin: 0;
+    background-color: $white !important;
+  }
+
+  .modal-content {
+    border: none;
+    border-radius: 0;
+    margin: auto;
+    padding: 0 15px;
+
+    & > * {
+      padding-left: 0;
+      padding-right: 0;
+    }
+
+    button.close > span {
+      text-shadow: none;
+    }
+  }
+
+  .modal-content--dark {
+    .modal-dialog {
+      background-color: $bg-dark-mode !important;
+    }
+
+    .modal-content {
+      background-color: $bg-dark-mode !important;
+      color: $light;
+
+      & > * {
+        border-color: $text-secondary-dark-mode;
+      }
+
+      button.close {
+        opacity: 1 !important;
+        & > span {
+          color: $text-secondary-dark-mode;
+        }
+
+        &:hover > span {
+          color: $light !important;
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: 576px) and (max-width: 767px) {
+  .modal-content {
+    width: 540px;
+  }
+}

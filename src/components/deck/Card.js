@@ -1,13 +1,14 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import Button from 'react-bootstrap/Button'
 import { Link } from 'react-router-dom'
 import { CKEditor } from '@ckeditor/ckeditor5-react'
 import BalloonEditor from '@ckeditor/ckeditor5-build-balloon'
 import editorConfig from '../../ckEditorConfig'
+import DeleteCardButton from './DeleteCardButton'
 
 const Card = ({
   deckIndex,
+  deckName,
   cardIndex,
   card: { question, answerTitle, answerDesc, answerImage },
 }) => {
@@ -66,7 +67,11 @@ const Card = ({
           className='btn btn-outline-danger mr-2'>
           Edit Card
         </Link>
-        <Button variant='outline-danger'>Delete Card</Button>
+        <DeleteCardButton
+          deckName={deckName}
+          deckIndex={deckIndex}
+          cardIndex={cardIndex}
+        />
       </div>
     </div>
   )
@@ -74,6 +79,7 @@ const Card = ({
 
 Card.propTypes = {
   deckIndex: PropTypes.string.isRequired,
+  deckName: PropTypes.string.isRequired,
   cardIndex: PropTypes.number.isRequired,
   card: PropTypes.shape({
     question: PropTypes.string.isRequired,
