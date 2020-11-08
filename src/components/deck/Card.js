@@ -1,9 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
-import { CKEditor } from '@ckeditor/ckeditor5-react'
-import BalloonEditor from '@ckeditor/ckeditor5-build-balloon'
-import editorConfig from '../../ckEditorConfig'
 import DeleteCardButton from './DeleteCardButton'
 
 const Card = ({
@@ -18,25 +15,19 @@ const Card = ({
       <div className='card__sides d-flex flex-column flex-lg-row mb-2'>
         <div className='card__side card-front d-flex align-items-center mr-0 mr-md-3 mb-3 mb-lg-0 p-2'>
           <div className='card-front__canvas d-flex justify-content-center align-items-center w-100 h-100'>
-            <CKEditor
-              id='card-front__question'
-              editor={BalloonEditor}
-              data={question}
-              config={editorConfig}
-              disabled
-            />
+            {/* eslint-disable-next-line react/no-danger */}
+            <p className='ck' dangerouslySetInnerHTML={{ __html: question }} />
           </div>
         </div>
         <div className='card__side card-back d-flex flex-column'>
           <div className='card-back__canvas flex-grow-1 d-flex flex-column w-100 h-100'>
             <div className='card-back__row d-flex justify-content-between align-items-stretch'>
-              <CKEditor
-                id='card-back__title'
-                editor={BalloonEditor}
-                data={answerTitle}
-                config={editorConfig}
-                disabled
+              {/* eslint-disable react/no-danger */}
+              <p
+                className='ck'
+                dangerouslySetInnerHTML={{ __html: answerTitle }}
               />
+              {/* eslint-enable react/no-danger */}
               {answerImage !== '' ? (
                 <div
                   className='card-back__image mr-2 mt-2'
@@ -51,13 +42,12 @@ const Card = ({
                 </div>
               )}
             </div>
-            <CKEditor
-              id='card-back__desc'
-              editor={BalloonEditor}
-              data={answerDesc}
-              config={editorConfig}
-              disabled
+            {/* eslint-disable react/no-danger */}
+            <p
+              className='ck'
+              dangerouslySetInnerHTML={{ __html: answerDesc }}
             />
+            {/* eslint-enable react/no-danger */}
           </div>
         </div>
       </div>
