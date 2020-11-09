@@ -45,7 +45,7 @@ const initialState = {
           answerImage:
             'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/Flag_of_Nepal.svg/394px-Flag_of_Nepal.svg.png',
           answerDesc:
-            '<blockquote><p>Two juxtaposed triangular figures with a crimson-coloured base and deep blue borders</p><ol><li>Upper part: Crescent moon with eight of sixteen visible rays</li><li>Lower part: Twelve rayed sun</li></ol></blockquote>',
+            '<p>Two juxtaposed triangular figures with a crimson-coloured base and deep blue borders</p><ol><li>Upper part: Crescent moon with eight of sixteen visible rays</li><li>Lower part: Twelve rayed sun</li></ol>',
         },
       ],
     },

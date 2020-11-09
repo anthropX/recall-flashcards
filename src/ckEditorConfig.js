@@ -6,7 +6,6 @@ const editorConfig = {
     'link',
     'numberedList',
     'bulletedList',
-    'blockQuote',
     'undo',
     'redo',
   ],
