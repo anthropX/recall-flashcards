@@ -73,7 +73,7 @@ const CreateCard = ({
                   config={editorConfig}
                 />
                 <div
-                  className='card-back__image image-upload-placeholder position-relative mr-2 mt-2'
+                  className='card-back__image image-upload-placeholder image-upload-placeholder--editable position-relative mr-2 mt-2'
                   tabIndex='-1'>
                   <div className='image-upload-placeholder__canvas d-flex justify-content-center align-items-center position-absolute w-100 h-100'>
                     <i className='fas fa-file-image fa-2x mr-2' />

@@ -31,12 +31,16 @@
       background-size: contain;
       background-position: right;
       background-repeat: no-repeat;
+      border: transparent 1px solid;
     }
 
     .image-upload-placeholder {
-      @extend %field;
       border: $img-upload-light-border 1px solid;
       border-radius: 2px;
+      &--editable {
+        @extend %field-hover;
+        @extend %field-focus;
+      }
     }
 
     .image-upload-placeholder__canvas {
@@ -52,7 +56,7 @@
     }
 
     .ck {
-      @extend %field;
+      @extend %field-focus;
       padding: 0.5rem;
       border: transparent 1px solid;
       margin-bottom: 0;
@@ -63,6 +67,10 @@
 
       & > *:last-of-type {
         margin-bottom: 0;
+      }
+
+      &-editor__editable:hover {
+        @extend %field-hover;
       }
     }
 

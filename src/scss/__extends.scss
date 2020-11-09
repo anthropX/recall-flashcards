@@ -28,8 +28,13 @@
   box-shadow: none;
 }
 
-%field:focus {
+%field-focus:focus {
   border-color: $field-focus-border !important;
   box-shadow: 0 0 0 3px $field-focus-shadow !important;
+  outline: none;
+}
+
+%field-hover:hover {
+  border: 1px $field-focus-border solid;
   outline: none;
 }
