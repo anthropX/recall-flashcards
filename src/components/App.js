@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { Switch, Route, useLocation } from 'react-router-dom'
 import Container from 'react-bootstrap/Container'
 import { connect } from 'react-redux'
@@ -15,15 +15,10 @@ import CreateDeck from './deckActions/CreateDeck'
 import RenameDeck from './deckActions/RenameDeck'
 import EditCard from './cardActions/EditCard'
 import CreateCard from './cardActions/CreateCard'
-import Modernizr from '../modernizr'
+import dashboardImg from '../img/dashboard-background.jpg'
 
 const App = ({ isDark }) => {
-  const [supportsWebp, setSupportsWebp] = useState(false)
-  useEffect(() => {
-    Modernizr.on('webp', (result) => {
-      return result ? setSupportsWebp(true) : setSupportsWebp(false)
-    })
-  }, [])
+  const wallOverlay = ['#302d2db5', '#302d2d59']
 
   const ColorStyle = () => {
     if (useLocation().pathname === '/') return 'main-content--wall text-white'
@@ -33,11 +28,7 @@ const App = ({ isDark }) => {
 
   const BgImageStyle = () => {
     if (useLocation().pathname !== '/') return 'none'
-    return supportsWebp
-      ? // eslint-disable-next-line global-require
-        `linear-gradient(#302d2db5, #302d2d59), url(${require('../img/dashboard-background.webp')})`
-      : // eslint-disable-next-line global-require
-        `linear-gradient(#302d2db5, #302d2d59), url(${require('../img/dashboard-background.jpg')})`
+    return `linear-gradient(${wallOverlay}), url(${dashboardImg})`
   }
 
   return (
