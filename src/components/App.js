@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Switch, Route, useLocation } from 'react-router-dom'
 import Container from 'react-bootstrap/Container'
 import { connect } from 'react-redux'
@@ -15,19 +15,42 @@ import CreateDeck from './deckActions/CreateDeck'
 import RenameDeck from './deckActions/RenameDeck'
 import EditCard from './cardActions/EditCard'
 import CreateCard from './cardActions/CreateCard'
+import Modernizr from '../modernizr'
 
 const App = ({ isDark }) => {
+  const [supportsWebp, setSupportsWebp] = useState(false)
+  useEffect(() => {
+    Modernizr.on('webp', (result) => {
+      return result ? setSupportsWebp(true) : setSupportsWebp(false)
+    })
+  }, [])
+
   const ColorStyle = () => {
     if (useLocation().pathname === '/') return 'main-content--wall text-white'
     if (isDark) return 'main-content--dark text-light'
     return 'bg-white text-dark'
   }
 
+  const BgImageStyle = () => {
+    if (useLocation().pathname !== '/') return 'none'
+    return supportsWebp
+      ? // eslint-disable-next-line global-require
+        `linear-gradient(#302d2db5, #302d2d59), url(${require('../img/dashboard-background.webp')})`
+      : // eslint-disable-next-line global-require
+        `linear-gradient(#302d2db5, #302d2d59), url(${require('../img/dashboard-background.jpg')})`
+  }
+
   return (
     <div className='App min-vh-100 d-flex flex-column position-relative'>
       <CustomNavbar />
 
-      <div className={`main-content ${ColorStyle()} flex-grow-1 text-break`}>
+      <div
+        className={`main-content ${ColorStyle()} flex-grow-1 text-break`}
+        style={{
+          backgroundImage: BgImageStyle(),
+          backgroundSize: 'cover',
+          backgroundPosition: 'left 0px',
+        }}>
         <Container>
           <Switch>
             <Route exact path='/'>
