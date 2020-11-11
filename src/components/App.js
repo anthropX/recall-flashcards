@@ -15,6 +15,7 @@ import CreateDeck from './deckActions/CreateDeck'
 import RenameDeck from './deckActions/RenameDeck'
 import EditCard from './cardActions/EditCard'
 import CreateCard from './cardActions/CreateCard'
+import PlayArea from './play/PlayArea'
 import dashboardImg from '../img/dashboard-background.jpg'
 
 const App = ({ isDark }) => {
@@ -76,6 +77,7 @@ const App = ({ isDark }) => {
               path='/decks/:deckIndex/cards/new'
               component={CreateCard}
             />
+            <Route exact path='/decks/:deckIndex/play' component={PlayArea} />
           </Switch>
         </Container>
       </div>

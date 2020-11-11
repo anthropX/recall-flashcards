@@ -20,7 +20,7 @@
 
 // Cards
 .cards__card {
-  .card__sides > .card__side {
+  .card__sides .card__side {
     @extend %card--light;
     width: 100%;
     min-height: 20rem;

@@ -1,0 +1,73 @@
+.card__side--transparent {
+  width: 100%;
+  min-height: 20rem;
+}
+
+.hr-100 {
+  margin-top: 2rem;
+  max-width: unset !important;
+}
+
+.flippable-card-container {
+  perspective: 2000px;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.flippable-card {
+  position: relative;
+  height: auto;
+  transition: transform 0.4s;
+  transform-style: preserve-3d;
+  transition-timing-function: ease-in-out;
+}
+
+.flippable-card:focus {
+  outline: none;
+  transform: rotateY(180deg);
+
+  .flippable-card__back {
+    height: auto;
+  }
+}
+
+.flippable-card__front {
+  position: absolute;
+}
+
+.flippable-card__front,
+.flippable-card__back {
+  width: 100%;
+  backface-visibility: hidden;
+}
+
+.flippable-card__back {
+  transform: rotateY(180deg);
+  height: 0;
+}
+
+.play-buttons > button {
+  padding: 0.75rem;
+  border: none !important;
+  outline: none !important;
+
+  &:first-of-type {
+    background-color: $play-bg-success;
+    color: $success;
+
+    &:hover {
+      background-color: $play-bg-success-hover !important;
+      color: $play-text-success-hover !important;
+    }
+  }
+  &:last-of-type {
+    background-color: $play-bg-danger;
+    color: $danger;
+
+    &:hover {
+      // border: $danger 1px solid !important;
+      background-color: $play-bg-danger-hover !important;
+      color: $play-text-danger-hover !important;
+    }
+  }
+}
