@@ -7,6 +7,7 @@ import { CKEditor } from '@ckeditor/ckeditor5-react'
 import BalloonEditor from '@ckeditor/ckeditor5-build-balloon'
 import { setCard } from '../../actions/decksPage'
 import editorConfig from '../../ckEditorConfig'
+import Spinner from '../layout/Spinner'
 
 const EditCard = ({
   setCard,
@@ -15,8 +16,8 @@ const EditCard = ({
   },
   decks,
 }) => {
-  const { name, desc, cards } = decks[deckIndex]
-  const { question, answerTitle, answerImage, answerDesc } = cards[cardIndex]
+  const deck = decks[deckIndex]
+  const card = deck && deck.cards[cardIndex]
 
   const getEditorData = (selector) =>
     document.querySelector(selector).innerHTML.toString()
@@ -28,17 +29,17 @@ const EditCard = ({
       card: {
         question: getEditorData('.card-front .ck'),
         answerTitle: getEditorData('.card-back__row .ck'),
-        answerImage,
+        answerImage: card.answerImage,
         answerDesc: getEditorData('.card-back__row + .ck'),
       },
     })
   }
 
-  return (
+  return deck ? (
     <>
       <div className='edit-card'>
-        <h1 className='display-5 mb-1'>{name} Deck</h1>
-        <p className='p1 mb-0 pr-0 pr-md-5'>{desc}</p>
+        <h1 className='display-5 mb-1'>{deck.name} Deck</h1>
+        <p className='p1 mb-0 pr-0 pr-md-5'>{deck.desc}</p>
         <hr className='hr w-75 ml-0' />
 
         <h3 className='display-6'>Update card details</h3>
@@ -50,7 +51,7 @@ const EditCard = ({
               <CKEditor
                 id='card-front__question'
                 editor={BalloonEditor}
-                data={question}
+                data={card.question}
                 config={editorConfig}
               />
             </div>
@@ -61,13 +62,13 @@ const EditCard = ({
                 <CKEditor
                   id='card-back__title'
                   editor={BalloonEditor}
-                  data={answerTitle}
+                  data={card.answerTitle}
                   config={editorConfig}
                 />
-                {answerImage !== '' ? (
+                {card.answerImage !== '' ? (
                   <div
                     className='card-back__image image-upload-placeholder--editable mr-2 mt-2'
-                    style={{ backgroundImage: `url(${answerImage})` }}
+                    style={{ backgroundImage: `url(${card.answerImage})` }}
                     tabIndex='-1'
                   />
                 ) : (
@@ -84,7 +85,7 @@ const EditCard = ({
               <CKEditor
                 id='card-back__desc'
                 editor={BalloonEditor}
-                data={answerDesc}
+                data={card.answerDesc}
                 config={editorConfig}
               />
             </div>
@@ -102,6 +103,8 @@ const EditCard = ({
         </div>
       </div>
     </>
+  ) : (
+    <Spinner />
   )
 }
 

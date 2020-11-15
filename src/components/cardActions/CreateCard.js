@@ -7,6 +7,7 @@ import { CKEditor } from '@ckeditor/ckeditor5-react'
 import BalloonEditor from '@ckeditor/ckeditor5-build-balloon'
 import { addCard } from '../../actions/decksPage'
 import editorConfig from '../../ckEditorConfig'
+import Spinner from '../layout/Spinner'
 
 const CreateCard = ({
   addCard,
@@ -16,7 +17,7 @@ const CreateCard = ({
   },
   decks,
 }) => {
-  const { name, desc } = decks[deckIndex]
+  const deck = decks[deckIndex]
 
   const cardPlaceholder = {
     question: '<h5>Your <i>question</i> goes in here.</h5>',
@@ -42,11 +43,11 @@ const CreateCard = ({
     history.push(`/decks/${deckIndex}`)
   }
 
-  return (
+  return deck ? (
     <>
       <div className='create-card'>
-        <h1 className='display-5 mb-1'>{name} Deck</h1>
-        <p className='p1 mb-0 pr-0 pr-md-5'>{desc}</p>
+        <h1 className='display-5 mb-1'>{deck.name} Deck</h1>
+        <p className='p1 mb-0 pr-0 pr-md-5'>{deck.desc}</p>
         <hr className='hr w-75 ml-0' />
 
         <h3 className='display-6'>Fill in details for your new card!</h3>
@@ -102,6 +103,8 @@ const CreateCard = ({
         </div>
       </div>
     </>
+  ) : (
+    <Spinner />
   )
 }
 

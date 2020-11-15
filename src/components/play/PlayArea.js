@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import ProgressBar from 'react-bootstrap/ProgressBar'
 import FlippableCard from './FlippableCard'
+import Spinner from '../layout/Spinner'
 
 const PlayArea = ({
   match: {
@@ -11,22 +12,21 @@ const PlayArea = ({
   decks,
 }) => {
   const deck = decks[deckIndex]
-  const { name, mastered, total, cards } = deck
 
   const getProgressPercentage = () => {
-    if (total === 0) return 0
-    return Math.floor((mastered / total) * 100)
+    if (deck.total === 0) return 0
+    return Math.floor((deck.mastered / deck.total) * 100)
   }
 
-  return (
+  return deck ? (
     <div className='playarea'>
-      <h1 className='display-5 mb-1 d-flex flex-wrap'>Playing {name}</h1>
+      <h1 className='display-5 mb-1 d-flex flex-wrap'>Playing {deck.name}</h1>
       <div className='cards__card pb-4 mt-3'>
         <div className='card__sides d-flex flex-column flex-lg-row mb-2'>
           <div className='card__side--transparent flippable-card-container mr-0 mr-md-3 mb-3 mb-lg-0 border-none'>
-            <FlippableCard deck={deck} card={cards[1]} />
+            <FlippableCard deck={deck} card={deck.cards[1]} />
             <p className='p2 mt-3 mb-2 text-muted'>
-              Mastered {mastered} of {total} cards
+              Mastered {deck.mastered} of {deck.total} cards
             </p>
             <ProgressBar
               striped
@@ -35,7 +35,9 @@ const PlayArea = ({
               label={`${getProgressPercentage()}%`}
               srOnly={getProgressPercentage() < 6}
             />
-            <p className='p2 my-2 text-muted'>Learning 18 of {total} cards</p>
+            <p className='p2 my-2 text-muted'>
+              Learning 18 of {deck.total} cards
+            </p>
             <ProgressBar
               striped
               variant='secondary'
@@ -49,6 +51,8 @@ const PlayArea = ({
         </div>
       </div>
     </div>
+  ) : (
+    <Spinner />
   )
 }
 
