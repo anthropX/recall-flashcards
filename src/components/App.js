@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Switch, Route, useLocation } from 'react-router-dom'
 import Container from 'react-bootstrap/Container'
 import { connect } from 'react-redux'
@@ -17,8 +17,10 @@ import EditCard from './cardActions/EditCard'
 import CreateCard from './cardActions/CreateCard'
 import PlayArea from './play/PlayArea'
 import dashboardImg from '../img/dashboard-background.jpg'
+import { setDecks } from '../actions/decksPage'
+import getDecks from '../util/api'
 
-const App = ({ isDark }) => {
+const App = ({ setDecks, isDark }) => {
   const wallOverlay = ['#302d2db5', '#302d2d59']
 
   const ColorStyle = () => {
@@ -31,6 +33,11 @@ const App = ({ isDark }) => {
     if (useLocation().pathname !== '/') return 'none'
     return `linear-gradient(${wallOverlay}), url(${dashboardImg})`
   }
+
+  useEffect(() => {
+    console.log('App useEffect!')
+    setDecks(getDecks())
+  }, [setDecks])
 
   return (
     <div className='App min-vh-100 d-flex flex-column position-relative'>
@@ -88,6 +95,7 @@ const App = ({ isDark }) => {
 }
 
 App.propTypes = {
+  setDecks: PropTypes.func.isRequired,
   isDark: PropTypes.bool.isRequired,
 }
 
@@ -97,4 +105,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps)(App)
+export default connect(mapStateToProps, { setDecks })(App)
