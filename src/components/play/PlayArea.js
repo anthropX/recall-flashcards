@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import ProgressBar from 'react-bootstrap/ProgressBar'
 import FlippableCard from './FlippableCard'
 import Spinner from '../layout/Spinner'
-import getCard from './PlayAreaService'
+import PlayAreaService from './PlayAreaService'
 
 const PlayArea = ({
   match: {
@@ -13,7 +13,13 @@ const PlayArea = ({
   decks,
 }) => {
   const deck = decks[deckIndex]
-  const card = deck && getCard(deck)
+  let card
+  let service
+
+  if (deck) {
+    service = new PlayAreaService(deck)
+    card = service.getCard()
+  }
 
   const getProgressPercentage = () => {
     if (deck.total === 0) return 0
@@ -26,7 +32,7 @@ const PlayArea = ({
       <div className='cards__card pb-4 mt-3'>
         <div className='card__sides d-flex flex-column flex-lg-row mb-2'>
           <div className='card__side--transparent flippable-card-container mr-0 mr-md-3 mb-3 mb-lg-0 border-none'>
-            <FlippableCard deck={deck} card={card} />
+            <FlippableCard card={card} />
             <p className='p2 mt-3 mb-2 text-muted'>
               Mastered {deck.mastered} of {deck.total} cards
             </p>

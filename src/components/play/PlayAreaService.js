@@ -1,76 +1,110 @@
-let cards
-let buckets
+export default class PlayAreaService {
+  cards
 
-// Higher the card weight, higher the changes of a card being shown
-const hfCardWeight = 8 // hf - high frequency
-const mfCardWeight = 4 // mf - medium frequency
-const lfCardWeight = 2 // lf - low frequency
-const masteredCardWeight = 1
+  buckets
 
-let hfBucketWeight
-let mfBucketWeight
-let lfBucketWeight
-let masteredBucketWeight
+  // Higher the card weight, higher the changes of a card being shown
 
-const minHfBucketSize = 5
+  hfCardWeight = 8 // hf - high frequency
 
-export default function getCard(deck) {
-  cards = deck.cards
-  buckets = deck.buckets
-  hfBucketWeight = hfCardWeight * buckets.highFreq.length
-  mfBucketWeight = mfCardWeight * buckets.mdFreq.length
-  lfBucketWeight = lfCardWeight * buckets.lowFreq.length
-  masteredBucketWeight = masteredCardWeight * buckets.mastered.length
-  if (buckets.highFreq.length < minHfBucketSize && buckets.new.length > 0)
-    return getCardFromNew()
-  return getCardFromLearning(getRand(getMaxRand()))
-}
+  mfCardWeight = 4 // mf - medium frequency
 
-function getCardFromLearning(rand) {
-  let cardIndex
-  let badge
-  if (rand - hfBucketWeight < 0) {
-    // high freq bucket
-    cardIndex = buckets.highFreq[Math.floor(rand / hfCardWeight)]
-    badge = { bucket: 'Learning', variant: 'danger' }
-  } else if (rand - hfBucketWeight - mfBucketWeight < 0) {
-    // md freq bucket
-    cardIndex =
-      buckets.mdFreq[Math.floor((rand - hfBucketWeight) / mfCardWeight)]
-    badge = { bucket: 'Reinforcing', variant: 'threat' }
-  } else if (rand - hfBucketWeight - mfBucketWeight - lfBucketWeight < 0) {
-    // low freq bucket
-    cardIndex =
-      buckets.lowFreq[
-        Math.floor((rand - hfBucketWeight - mfBucketWeight) / lfCardWeight)
+  lfCardWeight = 2 // lf - low frequency
+
+  masteredCardWeight = 1
+
+  hfBucketWeight
+
+  mfBucketWeight
+
+  lfBucketWeight
+
+  masteredBucketWeight
+
+  minHfBucketSize = 5
+
+  maxRand
+
+  constructor(deck) {
+    this.cards = deck.cards
+    this.buckets = deck.buckets
+  }
+
+  getCard() {
+    this.hfBucketWeight = this.hfCardWeight * this.buckets.highFreq.length
+    this.mfBucketWeight = this.mfCardWeight * this.buckets.mdFreq.length
+    this.lfBucketWeight = this.lfCardWeight * this.buckets.lowFreq.length
+    this.masteredBucketWeight =
+      this.masteredCardWeight * this.buckets.mastered.length
+    if (
+      this.buckets.highFreq.length < this.minHfBucketSize &&
+      this.buckets.new.length > 0
+    )
+      return this.getCardFromNew()
+    this.maxRand = this.getMaxRand()
+    return this.getCardFromLearning(this.getRand())
+  }
+
+  getCardFromLearning(rand) {
+    let cardIndex
+    let badge
+    if (rand - this.hfBucketWeight < 0) {
+      // high freq bucket
+      cardIndex = this.buckets.highFreq[Math.floor(rand / this.hfCardWeight)]
+      badge = { bucket: 'Learning', variant: 'danger' }
+    } else if (rand - this.hfBucketWeight - this.mfBucketWeight < 0) {
+      // md freq bucket
+      cardIndex = this.buckets.mdFreq[
+        Math.floor((rand - this.hfBucketWeight) / this.mfCardWeight)
       ]
-    badge = { bucket: 'Mastering', variant: 'threat' }
-  } else {
-    // mastered bucket
-    cardIndex =
-      buckets.mastered[
+      badge = { bucket: 'Reinforcing', variant: 'threat' }
+    } else if (
+      rand - this.hfBucketWeight - this.mfBucketWeight - this.lfBucketWeight <
+      0
+    ) {
+      // low freq bucket
+      cardIndex = this.buckets.lowFreq[
         Math.floor(
-          (rand - hfBucketWeight - mfBucketWeight - lfBucketWeight) /
-            masteredCardWeight,
+          (rand - this.hfBucketWeight - this.mfBucketWeight) /
+            this.lfCardWeight,
         )
       ]
-    badge = { bucket: 'Mastered', variant: 'success' }
+      badge = { bucket: 'Mastering', variant: 'threat' }
+    } else {
+      // mastered bucket
+      cardIndex = this.buckets.mastered[
+        Math.floor(
+          (rand -
+            this.hfBucketWeight -
+            this.mfBucketWeight -
+            this.lfBucketWeight) /
+            this.masteredCardWeight,
+        )
+      ]
+      badge = { bucket: 'Mastered', variant: 'success' }
+    }
+    return { ...this.cards[cardIndex], badge }
   }
-  return { ...cards[cardIndex], badge }
-}
 
-function getCardFromNew() {
-  const cardIndex = buckets.new[Math.floor(Math.random() * buckets.new.length)]
-  const badge = { bucket: 'New', variant: 'secondary' }
-  return { ...cards[cardIndex], badge }
-}
+  getCardFromNew() {
+    const cardIndex = this.buckets.new[
+      Math.floor(Math.random() * this.buckets.new.length)
+    ]
+    const badge = { bucket: 'New', variant: 'secondary' }
+    return { ...this.cards[cardIndex], badge }
+  }
 
-function getMaxRand() {
-  return (
-    hfBucketWeight + mfBucketWeight + lfBucketWeight + masteredBucketWeight - 1
-  )
-}
+  getMaxRand() {
+    return (
+      this.hfBucketWeight +
+      this.mfBucketWeight +
+      this.lfBucketWeight +
+      this.masteredBucketWeight -
+      1
+    )
+  }
 
-function getRand(maxRand) {
-  return Math.floor(Math.random() * (maxRand + 1))
+  getRand() {
+    return Math.floor(Math.random() * (this.maxRand + 1))
+  }
 }
