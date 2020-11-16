@@ -44,6 +44,7 @@
 .flippable-card__back {
   transform: rotateY(180deg);
   height: 0;
+  overflow: hidden;
 }
 
 .play-buttons > button {
