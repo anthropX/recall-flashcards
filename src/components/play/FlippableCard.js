@@ -1,9 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Button from 'react-bootstrap/Button'
+import Badge from 'react-bootstrap/Badge'
 
 const FlippableCard = ({
-  card: { question, answerTitle, answerDesc, answerImage },
+  card: { question, answerTitle, answerDesc, answerImage, badge },
 }) => {
   return (
     <div
@@ -11,6 +12,11 @@ const FlippableCard = ({
       tabIndex='-1'
       onBlur={({ target }) => target.focus()}>
       <div className='flippable-card__front card__side card-front d-flex align-items-center p-2'>
+        <Badge
+          variant={badge.variant}
+          className='card-front__badge align-self-start position-absolute'>
+          {badge.bucket}
+        </Badge>
         <div className='card-front__canvas d-flex justify-content-center align-items-center w-100 h-100'>
           {/* eslint-disable-next-line react/no-danger */}
           <p className='ck' dangerouslySetInnerHTML={{ __html: question }} />
@@ -61,6 +67,10 @@ FlippableCard.propTypes = {
     answerTitle: PropTypes.string.isRequired,
     answerImage: PropTypes.string.isRequired,
     answerDesc: PropTypes.string.isRequired,
+    badge: PropTypes.shape({
+      bucket: PropTypes.string.isRequired,
+      variant: PropTypes.string.isRequired,
+    }).isRequired,
   }).isRequired,
 }
 

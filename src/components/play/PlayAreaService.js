@@ -28,19 +28,23 @@ export default function getCard(deck) {
 
 function getCardFromLearning(rand) {
   let cardIndex
+  let badge
   if (rand - hfBucketWeight < 0) {
     // high freq bucket
     cardIndex = buckets.highFreq[Math.floor(rand / hfCardWeight)]
+    badge = { bucket: 'Learning', variant: 'danger' }
   } else if (rand - hfBucketWeight - mfBucketWeight < 0) {
     // md freq bucket
     cardIndex =
       buckets.mdFreq[Math.floor((rand - hfBucketWeight) / mfCardWeight)]
+    badge = { bucket: 'Reinforcing', variant: 'threat' }
   } else if (rand - hfBucketWeight - mfBucketWeight - lfBucketWeight < 0) {
     // low freq bucket
     cardIndex =
       buckets.lowFreq[
         Math.floor((rand - hfBucketWeight - mfBucketWeight) / lfCardWeight)
       ]
+    badge = { bucket: 'Mastering', variant: 'threat' }
   } else {
     // mastered bucket
     cardIndex =
@@ -50,13 +54,15 @@ function getCardFromLearning(rand) {
             masteredCardWeight,
         )
       ]
+    badge = { bucket: 'Mastered', variant: 'success' }
   }
-  return cards[cardIndex]
+  return { ...cards[cardIndex], badge }
 }
 
 function getCardFromNew() {
   const cardIndex = buckets.new[Math.floor(Math.random() * buckets.new.length)]
-  return cards[cardIndex]
+  const badge = { bucket: 'New', variant: 'secondary' }
+  return { ...cards[cardIndex], badge }
 }
 
 function getMaxRand() {
