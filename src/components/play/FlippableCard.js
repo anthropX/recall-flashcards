@@ -6,7 +6,10 @@ const FlippableCard = ({
   card: { question, answerTitle, answerDesc, answerImage },
 }) => {
   return (
-    <div className='flippable-card' tabIndex='-1'>
+    <div
+      className='flippable-card'
+      tabIndex='-1'
+      onBlur={({ target }) => target.focus()}>
       <div className='flippable-card__front card__side card-front d-flex align-items-center p-2'>
         <div className='card-front__canvas d-flex justify-content-center align-items-center w-100 h-100'>
           {/* eslint-disable-next-line react/no-danger */}
