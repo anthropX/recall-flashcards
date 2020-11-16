@@ -26,6 +26,11 @@
   outline: none;
   transform: rotateY(180deg);
 
+  .flippable-card__front {
+    .card-front__badge {
+      opacity: 0;
+    }
+  }
   .flippable-card__back {
     height: auto;
   }
@@ -33,6 +38,17 @@
 
 .flippable-card__front {
   position: absolute;
+
+  .card-front__badge {
+    right: 0.5rem;
+    top: 0.5rem;
+    transition: opacity 0.4s ease-in-out;
+
+    &.badge-threat {
+      background: $threat;
+      color: white;
+    }
+  }
 }
 
 .flippable-card__front,

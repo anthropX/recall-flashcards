@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import ProgressBar from 'react-bootstrap/ProgressBar'
 import FlippableCard from './FlippableCard'
 import Spinner from '../layout/Spinner'
+import getCard from './PlayAreaService'
 
 const PlayArea = ({
   match: {
@@ -12,6 +13,7 @@ const PlayArea = ({
   decks,
 }) => {
   const deck = decks[deckIndex]
+  const card = deck && getCard(deck)
 
   const getProgressPercentage = () => {
     if (deck.total === 0) return 0
@@ -24,7 +26,7 @@ const PlayArea = ({
       <div className='cards__card pb-4 mt-3'>
         <div className='card__sides d-flex flex-column flex-lg-row mb-2'>
           <div className='card__side--transparent flippable-card-container mr-0 mr-md-3 mb-3 mb-lg-0 border-none'>
-            <FlippableCard deck={deck} card={deck.cards[1]} />
+            <FlippableCard deck={deck} card={card} />
             <p className='p2 mt-3 mb-2 text-muted'>
               Mastered {deck.mastered} of {deck.total} cards
             </p>
@@ -76,6 +78,13 @@ PlayArea.propTypes = {
           answerDesc: PropTypes.string.isRequired,
         }),
       ).isRequired,
+      buckets: PropTypes.shape({
+        new: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
+        highFreq: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
+        mdFreq: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
+        lowFreq: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
+        mastered: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
+      }),
     }).isRequired,
   ).isRequired,
 }
