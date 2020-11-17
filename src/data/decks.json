@@ -4,7 +4,14 @@
     "desc": "Learn atomic numbers and classifications of elements of the periodic table",
     "mastered": 27,
     "total": 118,
-    "cards": []
+    "cards": [],
+    "buckets": {
+      "new": [],
+      "highFreq": [],
+      "mdFreq": [],
+      "lowFreq": [],
+      "mastered": []
+    }
   },
   {
     "name": "Asian Countries",
@@ -343,13 +350,27 @@
     "desc": "Master the top 100 GRE words",
     "mastered": 100,
     "total": 100,
-    "cards": []
+    "cards": [],
+    "buckets": {
+      "new": [],
+      "highFreq": [],
+      "mdFreq": [],
+      "lowFreq": [],
+      "mastered": []
+    }
   },
   {
     "name": "Pokemon",
     "desc": "Memorize Pokedex numbers and types of the original 151 pokemons",
     "mastered": 0,
     "total": 151,
-    "cards": []
+    "cards": [],
+    "buckets": {
+      "new": [],
+      "highFreq": [],
+      "mdFreq": [],
+      "lowFreq": [],
+      "mastered": []
+    }
   }
 ]

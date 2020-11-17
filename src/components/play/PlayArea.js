@@ -90,7 +90,7 @@ PlayArea.propTypes = {
         mdFreq: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
         lowFreq: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
         mastered: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
-      }),
+      }).isRequired,
     }).isRequired,
   ).isRequired,
 }
