@@ -4,6 +4,8 @@ import Button from 'react-bootstrap/Button'
 import Badge from 'react-bootstrap/Badge'
 
 const FlippableCard = ({
+  handleAffirmation,
+  handleNegation,
   card: { question, answerTitle, answerDesc, answerImage, badge },
 }) => {
   return (
@@ -49,10 +51,16 @@ const FlippableCard = ({
           <p className='ck' dangerouslySetInnerHTML={{ __html: answerDesc }} />
         </div>
         <div className='play-buttons d-flex justify-content-stretch'>
-          <Button variant='success' className='w-100 border-0 rounded-0'>
+          <Button
+            variant='success'
+            className='w-100 border-0 rounded-0'
+            onClick={handleAffirmation}>
             I knew this!
           </Button>
-          <Button variant='danger' className='w-100 border-0 rounded-0'>
+          <Button
+            variant='danger'
+            className='w-100 border-0 rounded-0'
+            onClick={handleNegation}>
             I didn&apos;t know
           </Button>
         </div>
@@ -62,6 +70,8 @@ const FlippableCard = ({
 }
 
 FlippableCard.propTypes = {
+  handleAffirmation: PropTypes.func.isRequired,
+  handleNegation: PropTypes.func.isRequired,
   card: PropTypes.shape({
     question: PropTypes.string.isRequired,
     answerTitle: PropTypes.string.isRequired,

@@ -4,6 +4,7 @@ import {
   ADD_CARD,
   SET_CARD,
   DELETE_CARD,
+  SET_BUCKETS,
 } from '../actions/types'
 
 const initialState = {
@@ -57,6 +58,18 @@ export default function (state = initialState, { type, payload }) {
                 cards: deck.cards.filter(
                   (card, cardIndex) => cardIndex !== payload.cardIndex,
                 ),
+              }
+            : deck,
+        ),
+      }
+    case SET_BUCKETS:
+      return {
+        ...state,
+        decks: state.decks.map((deck, deckIndex) =>
+          deckIndex === payload.deckIndex
+            ? {
+                ...deck,
+                buckets: payload.buckets,
               }
             : deck,
         ),

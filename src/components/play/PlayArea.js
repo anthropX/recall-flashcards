@@ -5,8 +5,10 @@ import ProgressBar from 'react-bootstrap/ProgressBar'
 import FlippableCard from './FlippableCard'
 import Spinner from '../layout/Spinner'
 import PlayAreaService from './PlayAreaService'
+import { setBuckets } from '../../actions/decksPage'
 
 const PlayArea = ({
+  setBuckets,
   match: {
     params: { deckIndex },
   },
@@ -21,6 +23,12 @@ const PlayArea = ({
     card = service.getCard()
   }
 
+  const handleAffirmation = () =>
+    setBuckets({ deckIndex, buckets: service.updateBuckets(true) })
+
+  const handleNegation = () =>
+    setBuckets({ deckIndex, buckets: service.updateBuckets(false) })
+
   const getProgressPercentage = () => {
     if (deck.total === 0) return 0
     return Math.floor((deck.mastered / deck.total) * 100)
@@ -32,7 +40,11 @@ const PlayArea = ({
       <div className='cards__card pb-4 mt-3'>
         <div className='card__sides d-flex flex-column flex-lg-row mb-2'>
           <div className='card__side--transparent flippable-card-container mr-0 mr-md-3 mb-3 mb-lg-0 border-none'>
-            <FlippableCard card={card} />
+            <FlippableCard
+              card={card}
+              handleAffirmation={handleAffirmation}
+              handleNegation={handleNegation}
+            />
             <p className='p2 mt-3 mb-2 text-muted'>
               Mastered {deck.mastered} of {deck.total} cards
             </p>
@@ -65,6 +77,7 @@ const PlayArea = ({
 }
 
 PlayArea.propTypes = {
+  setBuckets: PropTypes.func.isRequired,
   match: PropTypes.shape({
     params: PropTypes.shape({
       deckIndex: PropTypes.string.isRequired,
@@ -99,4 +112,4 @@ const mapStateToProps = (state) => ({
   decks: state.decksPage.decks,
 })
 
-export default connect(mapStateToProps)(PlayArea)
+export default connect(mapStateToProps, { setBuckets })(PlayArea)
