@@ -17,14 +17,16 @@
 .flippable-card {
   position: relative;
   height: auto;
-  transition: transform 0.4s;
+  transition-property: transform;
+  transition-duration: 0s;
   transform-style: preserve-3d;
   transition-timing-function: ease-in-out;
 }
 
-.flippable-card:focus {
+.flippable-card__focus {
   outline: none;
   transform: rotateY(180deg);
+  transition-duration: 0.4s;
 
   .flippable-card__front {
     .card-front__badge {

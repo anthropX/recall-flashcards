@@ -23,11 +23,23 @@ const PlayArea = ({
     card = service.getCard()
   }
 
-  const handleAffirmation = () =>
-    setBuckets({ deckIndex, buckets: service.updateBuckets(true) })
+  const handleCardFocus = () =>
+    document
+      .querySelector('.flippable-card')
+      .classList.add('flippable-card__focus')
 
-  const handleNegation = () =>
+  const handleAffirmation = () => {
+    setBuckets({ deckIndex, buckets: service.updateBuckets(true) })
+    document
+      .querySelector('.flippable-card')
+      .classList.remove('flippable-card__focus')
+  }
+  const handleNegation = () => {
     setBuckets({ deckIndex, buckets: service.updateBuckets(false) })
+    document
+      .querySelector('.flippable-card')
+      .classList.remove('flippable-card__focus')
+  }
 
   const getProgressPercentage = () => {
     if (deck.total === 0) return 0
@@ -44,6 +56,7 @@ const PlayArea = ({
               card={card}
               handleAffirmation={handleAffirmation}
               handleNegation={handleNegation}
+              handleCardFocus={handleCardFocus}
             />
             <p className='p2 mt-3 mb-2 text-muted'>
               Mastered {deck.mastered} of {deck.total} cards
