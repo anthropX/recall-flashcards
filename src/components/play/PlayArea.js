@@ -34,12 +34,14 @@ const PlayArea = ({
 
   const handleAffirmation = () => {
     setBuckets({ deckIndex, buckets: service.updateBuckets(true) })
+    document.querySelector('.flippable-card').blur()
     document
       .querySelector('.flippable-card')
       .classList.remove('flippable-card__focus')
   }
   const handleNegation = () => {
     setBuckets({ deckIndex, buckets: service.updateBuckets(false) })
+    document.querySelector('.flippable-card').blur()
     document
       .querySelector('.flippable-card')
       .classList.remove('flippable-card__focus')
