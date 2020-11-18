@@ -45,9 +45,24 @@ const PlayArea = ({
       .classList.remove('flippable-card__focus')
   }
 
-  const getProgressPercentage = () => {
-    if (cards.length === 0) return 0
+  const getMasteredPercentage = () => {
+    if (buckets.mastered.length === 0) return 0
     return Math.floor((buckets.mastered.length / cards.length) * 100)
+  }
+
+  const getHighFreqPercentage = () => {
+    if (buckets.highFreq.length === 0) return 0
+    return Math.floor((buckets.highFreq.length / cards.length) * 100)
+  }
+
+  const getMdFreqPercentage = () => {
+    if (buckets.mdFreq.length === 0) return 0
+    return Math.floor((buckets.mdFreq.length / cards.length) * 100)
+  }
+
+  const getLowFreqPercentage = () => {
+    if (buckets.lowFreq.length === 0) return 0
+    return Math.floor((buckets.lowFreq.length / cards.length) * 100)
   }
 
   return deck ? (
@@ -65,24 +80,32 @@ const PlayArea = ({
             <p className='p2 mt-3 mb-2 text-muted'>
               Mastered {buckets.mastered.length} of {cards.length} cards
             </p>
-            <ProgressBar
-              striped
-              variant='danger'
-              now={getProgressPercentage()}
-              label={`${getProgressPercentage()}%`}
-              srOnly={getProgressPercentage() < 6}
-            />
-            <p className='p2 my-2 text-muted'>
-              Learning 18 of {cards.length} cards
-            </p>
-            <ProgressBar
-              striped
-              variant='secondary'
-              now={getProgressPercentage()}
-              label={`${getProgressPercentage()}%`}
-              srOnly={getProgressPercentage() < 6}
-              className='mb-3'
-            />
+            <ProgressBar className='mb-3'>
+              <ProgressBar
+                variant='danger'
+                now={getHighFreqPercentage()}
+                label={`${getHighFreqPercentage()}%`}
+                srOnly={getHighFreqPercentage() < 6}
+              />
+              <ProgressBar
+                variant='threat'
+                now={getMdFreqPercentage()}
+                label={`${getMdFreqPercentage()}%`}
+                srOnly={getMdFreqPercentage() < 6}
+              />
+              <ProgressBar
+                variant='warning'
+                now={getLowFreqPercentage()}
+                label={`${getLowFreqPercentage()}%`}
+                srOnly={getLowFreqPercentage() < 6}
+              />
+              <ProgressBar
+                variant='success'
+                now={getMasteredPercentage()}
+                label={`${getMasteredPercentage()}%`}
+                srOnly={getMasteredPercentage() < 6}
+              />
+            </ProgressBar>
           </div>
           <div className='card__side card-back d-none d-lg-flex flex-column invisible' />
         </div>

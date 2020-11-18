@@ -93,3 +93,12 @@
     }
   }
 }
+
+.progress-bar {
+  &.bg-threat {
+    background-color: $threat;
+  }
+  &.bg-warning {
+    color: $dark;
+  }
+}
