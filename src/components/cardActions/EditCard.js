@@ -128,6 +128,13 @@ EditCard.propTypes = {
           answerDesc: PropTypes.string.isRequired,
         }),
       ).isRequired,
+      buckets: PropTypes.shape({
+        new: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
+        highFreq: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
+        mdFreq: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
+        lowFreq: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
+        mastered: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
+      }).isRequired,
     }).isRequired,
   ).isRequired,
 }
