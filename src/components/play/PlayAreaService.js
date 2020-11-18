@@ -77,7 +77,7 @@ export default class PlayAreaService {
       // md freq bucket
       bucketIndex = Math.floor((rand - this.hfBucketWeight) / this.mfCardWeight)
       cardIndex = this.buckets.mdFreq[bucketIndex]
-      badge = { bucket: 'Reinforcing', variant: 'threat' }
+      badge = { bucket: 'Revising', variant: 'threat' }
       this.cardLocale = { bucketName: 'mdFreq', bucketIndex }
     } else if (
       rand - this.hfBucketWeight - this.mfBucketWeight - this.lfBucketWeight <
