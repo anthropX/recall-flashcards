@@ -50,6 +50,9 @@
       background: $threat;
       color: white;
     }
+    &.badge-warning {
+      color: $dark;
+    }
   }
 }
 

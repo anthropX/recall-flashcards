@@ -88,7 +88,7 @@ export default class PlayAreaService {
         (rand - this.hfBucketWeight - this.mfBucketWeight) / this.lfCardWeight,
       )
       cardIndex = this.buckets.lowFreq[bucketIndex]
-      badge = { bucket: 'Mastering', variant: 'threat' }
+      badge = { bucket: 'Mastering', variant: 'warning' }
       this.cardLocale = { bucketName: 'lowFreq', bucketIndex }
     } else {
       // mastered bucket
