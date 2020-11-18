@@ -45,6 +45,22 @@ const PlayArea = ({
       .classList.remove('flippable-card__focus')
   }
 
+  const getVerb = () => {
+    let verb = 'Touched'
+    if (
+      cards.length === buckets.new.length ||
+      cards.length === buckets.new.length + buckets.highFreq.length
+    )
+      verb = 'Learning'
+    else if (cards.length === buckets.new.length + buckets.mdFreq.length)
+      verb = 'Revising'
+    else if (cards.length === buckets.new.length + buckets.lowFreq.length)
+      verb = 'Mastering'
+    else if (cards.length === buckets.new.length + buckets.mastered.length)
+      verb = 'Mastered'
+    return verb
+  }
+
   const getMasteredPercentage = () => {
     if (buckets.mastered.length === 0) return 0
     return Math.floor((buckets.mastered.length / cards.length) * 100)
@@ -77,8 +93,10 @@ const PlayArea = ({
               handleNegation={handleNegation}
               handleCardFocus={handleCardFocus}
             />
-            <p className='p2 mt-3 mb-2 text-muted'>
-              Mastered {buckets.mastered.length} of {cards.length} cards
+            <p className='p2 my-2 text-muted'>
+              {getVerb()}
+              {` ${cards.length - buckets.new.length} `}
+              of {cards.length} cards
             </p>
             <ProgressBar className='mb-3'>
               <ProgressBar
