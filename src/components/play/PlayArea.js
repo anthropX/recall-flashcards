@@ -16,11 +16,15 @@ const PlayArea = ({
 }) => {
   const deck = decks[deckIndex]
   let card
+  let cards
+  let buckets
   let service
 
   if (deck) {
     service = new PlayAreaService(deck)
     card = service.getCard()
+    cards = deck.cards
+    buckets = deck.buckets
   }
 
   const handleCardFocus = () =>
@@ -42,8 +46,8 @@ const PlayArea = ({
   }
 
   const getProgressPercentage = () => {
-    if (deck.total === 0) return 0
-    return Math.floor((deck.mastered / deck.total) * 100)
+    if (cards.length === 0) return 0
+    return Math.floor((buckets.mastered.length / cards.length) * 100)
   }
 
   return deck ? (
@@ -59,7 +63,7 @@ const PlayArea = ({
               handleCardFocus={handleCardFocus}
             />
             <p className='p2 mt-3 mb-2 text-muted'>
-              Mastered {deck.mastered} of {deck.total} cards
+              Mastered {buckets.mastered.length} of {cards.length} cards
             </p>
             <ProgressBar
               striped
@@ -69,7 +73,7 @@ const PlayArea = ({
               srOnly={getProgressPercentage() < 6}
             />
             <p className='p2 my-2 text-muted'>
-              Learning 18 of {deck.total} cards
+              Learning 18 of {cards.length} cards
             </p>
             <ProgressBar
               striped
@@ -100,8 +104,6 @@ PlayArea.propTypes = {
     PropTypes.shape({
       name: PropTypes.string.isRequired,
       desc: PropTypes.string.isRequired,
-      mastered: PropTypes.number.isRequired,
-      total: PropTypes.number.isRequired,
       cards: PropTypes.arrayOf(
         PropTypes.shape({
           question: PropTypes.string.isRequired,

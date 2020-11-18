@@ -6,7 +6,7 @@ import { Link, withRouter } from 'react-router-dom'
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
 
-const DeckInfoCard = ({ history, deck: { name, desc, total } }) => {
+const DeckInfoCard = ({ history, deck: { name, desc, cards } }) => {
   const [confirmValue, setConfirmValue] = useState('')
   const [validated, setValidated] = useState(false)
 
@@ -58,38 +58,39 @@ const DeckInfoCard = ({ history, deck: { name, desc, total } }) => {
       onWheel={closeSidebar}
       onTouchMove={closeSidebar}>
       <div className='fluid-box pl-md-3 pr-md-0' tabIndex='-1'>
-        <aside
-          className={`deck-infocard aside pl-md-3 pr-md-0 ${
-            name === '' ? 'invisible' : 'visible'
-          }`}>
-          <h6 className='h6 mt-0 d-md-none'>{name} Deck</h6>
-          <div className='aside__close'>
-            <i className='fas fa-times text-muted' />
-          </div>
-          <p className='p2 my-2 text-muted d-md-none'>({total} cards)</p>
+        {name === '' ? (
+          <aside className='deck-infocard aside pl-md-3 pr-md-0'>
+            <h6 className='h6 mt-0 d-md-none'>{name} Deck</h6>
+            <div className='aside__close'>
+              <i className='fas fa-times text-muted' />
+            </div>
+            <p className='p2 my-2 text-muted d-md-none'>
+              ({cards.length} cards)
+            </p>
 
-          <p className='p1 mt-3 mb-0 d-md-none'>{desc}</p>
-          <hr className='hr mt-2 mb-4 d-md-none ml-0' />
-          <Row>
-            <Col xs='3' md='4' className='pl-2 pr-0 flex-grow-0'>
-              <Link
-                to='/decks/0/update'
-                className='aside__option text-decoration-none d-flex flex-column align-items-center p-2'>
-                <i className='aside__icon fas fa-edit' />
-                <p className='p2 mt-2 mb-0'>Rename</p>
-              </Link>
-            </Col>
-            <Col className='pl-0 pr-md-3 flex-grow-0'>
-              <button
-                className='aside__option text-decoration-none d-flex flex-column align-items-center p-2'
-                type='button'
-                onClick={showDelete}>
-                <i className='aside__icon fas fa-trash' />
-                <p className='p2 mt-2 mb-0 text-nowrap'>Delete</p>
-              </button>
-            </Col>
-          </Row>
-        </aside>
+            <p className='p1 mt-3 mb-0 d-md-none'>{desc}</p>
+            <hr className='hr mt-2 mb-4 d-md-none ml-0' />
+            <Row>
+              <Col xs='3' md='4' className='pl-2 pr-0 flex-grow-0'>
+                <Link
+                  to='/decks/0/update'
+                  className='aside__option text-decoration-none d-flex flex-column align-items-center p-2'>
+                  <i className='aside__icon fas fa-edit' />
+                  <p className='p2 mt-2 mb-0'>Rename</p>
+                </Link>
+              </Col>
+              <Col className='pl-0 pr-md-3 flex-grow-0'>
+                <button
+                  className='aside__option text-decoration-none d-flex flex-column align-items-center p-2'
+                  type='button'
+                  onClick={showDelete}>
+                  <i className='aside__icon fas fa-trash' />
+                  <p className='p2 mt-2 mb-0 text-nowrap'>Delete</p>
+                </button>
+              </Col>
+            </Row>
+          </aside>
+        ) : null}
         <aside className='decks-infocard aside pl-md-3 pr-md-0 d-flex flex-column'>
           <div className='aside__close'>
             <i className='fas fa-times text-muted' />
@@ -140,8 +141,6 @@ DeckInfoCard.propTypes = {
   deck: PropTypes.shape({
     name: PropTypes.string.isRequired,
     desc: PropTypes.string.isRequired,
-    mastered: PropTypes.number.isRequired,
-    total: PropTypes.number.isRequired,
     cards: PropTypes.arrayOf(
       PropTypes.shape({
         question: PropTypes.string.isRequired,

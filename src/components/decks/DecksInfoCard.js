@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom'
 import Button from 'react-bootstrap/Button'
 
 const DecksInfoCard = ({ deckIndex, decks }) => {
-  const { name, desc, mastered, total } = deckIndex !== -1 && decks[deckIndex]
+  const { name, desc, cards, buckets } = deckIndex !== -1 && decks[deckIndex]
   function closeSidebar() {
     // Close Sidebar
     document
@@ -41,8 +41,8 @@ const DecksInfoCard = ({ deckIndex, decks }) => {
   }
 
   function getProgressPercentage() {
-    if (total === 0) return 0
-    return Math.floor((mastered / total) * 100)
+    if (cards.length === 0) return 0
+    return Math.floor((buckets.mastered.length / cards.length) * 100)
   }
 
   return (
@@ -53,54 +53,53 @@ const DecksInfoCard = ({ deckIndex, decks }) => {
       onWheel={closeSidebar}
       onTouchMove={closeSidebar}>
       <div className='fluid-box pl-md-3 pr-md-0' tabIndex='-1'>
-        <aside
-          className={`decks-infocard aside pl-md-3 pr-md-0 ${
-            typeof name === 'undefined' ? 'invisible' : 'visible'
-          }`}>
-          <h6 className='h6 mt-0'>{name}</h6>
-          <div className='aside__close'>
-            <i className='fas fa-times text-muted' />
-          </div>
-          <p className='p2 my-2 text-muted'>
-            Mastered {mastered} of {total} cards
-          </p>
-          <ProgressBar
-            striped
-            variant='danger'
-            now={getProgressPercentage()}
-            label={`${getProgressPercentage()}%`}
-            srOnly={getProgressPercentage() < 6}
-          />
-          <p className='p1 mt-3 mb-0'>{desc}</p>
-          <hr className='hr mt-2 mb-4 ml-0' />
-          <Row>
-            <Col xs='3' className='pl-2 pr-0'>
-              <Link
-                to={`/decks/${deckIndex}/play`}
-                className='aside__option text-decoration-none d-flex flex-column align-items-center p-2'>
-                <i className='aside__icon fas fa-play' />
-                <p className='p2 mt-2 mb-0'>Play</p>
-              </Link>
-            </Col>
-            <Col xs='3' className='pl-0 pr-md-3'>
-              <Link
-                to={`/decks/${deckIndex}`}
-                className='aside__option text-decoration-none d-flex flex-column align-items-center p-2'>
-                <i className='aside__icon fas fa-cog' />
-                <p className='p2 mt-2 mb-0'>Configure</p>
-              </Link>
-            </Col>
-            <Col xs='3' className='pl-0 pr-md-3'>
-              <button
-                className='aside__option text-decoration-none d-flex flex-column align-items-center p-2'
-                type='button'
-                onClick={showReset}>
-                <i className='aside__icon fas fa-sync-alt' />
-                <p className='p2 mt-2 mb-0 text-nowrap'>Reset Progress</p>
-              </button>
-            </Col>
-          </Row>
-        </aside>
+        {typeof name !== 'undefined' ? (
+          <aside className='decks-infocard aside pl-md-3 pr-md-0'>
+            <h6 className='h6 mt-0'>{name}</h6>
+            <div className='aside__close'>
+              <i className='fas fa-times text-muted' />
+            </div>
+            <p className='p2 my-2 text-muted'>
+              Mastered {buckets.mastered.length} of {cards.length} cards
+            </p>
+            <ProgressBar
+              striped
+              variant='danger'
+              now={getProgressPercentage()}
+              label={`${getProgressPercentage()}%`}
+              srOnly={getProgressPercentage() < 6}
+            />
+            <p className='p1 mt-3 mb-0'>{desc}</p>
+            <hr className='hr mt-2 mb-4 ml-0' />
+            <Row>
+              <Col xs='3' className='pl-2 pr-0'>
+                <Link
+                  to={`/decks/${deckIndex}/play`}
+                  className='aside__option text-decoration-none d-flex flex-column align-items-center p-2'>
+                  <i className='aside__icon fas fa-play' />
+                  <p className='p2 mt-2 mb-0'>Play</p>
+                </Link>
+              </Col>
+              <Col xs='3' className='pl-0 pr-md-3'>
+                <Link
+                  to={`/decks/${deckIndex}`}
+                  className='aside__option text-decoration-none d-flex flex-column align-items-center p-2'>
+                  <i className='aside__icon fas fa-cog' />
+                  <p className='p2 mt-2 mb-0'>Configure</p>
+                </Link>
+              </Col>
+              <Col xs='3' className='pl-0 pr-md-3'>
+                <button
+                  className='aside__option text-decoration-none d-flex flex-column align-items-center p-2'
+                  type='button'
+                  onClick={showReset}>
+                  <i className='aside__icon fas fa-sync-alt' />
+                  <p className='p2 mt-2 mb-0 text-nowrap'>Reset Progress</p>
+                </button>
+              </Col>
+            </Row>
+          </aside>
+        ) : null}
         <aside className='decks-infocard aside pl-md-3 pr-md-0 d-flex flex-column'>
           <div className='aside__close'>
             <i className='fas fa-times text-muted' />
@@ -136,8 +135,6 @@ DecksInfoCard.propTypes = {
     PropTypes.shape({
       name: PropTypes.string.isRequired,
       desc: PropTypes.string.isRequired,
-      mastered: PropTypes.number.isRequired,
-      total: PropTypes.number.isRequired,
       cards: PropTypes.arrayOf(
         PropTypes.shape({
           question: PropTypes.string.isRequired,

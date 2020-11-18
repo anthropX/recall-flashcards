@@ -122,8 +122,6 @@ CreateCard.propTypes = {
     PropTypes.shape({
       name: PropTypes.string.isRequired,
       desc: PropTypes.string.isRequired,
-      mastered: PropTypes.number.isRequired,
-      total: PropTypes.number.isRequired,
       cards: PropTypes.arrayOf(
         PropTypes.shape({
           question: PropTypes.string.isRequired,
