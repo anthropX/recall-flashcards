@@ -80,6 +80,25 @@ export default class PlayAreaService {
     return this.getCardFromLearning(this.rollLearningDice())
   }
 
+  updateBuckets(isAffirmation) {
+    const { bucketName, bucketIndex } = this.cardLocale
+    const removed = this.buckets[bucketName].splice(bucketIndex, 1)[0]
+
+    if (!isAffirmation) this.buckets.highFreq.push(removed)
+    else if (bucketName === 'highFreq') this.buckets.mdFreq.push(removed)
+    else if (bucketName === 'mdFreq') this.buckets.lowFreq.push(removed)
+    else if (
+      bucketName === 'new' ||
+      bucketName === 'lowFreq' ||
+      bucketName === 'mastered'
+    )
+      this.buckets.mastered.push(removed)
+
+    this.card = null
+
+    return this.buckets
+  }
+
   getProgressDesc() {
     return `${this.getVerb()} ${
       this.cards.length - this.buckets.new.length
@@ -119,23 +138,30 @@ export default class PlayAreaService {
     return verb
   }
 
-  updateBuckets(isAffirmation) {
-    const { bucketName, bucketIndex } = this.cardLocale
-    const removed = this.buckets[bucketName].splice(bucketIndex, 1)[0]
-
-    if (!isAffirmation) this.buckets.highFreq.push(removed)
-    else if (bucketName === 'highFreq') this.buckets.mdFreq.push(removed)
-    else if (bucketName === 'mdFreq') this.buckets.lowFreq.push(removed)
-    else if (
-      bucketName === 'new' ||
-      bucketName === 'lowFreq' ||
-      bucketName === 'mastered'
+  getShouldShowNew(isHfLessThanIdealSize) {
+    const newBucketDice = Math.floor(
+      Math.random() *
+        (isHfLessThanIdealSize
+          ? this.maxShouldFillHfDice
+          : this.maxShouldShowNewDice),
     )
-      this.buckets.mastered.push(removed)
+    /* Probability that card shown is from the new bucket:
+    1. When hf bucket size is < idealHfBucketSize =
+        (maxShouldFillHfDice-1)/maxShouldFillHfDice
+    2. When hf bucket size is >= idealHfBucketSize =
+        1/maxShouldShowNewDice */
+    return isHfLessThanIdealSize ? newBucketDice !== 0 : newBucketDice === 0
+  }
 
-    this.card = null
-
-    return this.buckets
+  getCardFromNew() {
+    const bucketIndex = Math.floor(Math.random() * this.buckets.new.length)
+    const cardIndex = this.buckets.new[bucketIndex]
+    this.cardLocale = { bucketName: 'new', bucketIndex }
+    this.card = {
+      ...this.cards[cardIndex],
+      badge: { bucket: 'New', variant: 'secondary' },
+    }
+    return this.card
   }
 
   getShouldShowMastered() {
@@ -156,21 +182,6 @@ export default class PlayAreaService {
       badge: { bucket: 'Mastered', variant: 'success' },
     }
     return this.card
-  }
-
-  getShouldShowNew(isHfLessThanIdealSize) {
-    const newBucketDice = Math.floor(
-      Math.random() *
-        (isHfLessThanIdealSize
-          ? this.maxShouldFillHfDice
-          : this.maxShouldShowNewDice),
-    )
-    /* Probability that card shown is from the new bucket:
-    1. When hf bucket size is < idealHfBucketSize =
-        (maxShouldFillHfDice-1)/maxShouldFillHfDice
-    2. When hf bucket size is >= idealHfBucketSize =
-        1/maxShouldShowNewDice */
-    return isHfLessThanIdealSize ? newBucketDice !== 0 : newBucketDice === 0
   }
 
   getCardFromLearning(rand) {
@@ -202,17 +213,6 @@ export default class PlayAreaService {
       this.cardLocale = { bucketName: 'lowFreq', bucketIndex }
     }
     this.card = { ...this.cards[cardIndex], badge }
-    return this.card
-  }
-
-  getCardFromNew() {
-    const bucketIndex = Math.floor(Math.random() * this.buckets.new.length)
-    const cardIndex = this.buckets.new[bucketIndex]
-    this.cardLocale = { bucketName: 'new', bucketIndex }
-    this.card = {
-      ...this.cards[cardIndex],
-      badge: { bucket: 'New', variant: 'secondary' },
-    }
     return this.card
   }
 
