@@ -46,24 +46,31 @@ export default class PlayAreaService {
     this.mfBucketWeight = this.mfCardWeight * this.buckets.mdFreq.length
     this.lfBucketWeight = this.lfCardWeight * this.buckets.lowFreq.length
 
+    // Atleast one new card
     if (this.buckets.new.length > 0) {
+      // Hf bucket has fewer cards than minHfBucketSize: P(show new card) = 1
       if (this.buckets.highFreq.length < this.minHfBucketSize)
         return this.getCardFromNew()
+      // Hf bucket has fewer cards than idealHfBucketSize: P(show new card) = high
       if (
         this.buckets.highFreq.length < this.idealHfBucketSize &&
         this.getShouldShowNew(true)
       )
         return this.getCardFromNew()
+      // Hf bucket has at least idealHfBucketSize cards: P(show new card) = low
       if (
         this.buckets.highFreq.length >= this.idealHfBucketSize &&
         this.getShouldShowNew(false)
       )
         return this.getCardFromNew()
     }
+    // All cards have been mastered
     if (this.cards.length - this.buckets.mastered.length === 0)
       return this.getCardFromMastered()
+    // A fraction cards have been mastered
     if (this.buckets.mastered.length > 0 && this.getShouldShowMastered())
       return this.getCardFromMastered()
+    // Atleast min # of high freq cards
     this.maxLearningDice = this.getMaxLearningDice()
     return this.getCardFromLearning(this.rollLearningDice())
   }
