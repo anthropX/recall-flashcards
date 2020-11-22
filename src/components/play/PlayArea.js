@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import ProgressBar from 'react-bootstrap/ProgressBar'
@@ -15,16 +15,14 @@ const PlayArea = ({
   decks,
 }) => {
   const deck = decks[deckIndex]
-  let card
   let cards
   let buckets
-  let service
+  const [service, setService] = useState(null)
 
   if (deck) {
-    service = new PlayAreaService(deck)
-    card = service.getCard()
     cards = deck.cards
     buckets = deck.buckets
+    if (!service) setService(new PlayAreaService(deck))
   }
 
   const handleCardFocus = () =>
@@ -83,14 +81,14 @@ const PlayArea = ({
     return Math.floor((buckets.lowFreq.length / cards.length) * 100)
   }
 
-  return deck ? (
+  return service ? (
     <div className='playarea'>
       <h1 className='display-5 mb-1 d-flex flex-wrap'>Playing {deck.name}</h1>
       <div className='cards__card pb-4 mt-3'>
         <div className='card__sides d-flex flex-column flex-lg-row mb-2'>
           <div className='card__side--transparent flippable-card-container mr-0 mr-md-3 mb-3 mb-lg-0 border-none'>
             <FlippableCard
-              card={card}
+              card={service.getCard()}
               handleAffirmation={handleAffirmation}
               handleNegation={handleNegation}
               handleCardFocus={handleCardFocus}

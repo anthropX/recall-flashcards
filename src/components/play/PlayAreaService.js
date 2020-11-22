@@ -5,6 +5,8 @@ export default class PlayAreaService {
 
   cardLocale
 
+  card
+
   // Used to compute probability that card shown is from the new bucket when:
 
   // 1. hf bucket size < idealHfBucketSize
@@ -42,6 +44,9 @@ export default class PlayAreaService {
   }
 
   getCard() {
+    if (this.card) return this.card
+
+    // Compute card
     this.hfBucketWeight = this.hfCardWeight * this.buckets.highFreq.length
     this.mfBucketWeight = this.mfCardWeight * this.buckets.mdFreq.length
     this.lfBucketWeight = this.lfCardWeight * this.buckets.lowFreq.length
@@ -89,6 +94,8 @@ export default class PlayAreaService {
     )
       this.buckets.mastered.push(removed)
 
+    this.card = null
+
     return this.buckets
   }
 
@@ -105,10 +112,11 @@ export default class PlayAreaService {
     const bucketIndex = Math.floor(Math.random() * this.buckets.mastered.length)
     const cardIndex = this.buckets.mastered[bucketIndex]
     this.cardLocale = { bucketName: 'mastered', bucketIndex }
-    return {
+    this.card = {
       ...this.cards[cardIndex],
       badge: { bucket: 'Mastered', variant: 'success' },
     }
+    return this.card
   }
 
   getShouldShowNew(isHfLessThanIdealSize) {
@@ -154,17 +162,19 @@ export default class PlayAreaService {
       badge = { bucket: 'Mastering', variant: 'warning' }
       this.cardLocale = { bucketName: 'lowFreq', bucketIndex }
     }
-    return { ...this.cards[cardIndex], badge }
+    this.card = { ...this.cards[cardIndex], badge }
+    return this.card
   }
 
   getCardFromNew() {
     const bucketIndex = Math.floor(Math.random() * this.buckets.new.length)
     const cardIndex = this.buckets.new[bucketIndex]
     this.cardLocale = { bucketName: 'new', bucketIndex }
-    return {
+    this.card = {
       ...this.cards[cardIndex],
       badge: { bucket: 'New', variant: 'secondary' },
     }
+    return this.card
   }
 
   getMaxLearningDice() {
