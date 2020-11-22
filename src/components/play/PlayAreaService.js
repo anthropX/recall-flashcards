@@ -4,23 +4,23 @@ export default class PlayAreaService {
   buckets
 
   cardLocale
-  // Higher the card weight, higher the changes of a card being shown
 
-  hfCardWeight = 8 // hf - high frequency
+  // Used to compute probability that card shown is from the mastered bucket
+  maxShouldShowMasteredDice = 6
 
-  mfCardWeight = 4 // mf - medium frequency
+  // Higher the card weight, higher the chances of a card being shown
 
-  lfCardWeight = 2 // lf - low frequency
+  hfCardWeight = 4 // hf - high frequency
 
-  masteredCardWeight = 1
+  mfCardWeight = 2 // mf - medium frequency
+
+  lfCardWeight = 1 // lf - low frequency
 
   hfBucketWeight
 
   mfBucketWeight
 
   lfBucketWeight
-
-  masteredBucketWeight
 
   minHfBucketSize = 5
 
@@ -35,13 +35,15 @@ export default class PlayAreaService {
     this.hfBucketWeight = this.hfCardWeight * this.buckets.highFreq.length
     this.mfBucketWeight = this.mfCardWeight * this.buckets.mdFreq.length
     this.lfBucketWeight = this.lfCardWeight * this.buckets.lowFreq.length
-    this.masteredBucketWeight =
-      this.masteredCardWeight * this.buckets.mastered.length
     if (
       this.buckets.highFreq.length < this.minHfBucketSize &&
       this.buckets.new.length > 0
     )
       return this.getCardFromNew()
+    if (this.cards.length - this.buckets.mastered.length === 0)
+      return this.getCardFromMastered()
+    if (this.buckets.mastered.length > 0 && this.getShouldShowMastered())
+      return this.getCardFromMastered()
     this.maxLearningDice = this.getMaxLearningDice()
     return this.getCardFromLearning(this.rollLearningDice())
   }
@@ -61,6 +63,25 @@ export default class PlayAreaService {
       this.buckets.mastered.push(removed)
 
     return this.buckets
+  }
+
+  getShouldShowMastered() {
+    const masteredBucketDice = Math.floor(
+      Math.random() * this.maxShouldShowMasteredDice,
+    )
+    /* Probability that card shown is from the mastered bucket =
+    1/maxShouldShowMasteredDice */
+    return masteredBucketDice === 0
+  }
+
+  getCardFromMastered() {
+    const bucketIndex = Math.floor(Math.random() * this.buckets.mastered.length)
+    const cardIndex = this.buckets.mastered[bucketIndex]
+    this.cardLocale = { bucketName: 'mastered', bucketIndex }
+    return {
+      ...this.cards[cardIndex],
+      badge: { bucket: 'Mastered', variant: 'success' },
+    }
   }
 
   getCardFromLearning(rand) {
@@ -90,18 +111,6 @@ export default class PlayAreaService {
       cardIndex = this.buckets.lowFreq[bucketIndex]
       badge = { bucket: 'Mastering', variant: 'warning' }
       this.cardLocale = { bucketName: 'lowFreq', bucketIndex }
-    } else {
-      // mastered bucket
-      bucketIndex = Math.floor(
-        (rand -
-          this.hfBucketWeight -
-          this.mfBucketWeight -
-          this.lfBucketWeight) /
-          this.masteredCardWeight,
-      )
-      cardIndex = this.buckets.mastered[bucketIndex]
-      badge = { bucket: 'Mastered', variant: 'success' }
-      this.cardLocale = { bucketName: 'mastered', bucketIndex }
     }
     return { ...this.cards[cardIndex], badge }
   }
@@ -117,13 +126,7 @@ export default class PlayAreaService {
   }
 
   getMaxLearningDice() {
-    return (
-      this.hfBucketWeight +
-      this.mfBucketWeight +
-      this.lfBucketWeight +
-      this.masteredBucketWeight -
-      1
-    )
+    return this.hfBucketWeight + this.mfBucketWeight + this.lfBucketWeight - 1
   }
 
   rollLearningDice() {
