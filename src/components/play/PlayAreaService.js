@@ -107,7 +107,7 @@ export default class PlayAreaService {
 
   getProgressPercentage(bucketName) {
     if (this.buckets[bucketName].length === 0) return 0
-    return Math.floor(
+    return Math.round(
       (this.buckets[bucketName].length / this.cards.length) * 100,
     )
   }
