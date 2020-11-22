@@ -61,24 +61,9 @@ const PlayArea = ({
     return verb
   }
 
-  const getMasteredPercentage = () => {
-    if (buckets.mastered.length === 0) return 0
-    return Math.floor((buckets.mastered.length / cards.length) * 100)
-  }
-
-  const getHighFreqPercentage = () => {
-    if (buckets.highFreq.length === 0) return 0
-    return Math.floor((buckets.highFreq.length / cards.length) * 100)
-  }
-
-  const getMdFreqPercentage = () => {
-    if (buckets.mdFreq.length === 0) return 0
-    return Math.floor((buckets.mdFreq.length / cards.length) * 100)
-  }
-
-  const getLowFreqPercentage = () => {
-    if (buckets.lowFreq.length === 0) return 0
-    return Math.floor((buckets.lowFreq.length / cards.length) * 100)
+  const getProgressPercentage = (bucketName) => {
+    if (buckets[bucketName].length === 0) return 0
+    return Math.floor((buckets[bucketName].length / cards.length) * 100)
   }
 
   return service ? (
@@ -101,27 +86,27 @@ const PlayArea = ({
             <ProgressBar className='mb-3'>
               <ProgressBar
                 variant='danger'
-                now={getHighFreqPercentage()}
-                label={`${getHighFreqPercentage()}%`}
-                srOnly={getHighFreqPercentage() < 6}
+                now={getProgressPercentage('highFreq')}
+                label={`${getProgressPercentage('highFreq')}%`}
+                srOnly={getProgressPercentage('highFreq') < 6}
               />
               <ProgressBar
                 variant='threat'
-                now={getMdFreqPercentage()}
-                label={`${getMdFreqPercentage()}%`}
-                srOnly={getMdFreqPercentage() < 6}
+                now={getProgressPercentage('mdFreq')}
+                label={`${getProgressPercentage('mdFreq')}%`}
+                srOnly={getProgressPercentage('mdFreq') < 6}
               />
               <ProgressBar
                 variant='warning'
-                now={getLowFreqPercentage()}
-                label={`${getLowFreqPercentage()}%`}
-                srOnly={getLowFreqPercentage() < 6}
+                now={getProgressPercentage('lowFreq')}
+                label={`${getProgressPercentage('lowFreq')}%`}
+                srOnly={getProgressPercentage('lowFreq') < 6}
               />
               <ProgressBar
                 variant='success'
-                now={getMasteredPercentage()}
-                label={`${getMasteredPercentage()}%`}
-                srOnly={getMasteredPercentage() < 6}
+                now={getProgressPercentage('mastered')}
+                label={`${getProgressPercentage('mastered')}%`}
+                srOnly={getProgressPercentage('mastered') < 6}
               />
             </ProgressBar>
           </div>
