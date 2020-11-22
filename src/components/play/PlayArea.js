@@ -15,15 +15,9 @@ const PlayArea = ({
   decks,
 }) => {
   const deck = decks[deckIndex]
-  let cards
-  let buckets
   const [service, setService] = useState(null)
 
-  if (deck) {
-    cards = deck.cards
-    buckets = deck.buckets
-    if (!service) setService(new PlayAreaService(deck))
-  }
+  if (deck && !service) setService(new PlayAreaService(deck))
 
   const handleCardFocus = () =>
     document
@@ -45,27 +39,6 @@ const PlayArea = ({
       .classList.remove('flippable-card__focus')
   }
 
-  const getVerb = () => {
-    let verb = 'Touched'
-    if (
-      cards.length === buckets.new.length ||
-      cards.length === buckets.new.length + buckets.highFreq.length
-    )
-      verb = 'Learning'
-    else if (cards.length === buckets.new.length + buckets.mdFreq.length)
-      verb = 'Revising'
-    else if (cards.length === buckets.new.length + buckets.lowFreq.length)
-      verb = 'Mastering'
-    else if (cards.length === buckets.new.length + buckets.mastered.length)
-      verb = 'Mastered'
-    return verb
-  }
-
-  const getProgressPercentage = (bucketName) => {
-    if (buckets[bucketName].length === 0) return 0
-    return Math.floor((buckets[bucketName].length / cards.length) * 100)
-  }
-
   return service ? (
     <div className='playarea'>
       <h1 className='display-5 mb-1 d-flex flex-wrap'>Playing {deck.name}</h1>
@@ -78,35 +51,31 @@ const PlayArea = ({
               handleNegation={handleNegation}
               handleCardFocus={handleCardFocus}
             />
-            <p className='p2 my-2 text-muted'>
-              {getVerb()}
-              {` ${cards.length - buckets.new.length} `}
-              of {cards.length} cards
-            </p>
+            <p className='p2 my-2 text-muted'>{service.getProgressDesc()}</p>
             <ProgressBar className='mb-3'>
               <ProgressBar
                 variant='danger'
-                now={getProgressPercentage('highFreq')}
-                label={`${getProgressPercentage('highFreq')}%`}
-                srOnly={getProgressPercentage('highFreq') < 6}
+                now={service.getProgressPercentage('highFreq')}
+                label={`${service.getProgressPercentage('highFreq')}%`}
+                srOnly={service.getProgressPercentage('highFreq') < 6}
               />
               <ProgressBar
                 variant='threat'
-                now={getProgressPercentage('mdFreq')}
-                label={`${getProgressPercentage('mdFreq')}%`}
-                srOnly={getProgressPercentage('mdFreq') < 6}
+                now={service.getProgressPercentage('mdFreq')}
+                label={`${service.getProgressPercentage('mdFreq')}%`}
+                srOnly={service.getProgressPercentage('mdFreq') < 6}
               />
               <ProgressBar
                 variant='warning'
-                now={getProgressPercentage('lowFreq')}
-                label={`${getProgressPercentage('lowFreq')}%`}
-                srOnly={getProgressPercentage('lowFreq') < 6}
+                now={service.getProgressPercentage('lowFreq')}
+                label={`${service.getProgressPercentage('lowFreq')}%`}
+                srOnly={service.getProgressPercentage('lowFreq') < 6}
               />
               <ProgressBar
                 variant='success'
-                now={getProgressPercentage('mastered')}
-                label={`${getProgressPercentage('mastered')}%`}
-                srOnly={getProgressPercentage('mastered') < 6}
+                now={service.getProgressPercentage('mastered')}
+                label={`${service.getProgressPercentage('mastered')}%`}
+                srOnly={service.getProgressPercentage('mastered') < 6}
               />
             </ProgressBar>
           </div>

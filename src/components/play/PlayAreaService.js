@@ -80,6 +80,45 @@ export default class PlayAreaService {
     return this.getCardFromLearning(this.rollLearningDice())
   }
 
+  getProgressDesc() {
+    return `${this.getVerb()} ${
+      this.cards.length - this.buckets.new.length
+    } of ${this.cards.length} cards`
+  }
+
+  getProgressPercentage(bucketName) {
+    if (this.buckets[bucketName].length === 0) return 0
+    return Math.floor(
+      (this.buckets[bucketName].length / this.cards.length) * 100,
+    )
+  }
+
+  getVerb() {
+    let verb = 'Touched'
+    if (
+      this.cards.length === this.buckets.new.length ||
+      this.cards.length ===
+        this.buckets.new.length + this.buckets.highFreq.length
+    )
+      verb = 'Learning'
+    else if (
+      this.cards.length ===
+      this.buckets.new.length + this.buckets.mdFreq.length
+    )
+      verb = 'Revising'
+    else if (
+      this.cards.length ===
+      this.buckets.new.length + this.buckets.lowFreq.length
+    )
+      verb = 'Mastering'
+    else if (
+      this.cards.length ===
+      this.buckets.new.length + this.buckets.mastered.length
+    )
+      verb = 'Mastered'
+    return verb
+  }
+
   updateBuckets(isAffirmation) {
     const { bucketName, bucketIndex } = this.cardLocale
     const removed = this.buckets[bucketName].splice(bucketIndex, 1)[0]
