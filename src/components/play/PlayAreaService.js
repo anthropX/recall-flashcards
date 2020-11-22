@@ -24,7 +24,7 @@ export default class PlayAreaService {
 
   minHfBucketSize = 5
 
-  maxRand
+  maxLearningDice
 
   constructor(deck) {
     this.cards = deck.cards
@@ -42,8 +42,8 @@ export default class PlayAreaService {
       this.buckets.new.length > 0
     )
       return this.getCardFromNew()
-    this.maxRand = this.getMaxRand()
-    return this.getCardFromLearning(this.getRand())
+    this.maxLearningDice = this.getMaxLearningDice()
+    return this.getCardFromLearning(this.rollLearningDice())
   }
 
   updateBuckets(isAffirmation) {
@@ -116,7 +116,7 @@ export default class PlayAreaService {
     }
   }
 
-  getMaxRand() {
+  getMaxLearningDice() {
     return (
       this.hfBucketWeight +
       this.mfBucketWeight +
@@ -126,7 +126,7 @@ export default class PlayAreaService {
     )
   }
 
-  getRand() {
-    return Math.floor(Math.random() * (this.maxRand + 1))
+  rollLearningDice() {
+    return Math.floor(Math.random() * (this.maxLearningDice + 1))
   }
 }
