@@ -5,6 +5,14 @@ export default class PlayAreaService {
 
   cardLocale
 
+  // Used to compute probability that card shown is from the new bucket when:
+
+  // 1. hf bucket size < idealHfBucketSize
+  maxShouldFillHfDice = 2
+
+  // 2. hf bucket size >= idealHfBucketSize */
+  maxShouldShowNewDice = 6
+
   // Used to compute probability that card shown is from the mastered bucket
   maxShouldShowMasteredDice = 6
 
@@ -22,7 +30,9 @@ export default class PlayAreaService {
 
   lfBucketWeight
 
-  minHfBucketSize = 5
+  minHfBucketSize = 3
+
+  idealHfBucketSize = 6
 
   maxLearningDice
 
@@ -35,11 +45,21 @@ export default class PlayAreaService {
     this.hfBucketWeight = this.hfCardWeight * this.buckets.highFreq.length
     this.mfBucketWeight = this.mfCardWeight * this.buckets.mdFreq.length
     this.lfBucketWeight = this.lfCardWeight * this.buckets.lowFreq.length
-    if (
-      this.buckets.highFreq.length < this.minHfBucketSize &&
-      this.buckets.new.length > 0
-    )
-      return this.getCardFromNew()
+
+    if (this.buckets.new.length > 0) {
+      if (this.buckets.highFreq.length < this.minHfBucketSize)
+        return this.getCardFromNew()
+      if (
+        this.buckets.highFreq.length < this.idealHfBucketSize &&
+        this.getShouldShowNew(true)
+      )
+        return this.getCardFromNew()
+      if (
+        this.buckets.highFreq.length >= this.idealHfBucketSize &&
+        this.getShouldShowNew(false)
+      )
+        return this.getCardFromNew()
+    }
     if (this.cards.length - this.buckets.mastered.length === 0)
       return this.getCardFromMastered()
     if (this.buckets.mastered.length > 0 && this.getShouldShowMastered())
@@ -82,6 +102,21 @@ export default class PlayAreaService {
       ...this.cards[cardIndex],
       badge: { bucket: 'Mastered', variant: 'success' },
     }
+  }
+
+  getShouldShowNew(isHfLessThanIdealSize) {
+    const newBucketDice = Math.floor(
+      Math.random() *
+        (isHfLessThanIdealSize
+          ? this.maxShouldFillHfDice
+          : this.maxShouldShowNewDice),
+    )
+    /* Probability that card shown is from the new bucket:
+    1. When hf bucket size is < idealHfBucketSize =
+        (maxShouldFillHfDice-1)/maxShouldFillHfDice
+    2. When hf bucket size is >= idealHfBucketSize =
+        1/maxShouldShowNewDice */
+    return isHfLessThanIdealSize ? newBucketDice !== 0 : newBucketDice === 0
   }
 
   getCardFromLearning(rand) {
