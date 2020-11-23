@@ -2,16 +2,16 @@ $threat: #e65f12;
 
 /* import bootstrap to set changes */
 @import '../../node_modules/bootstrap/scss/bootstrap';
-@import './__variables';
-@import './__extends';
-@import './__DarkModeSwitch';
-@import './__DecksPage';
-@import './__DeckPage';
-@import './__DeleteCardButton';
-@import './__DeckInfoCard';
-@import './__CreateNew';
-@import './__Aside';
-@import './__PlayArea';
+@import './_variables';
+@import './_extends';
+@import './DarkModeSwitch';
+@import './DecksPage';
+@import './DeckPage';
+@import './DeleteCardButton';
+@import './DeckInfoCard';
+@import './CreateNew';
+@import './Aside';
+@import './PlayArea';
 
 // UTILITY
 
