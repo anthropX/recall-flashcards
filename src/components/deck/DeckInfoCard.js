@@ -12,20 +12,20 @@ const DeckInfoCard = ({
   deck: { name, desc, cards },
   isSidebarOverlaid,
 }) => {
-  const [confirmValue, setConfirmValue] = useState('')
+  const [comfirmation, setConfirmation] = useState('')
   const [validated, setValidated] = useState(false)
   const [isDeleteVisible, setDeleteVisible] = useState(false)
 
-  const handleChange = (event) => {
-    setConfirmValue(event.target.value)
+  const handleConfirmationChange = (event) => {
+    setConfirmation(event.target.value)
     setValidated(false)
   }
 
-  const handleSubmit = (event) => {
+  const handleConfirmationSubmit = (event) => {
     event.preventDefault()
     event.stopPropagation()
     const form = event.currentTarget
-    if (form.checkValidity() && confirmValue === name) {
+    if (form.checkValidity() && comfirmation === name) {
       setValidated(true)
       history.push('/decks')
     }
@@ -93,15 +93,18 @@ const DeckInfoCard = ({
             <strong className='text-danger'>permanently delete</strong> this
             deck, including all cards and progress info?
           </p>
-          <Form noValidate validated={validated} onSubmit={handleSubmit}>
-            <Form.Group controlId='formBasicEmail' className='mb-1'>
+          <Form
+            noValidate
+            validated={validated}
+            onSubmit={handleConfirmationSubmit}>
+            <Form.Group controlId='confirmation' className='mb-1'>
               <Form.Control
                 type='text'
-                value={confirmValue}
-                onChange={handleChange}
+                value={comfirmation}
+                onChange={handleConfirmationChange}
                 required
-                isInvalid={confirmValue !== name}
-                isValid={confirmValue === name}
+                isInvalid={comfirmation !== name}
+                isValid={comfirmation === name}
               />
               <Form.Control.Feedback type='invalid'>
                 Please type <strong>{name}</strong> to confirm
