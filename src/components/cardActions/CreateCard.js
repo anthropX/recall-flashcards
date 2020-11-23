@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Button from 'react-bootstrap/Button'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
@@ -18,27 +18,20 @@ const CreateCard = ({
   decks,
 }) => {
   const deck = decks[deckIndex]
-
-  const cardPlaceholder = {
-    question: '<h5>Your <i>question</i> goes in here.</h5>',
-    answerTitle: '<h5>Your <i>answer heading</i> goes in here.&nbsp;</h5>',
-    answerImage: '',
-    answerDesc:
-      '<p>Type your<strong> answer description</strong>. &nbsp;Lorem ipsum dolor sit amet consectetur, adipisicing elit. Optio sint consectetur veritatis sunt ab.</p><ol><li>Lorem ipsum dolor sit amet consectetur, adipisicing elit.</li><li>Optio sint consectetur veritatis sunt ab asperiores.</li></ol>',
-  }
-
-  const getEditorData = (selector) =>
-    document.querySelector(selector).innerHTML.toString()
-
+  const [question, setQuestion] = useState(
+    '<h5>Your <i>question</i> goes in here.</h5>',
+  )
+  const [answerTitle, setAnswerTitle] = useState(
+    '<h5>Your <i>answer heading</i> goes in here.&nbsp;</h5>',
+  )
+  const answerImage = ''
+  const [answerDesc, setAnswerDesc] = useState(
+    '<p>Type your<strong> answer description</strong>. &nbsp;Lorem ipsum dolor sit amet consectetur, adipisicing elit. Optio sint consectetur veritatis sunt ab.</p><ol><li>Lorem ipsum dolor sit amet consectetur, adipisicing elit.</li><li>Optio sint consectetur veritatis sunt ab asperiores.</li></ol>',
+  )
   const handleSave = () => {
     addCard({
       deckIndex: parseInt(deckIndex, 10),
-      card: {
-        question: getEditorData('.card-front .ck'),
-        answerTitle: getEditorData('.card-back__row .ck'),
-        answerImage: '',
-        answerDesc: getEditorData('.card-back__row + .ck'),
-      },
+      card: { question, answerTitle, answerImage, answerDesc },
     })
     history.push(`/decks/${deckIndex}`)
   }
@@ -59,7 +52,8 @@ const CreateCard = ({
               <CKEditor
                 id='card-front__question'
                 editor={BalloonEditor}
-                data={cardPlaceholder.question}
+                data={question}
+                onBlur={(event, editor) => setQuestion(editor.getData())}
                 config={editorConfig}
               />
             </div>
@@ -70,7 +64,8 @@ const CreateCard = ({
                 <CKEditor
                   id='card-back__title'
                   editor={BalloonEditor}
-                  data={cardPlaceholder.answerTitle}
+                  data={answerTitle}
+                  onBlur={(event, editor) => setAnswerTitle(editor.getData())}
                   config={editorConfig}
                 />
                 <div
@@ -85,7 +80,8 @@ const CreateCard = ({
               <CKEditor
                 id='card-back__desc'
                 editor={BalloonEditor}
-                data={cardPlaceholder.answerDesc}
+                data={answerDesc}
+                onBlur={(event, editor) => setAnswerDesc(editor.getData())}
                 config={editorConfig}
               />
             </div>

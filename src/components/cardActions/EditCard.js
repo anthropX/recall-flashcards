@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Button from 'react-bootstrap/Button'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
@@ -19,19 +19,15 @@ const EditCard = ({
   const deck = decks[deckIndex]
   const card = deck && deck.cards[cardIndex]
 
-  const getEditorData = (selector) =>
-    document.querySelector(selector).innerHTML.toString()
-
+  const [question, setQuestion] = useState(card.question)
+  const [answerTitle, setAnswerTitle] = useState(card.answerTitle)
+  const { answerImage } = card
+  const [answerDesc, setAnswerDesc] = useState(card.answerDesc)
   const handleSave = () => {
     setCard({
       deckIndex: parseInt(deckIndex, 10),
       cardIndex: parseInt(cardIndex, 10),
-      card: {
-        question: getEditorData('.card-front .ck'),
-        answerTitle: getEditorData('.card-back__row .ck'),
-        answerImage: card.answerImage,
-        answerDesc: getEditorData('.card-back__row + .ck'),
-      },
+      card: { question, answerTitle, answerImage, answerDesc },
     })
   }
 
@@ -52,6 +48,7 @@ const EditCard = ({
                 id='card-front__question'
                 editor={BalloonEditor}
                 data={card.question}
+                onBlur={(event, editor) => setQuestion(editor.getData())}
                 config={editorConfig}
               />
             </div>
@@ -63,6 +60,7 @@ const EditCard = ({
                   id='card-back__title'
                   editor={BalloonEditor}
                   data={card.answerTitle}
+                  onBlur={(event, editor) => setAnswerTitle(editor.getData())}
                   config={editorConfig}
                 />
                 {card.answerImage !== '' ? (
@@ -86,6 +84,7 @@ const EditCard = ({
                 id='card-back__desc'
                 editor={BalloonEditor}
                 data={card.answerDesc}
+                onBlur={(event, editor) => setAnswerDesc(editor.getData())}
                 config={editorConfig}
               />
             </div>

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import CardNew from './CardNew'
@@ -13,13 +13,7 @@ const DeckPage = ({
   decks,
 }) => {
   const deck = decks[deckIndex]
-  const handleClick = () => {
-    document
-      .querySelector('.fluid-overlay')
-      .classList.add('fluid-overlay--overlaid')
-    // Hide Reset
-    document.querySelector('.fluid-box').classList.remove('fluid-box--delete')
-  }
+  const [isSidebarOverlaid, setSidebarOverlaid] = useState(false)
   return deck ? (
     <>
       <div className='deck-page d-flex flex-column flex-md-row'>
@@ -28,7 +22,7 @@ const DeckPage = ({
             <span className='mr-4'>{deck.name} Deck</span>
             <button
               className='icon-button d-flex align-items-center d-md-none pl-0'
-              onClick={handleClick}
+              onClick={() => setSidebarOverlaid(true)}
               type='button'>
               <i className='deck-main__icon fas fa-ellipsis-h my-3' />
             </button>
@@ -36,7 +30,11 @@ const DeckPage = ({
           <p className='p1 mb-0 pr-0 pr-md-5'>{deck.desc}</p>
           <CardNew deckIndex={deckIndex} />
         </div>
-        <DeckInfoCard deck={deck} />
+        <DeckInfoCard
+          deck={deck}
+          isSidebarOverlaid={isSidebarOverlaid}
+          setSidebarOverlaid={setSidebarOverlaid}
+        />
       </div>
       <Cards deckIndex={deckIndex} deckName={deck.name} cards={deck.cards} />
     </>

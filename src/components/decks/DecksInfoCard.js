@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import ProgressBar from 'react-bootstrap/ProgressBar'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
@@ -7,40 +7,27 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import Button from 'react-bootstrap/Button'
 
-const DecksInfoCard = ({ deckIndex, decks }) => {
+const DecksInfoCard = ({
+  setSidebarOverlaid,
+  deckIndex,
+  decks,
+  isSidebarOverlaid,
+}) => {
   const { name, desc, cards, buckets } = deckIndex !== -1 && decks[deckIndex]
-  function closeSidebar() {
-    // Close Sidebar
-    document
-      .querySelector('.fluid-overlay')
-      .classList.remove('fluid-overlay--overlaid')
-    // Blur previously focused deck-graphic
-    document
-      .querySelectorAll('.decks .deck-graphic')
-      .forEach((graphic) => graphic.blur())
-    // Hide Reset, in case any
-    hideReset()
+  const [isResetVisible, setResetVisible] = useState(false)
+
+  const closeSidebar = () => {
+    setSidebarOverlaid(false)
+    setResetVisible(false)
   }
 
-  function handleSidebarClick(event) {
-    const { classList } = event.target
-    if (
-      classList.contains('fluid-overlay') ||
+  const handleSidebarClick = ({ target: { classList } }) =>
+    (classList.contains('fluid-overlay') ||
       classList.contains('aside__close') ||
-      classList.contains('fa-times')
-    )
-      closeSidebar()
-  }
+      classList.contains('fa-times')) &&
+    closeSidebar()
 
-  function showReset() {
-    document.querySelector('.fluid-box').classList.add('fluid-box--reset')
-  }
-
-  function hideReset() {
-    document.querySelector('.fluid-box').classList.remove('fluid-box--reset')
-  }
-
-  function getProgressPercentage() {
+  const getProgressPercentage = () => {
     if (cards.length === 0) return 0
     return Math.floor((buckets.mastered.length / cards.length) * 100)
   }
@@ -48,11 +35,17 @@ const DecksInfoCard = ({ deckIndex, decks }) => {
   return (
     // eslint-disable-next-line jsx-a11y/no-static-element-interactions, jsx-a11y/click-events-have-key-events
     <div
-      className='fluid-overlay'
+      className={`fluid-overlay ${
+        isSidebarOverlaid && 'fluid-overlay--overlaid'
+      }`}
       onClick={handleSidebarClick}
       onWheel={closeSidebar}
       onTouchMove={closeSidebar}>
-      <div className='fluid-box pl-md-3 pr-md-0' tabIndex='-1'>
+      <div
+        className={`fluid-box ${
+          isResetVisible && 'fluid-box--reset'
+        } pl-md-3 pr-md-0`}
+        tabIndex='-1'>
         {typeof name !== 'undefined' ? (
           <aside className='decks-infocard aside pl-md-3 pr-md-0'>
             <h6 className='h6 mt-0'>{name}</h6>
@@ -92,7 +85,7 @@ const DecksInfoCard = ({ deckIndex, decks }) => {
                 <button
                   className='aside__option text-decoration-none d-flex flex-column align-items-center p-2'
                   type='button'
-                  onClick={showReset}>
+                  onClick={() => setResetVisible(true)}>
                   <i className='aside__icon fas fa-sync-alt' />
                   <p className='p2 mt-2 mb-0 text-nowrap'>Reset Progress</p>
                 </button>
@@ -113,14 +106,14 @@ const DecksInfoCard = ({ deckIndex, decks }) => {
             variant='outline-secondary'
             type='submit'
             className='px-4 mt-2 mb-3'
-            onClick={hideReset}>
+            onClick={() => setResetVisible(false)}>
             Cancel
           </Button>
           <Button
             variant='outline-danger'
             type='submit'
             className='px-4 mt-2 mb-3'
-            onClick={hideReset}>
+            onClick={() => setResetVisible(false)}>
             Confirm
           </Button>
         </aside>
@@ -130,6 +123,7 @@ const DecksInfoCard = ({ deckIndex, decks }) => {
 }
 
 DecksInfoCard.propTypes = {
+  setSidebarOverlaid: PropTypes.func.isRequired,
   deckIndex: PropTypes.number.isRequired,
   decks: PropTypes.arrayOf(
     PropTypes.shape({
@@ -152,6 +146,7 @@ DecksInfoCard.propTypes = {
       }).isRequired,
     }).isRequired,
   ).isRequired,
+  isSidebarOverlaid: PropTypes.bool.isRequired,
 }
 
 const mapStateToProps = (state) => ({

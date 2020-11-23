@@ -6,8 +6,19 @@ import { v4 as uuidv4 } from 'uuid'
 import { connect } from 'react-redux'
 import DeckNew from './DeckNew'
 import DeckGraphic from './DeckGraphic'
+import { setDeckIndex } from '../../actions/decksPage'
 
-const Decks = ({ decks }) => {
+const Decks = ({
+  setDeckIndex,
+  setSidebarOverlaid,
+  selectedDeckIndex,
+  decks,
+}) => {
+  const handleDeckGraphicFocus = (deckIndex) => {
+    setSidebarOverlaid(true)
+    setDeckIndex(deckIndex)
+  }
+
   return (
     <Row className='decks'>
       <Col
@@ -22,7 +33,12 @@ const Decks = ({ decks }) => {
 
       {decks.map(({ name }, deckIndex) => (
         <Col key={uuidv4()} lg='4' md='6' sm='4' xs='6'>
-          <DeckGraphic deckIndex={deckIndex} name={name} decks={decks} />
+          <DeckGraphic
+            deckIndex={deckIndex}
+            name={name}
+            handleDeckGraphicFocus={handleDeckGraphicFocus}
+            isDeckGraphicOpened={deckIndex === selectedDeckIndex}
+          />
         </Col>
       ))}
     </Row>
@@ -30,6 +46,9 @@ const Decks = ({ decks }) => {
 }
 
 Decks.propTypes = {
+  setDeckIndex: PropTypes.func.isRequired,
+  setSidebarOverlaid: PropTypes.func.isRequired,
+  selectedDeckIndex: PropTypes.number.isRequired,
   decks: PropTypes.arrayOf(
     PropTypes.shape({
       name: PropTypes.string.isRequired,
@@ -54,7 +73,8 @@ Decks.propTypes = {
 }
 
 const mapStateToProps = (state) => ({
+  selectedDeckIndex: state.decksPage.deckIndex,
   decks: state.decksPage.decks,
 })
 
-export default connect(mapStateToProps)(Decks)
+export default connect(mapStateToProps, { setDeckIndex })(Decks)

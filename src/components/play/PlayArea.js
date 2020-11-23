@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import ProgressBar from 'react-bootstrap/ProgressBar'
@@ -16,27 +16,20 @@ const PlayArea = ({
 }) => {
   const deck = decks[deckIndex]
   const [service, setService] = useState(null)
-
   if (deck && !service) setService(new PlayAreaService(deck))
-
-  const handleCardFocus = () =>
-    document
-      .querySelector('.flippable-card')
-      .classList.add('flippable-card__focus')
+  const [isCardFocused, setCardFocused] = useState(false)
+  const cardRef = useRef(null)
 
   const handleAffirmation = () => {
     setBuckets({ deckIndex, buckets: service.updateBuckets(true) })
-    document.querySelector('.flippable-card').blur()
-    document
-      .querySelector('.flippable-card')
-      .classList.remove('flippable-card__focus')
+    setCardFocused(false)
+    cardRef.current.blur()
   }
+
   const handleNegation = () => {
     setBuckets({ deckIndex, buckets: service.updateBuckets(false) })
-    document.querySelector('.flippable-card').blur()
-    document
-      .querySelector('.flippable-card')
-      .classList.remove('flippable-card__focus')
+    setCardFocused(false)
+    cardRef.current.blur()
   }
 
   return service ? (
@@ -47,9 +40,11 @@ const PlayArea = ({
           <div className='card__side--transparent flippable-card-container mr-0 mr-md-3 mb-3 mb-lg-0 border-none'>
             <FlippableCard
               card={service.getCard()}
+              cardRef={cardRef}
+              isCardFocused={isCardFocused}
               handleAffirmation={handleAffirmation}
               handleNegation={handleNegation}
-              handleCardFocus={handleCardFocus}
+              setCardFocused={setCardFocused}
             />
             <p className='p2 my-2 text-muted'>{service.getProgressDesc()}</p>
             <ProgressBar className='mb-3'>

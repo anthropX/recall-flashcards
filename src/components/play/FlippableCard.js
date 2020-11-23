@@ -6,11 +6,17 @@ import Badge from 'react-bootstrap/Badge'
 const FlippableCard = ({
   handleAffirmation,
   handleNegation,
-  handleCardFocus,
+  setCardFocused,
+  cardRef,
+  isCardFocused,
   card: { question, answerTitle, answerDesc, answerImage, badge },
 }) => {
   return (
-    <div className='flippable-card' tabIndex='-1' onFocus={handleCardFocus}>
+    <div
+      ref={cardRef}
+      className={`flippable-card ${isCardFocused && 'flippable-card__focus'}`}
+      tabIndex='-1'
+      onFocus={() => setCardFocused(true)}>
       <div className='flippable-card__front card__side card-front d-flex align-items-center p-2'>
         <Badge
           variant={badge.variant}
@@ -70,7 +76,11 @@ const FlippableCard = ({
 FlippableCard.propTypes = {
   handleAffirmation: PropTypes.func.isRequired,
   handleNegation: PropTypes.func.isRequired,
-  handleCardFocus: PropTypes.func.isRequired,
+  setCardFocused: PropTypes.func.isRequired,
+  cardRef: PropTypes.oneOfType([
+    PropTypes.func,
+    PropTypes.shape({ current: PropTypes.instanceOf(Element) }),
+  ]).isRequired,
   card: PropTypes.shape({
     question: PropTypes.string.isRequired,
     answerTitle: PropTypes.string.isRequired,
@@ -81,6 +91,7 @@ FlippableCard.propTypes = {
       variant: PropTypes.string.isRequired,
     }).isRequired,
   }).isRequired,
+  isCardFocused: PropTypes.bool.isRequired,
 }
 
 export default FlippableCard

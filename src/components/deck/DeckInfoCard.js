@@ -6,16 +6,22 @@ import { Link, withRouter } from 'react-router-dom'
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
 
-const DeckInfoCard = ({ history, deck: { name, desc, cards } }) => {
+const DeckInfoCard = ({
+  setSidebarOverlaid,
+  history,
+  deck: { name, desc, cards },
+  isSidebarOverlaid,
+}) => {
   const [confirmValue, setConfirmValue] = useState('')
   const [validated, setValidated] = useState(false)
+  const [isDeleteVisible, setDeleteVisible] = useState(false)
 
-  function handleChange(event) {
+  const handleChange = (event) => {
     setConfirmValue(event.target.value)
     setValidated(false)
   }
 
-  function handleSubmit(event) {
+  const handleSubmit = (event) => {
     event.preventDefault()
     event.stopPropagation()
     const form = event.currentTarget
@@ -25,39 +31,26 @@ const DeckInfoCard = ({ history, deck: { name, desc, cards } }) => {
     }
   }
 
-  function closeSidebar() {
-    document
-      .querySelector('.fluid-overlay')
-      .classList.remove('fluid-overlay--overlaid')
-  }
-
-  function handleSidebarClick(event) {
-    const { classList } = event.target
-    if (
-      classList.contains('fluid-overlay') ||
+  const handleSidebarClick = ({ target: { classList } }) =>
+    (classList.contains('fluid-overlay') ||
       classList.contains('aside__close') ||
-      classList.contains('fa-times')
-    )
-      closeSidebar()
-  }
-
-  function showDelete() {
-    document.querySelector('.fluid-box').classList.add('fluid-box--delete')
-  }
-
-  function hideDelete(event) {
-    event.preventDefault()
-    document.querySelector('.fluid-box').classList.remove('fluid-box--delete')
-  }
+      classList.contains('fa-times')) &&
+    setSidebarOverlaid(false)
 
   return (
     // eslint-disable-next-line jsx-a11y/no-static-element-interactions, jsx-a11y/click-events-have-key-events
     <div
-      className='deck-fluid-overlay fluid-overlay'
+      className={`deck-fluid-overlay fluid-overlay ${
+        isSidebarOverlaid && 'fluid-overlay--overlaid'
+      }`}
       onClick={handleSidebarClick}
-      onWheel={closeSidebar}
-      onTouchMove={closeSidebar}>
-      <div className='fluid-box pl-md-3 pr-md-0' tabIndex='-1'>
+      onWheel={() => setSidebarOverlaid(false)}
+      onTouchMove={() => setSidebarOverlaid(false)}>
+      <div
+        className={`fluid-box ${
+          isDeleteVisible && 'fluid-box--delete'
+        } pl-md-3 pr-md-0`}
+        tabIndex='-1'>
         {name !== '' ? (
           <aside className='deck-infocard aside pl-md-3 pr-md-0'>
             <h6 className='h6 mt-0 d-md-none'>{name} Deck</h6>
@@ -83,7 +76,7 @@ const DeckInfoCard = ({ history, deck: { name, desc, cards } }) => {
                 <button
                   className='aside__option text-decoration-none d-flex flex-column align-items-center p-2'
                   type='button'
-                  onClick={showDelete}>
+                  onClick={() => setDeleteVisible(true)}>
                   <i className='aside__icon fas fa-trash' />
                   <p className='p2 mt-2 mb-0 text-nowrap'>Delete</p>
                 </button>
@@ -118,7 +111,7 @@ const DeckInfoCard = ({ history, deck: { name, desc, cards } }) => {
               variant='outline-secondary'
               type='button'
               className='px-4 mt-2 mb-3 mr-2'
-              onClick={hideDelete}>
+              onClick={() => setDeleteVisible(false)}>
               Cancel
             </Button>
             <Button
@@ -135,6 +128,7 @@ const DeckInfoCard = ({ history, deck: { name, desc, cards } }) => {
 }
 
 DeckInfoCard.propTypes = {
+  setSidebarOverlaid: PropTypes.func.isRequired,
   history: PropTypes.shape({
     push: PropTypes.func.isRequired,
   }).isRequired,
@@ -150,6 +144,7 @@ DeckInfoCard.propTypes = {
       }),
     ).isRequired,
   }).isRequired,
+  isSidebarOverlaid: PropTypes.bool.isRequired,
 }
 
 export default withRouter(DeckInfoCard)
