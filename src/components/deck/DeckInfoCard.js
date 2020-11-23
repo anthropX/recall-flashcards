@@ -58,7 +58,7 @@ const DeckInfoCard = ({ history, deck: { name, desc, cards } }) => {
       onWheel={closeSidebar}
       onTouchMove={closeSidebar}>
       <div className='fluid-box pl-md-3 pr-md-0' tabIndex='-1'>
-        {name === '' ? (
+        {name !== '' ? (
           <aside className='deck-infocard aside pl-md-3 pr-md-0'>
             <h6 className='h6 mt-0 d-md-none'>{name} Deck</h6>
             <div className='aside__close'>
