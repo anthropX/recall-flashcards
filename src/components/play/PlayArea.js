@@ -20,14 +20,8 @@ const PlayArea = ({
   const [isCardFocused, setCardFocused] = useState(false)
   const cardRef = useRef(null)
 
-  const handleAffirmation = () => {
-    setBuckets({ deckIndex, buckets: service.updateBuckets(true) })
-    setCardFocused(false)
-    cardRef.current.blur()
-  }
-
-  const handleNegation = () => {
-    setBuckets({ deckIndex, buckets: service.updateBuckets(false) })
+  const handleResponse = (isAffirmation) => {
+    setBuckets({ deckIndex, buckets: service.updateBuckets(isAffirmation) })
     setCardFocused(false)
     cardRef.current.blur()
   }
@@ -42,8 +36,7 @@ const PlayArea = ({
               card={service.getCard()}
               cardRef={cardRef}
               isCardFocused={isCardFocused}
-              handleAffirmation={handleAffirmation}
-              handleNegation={handleNegation}
+              handleResponse={handleResponse}
               setCardFocused={setCardFocused}
             />
             <p className='p2 my-2 text-muted'>{service.getProgressDesc()}</p>

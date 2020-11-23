@@ -4,8 +4,7 @@ import Button from 'react-bootstrap/Button'
 import Badge from 'react-bootstrap/Badge'
 
 const FlippableCard = ({
-  handleAffirmation,
-  handleNegation,
+  handleResponse,
   setCardFocused,
   cardRef,
   isCardFocused,
@@ -58,13 +57,13 @@ const FlippableCard = ({
           <Button
             variant='success'
             className='w-100 border-0 rounded-0'
-            onClick={handleAffirmation}>
+            onClick={() => handleResponse(true)}>
             I knew this!
           </Button>
           <Button
             variant='danger'
             className='w-100 border-0 rounded-0'
-            onClick={handleNegation}>
+            onClick={() => handleResponse(false)}>
             I didn&apos;t know
           </Button>
         </div>
@@ -74,8 +73,7 @@ const FlippableCard = ({
 }
 
 FlippableCard.propTypes = {
-  handleAffirmation: PropTypes.func.isRequired,
-  handleNegation: PropTypes.func.isRequired,
+  handleResponse: PropTypes.func.isRequired,
   setCardFocused: PropTypes.func.isRequired,
   cardRef: PropTypes.oneOfType([
     PropTypes.func,
