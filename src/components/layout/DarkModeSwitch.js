@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
-import toggleDark from '../actions/switch'
+import toggleDark from '../../actions/switch'
 
 const DarkModeSwitch = ({ toggleDark, isDark }) => {
   useEffect(() => {

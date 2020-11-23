@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom'
 import { CKEditor } from '@ckeditor/ckeditor5-react'
 import BalloonEditor from '@ckeditor/ckeditor5-build-balloon'
 import { setCard } from '../../actions/decksPage'
-import editorConfig from '../../ckEditorConfig'
+import editorConfig from '../../config/ckEditorConfig'
 import Spinner from '../layout/Spinner'
 
 const EditCard = ({
