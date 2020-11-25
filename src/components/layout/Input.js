@@ -20,11 +20,7 @@ const Input = ({ className, label, autoComplete, ...props }) => {
         isInvalid={meta.touched && meta.error}
         autoComplete={autoComplete}
       />
-      {meta.touched && meta.error ? (
-        <Form.Control.Feedback type='invalid'>
-          {meta.error}
-        </Form.Control.Feedback>
-      ) : null}
+      <Form.Control.Feedback type='invalid'>{meta.error}</Form.Control.Feedback>
     </Form.Group>
   )
 }
