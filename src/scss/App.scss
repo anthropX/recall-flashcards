@@ -68,10 +68,6 @@ textarea {
   resize: none;
 }
 
-.form-control {
-  @extend %field-focus;
-}
-
 .btn-light {
   background: $white;
 }
