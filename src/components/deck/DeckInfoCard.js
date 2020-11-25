@@ -13,22 +13,12 @@ const DeckInfoCard = ({
   isSidebarOverlaid,
 }) => {
   const [comfirmation, setConfirmation] = useState('')
-  const [validated, setValidated] = useState(false)
   const [isDeleteVisible, setDeleteVisible] = useState(false)
-
-  const handleConfirmationChange = (event) => {
-    setConfirmation(event.target.value)
-    setValidated(false)
-  }
 
   const handleConfirmationSubmit = (event) => {
     event.preventDefault()
     event.stopPropagation()
-    const form = event.currentTarget
-    if (form.checkValidity() && comfirmation === name) {
-      setValidated(true)
-      history.push('/decks')
-    }
+    if (comfirmation === name) history.push('/decks')
   }
 
   const handleSidebarClick = ({ target: { classList } }) =>
@@ -93,15 +83,12 @@ const DeckInfoCard = ({
             <strong className='text-danger'>permanently delete</strong> this
             deck, including all cards and progress info?
           </p>
-          <Form
-            noValidate
-            validated={validated}
-            onSubmit={handleConfirmationSubmit}>
+          <Form noValidate onSubmit={handleConfirmationSubmit}>
             <Form.Group controlId='confirmation' className='mb-1'>
               <Form.Control
                 type='text'
                 value={comfirmation}
-                onChange={handleConfirmationChange}
+                onChange={(event) => setConfirmation(event.target.value)}
                 required
                 isInvalid={comfirmation !== name}
                 isValid={comfirmation === name}
