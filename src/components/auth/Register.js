@@ -63,18 +63,21 @@ const Register = () => {
               name='email'
               type='email'
               placeholder="What's your email?"
+              autoComplete='username'
             />
             <Input
               label='Password'
               name='password'
               type='password'
               placeholder='Enter a password'
+              autoComplete='new-password'
             />
             <Input
               label='Confirm Password'
               name='confirm'
               type='password'
               placeholder='Enter the password again'
+              autoComplete='new-password'
             />
             <Button
               className='px-4 mt-2 mb-3'
