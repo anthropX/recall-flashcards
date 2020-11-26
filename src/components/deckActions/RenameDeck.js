@@ -58,7 +58,7 @@ const RenameDeck = ({
               variant='outline-danger'
               type='submit'
               className='px-4 mt-2 mb-3'
-              disabled={formik.isSubmitting}>
+              disabled={!formik.dirty || formik.isSubmitting}>
               Update Deck
             </Button>
           </Form>
