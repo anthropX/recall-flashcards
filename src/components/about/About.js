@@ -1,6 +1,9 @@
 import React from 'react'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
+import { Formik } from 'formik'
+import { object, string } from 'yup'
+import Input from '../layout/Input'
 
 const About = () => {
   return (
@@ -17,28 +20,55 @@ const About = () => {
       <hr className='hr ml-0' />
 
       <h3 className='display-6'>Write to me</h3>
-      <Form className='form mt-3'>
-        <Form.Group controlId='form__name'>
-          <Form.Label>Name</Form.Label>
-          <Form.Control type='name' placeholder="What's your name?" />
-        </Form.Group>
-        <Form.Group controlId='form__email'>
-          <Form.Label>Email address</Form.Label>
-          <Form.Control type='email' placeholder="What's your email?" />
-        </Form.Group>
-        <Form.Group controlId='form__message'>
-          <Form.Label>Message</Form.Label>
-          <Form.Control
-            as='textarea'
-            rows={4}
-            placeholder='What do you have to say?'
-          />
-        </Form.Group>
-
-        <Button variant='outline-danger' type='submit' className='px-4 mt-2'>
-          Send
-        </Button>
-      </Form>
+      <Formik
+        initialValues={{
+          name: '',
+          email: '',
+          message: '',
+        }}
+        validationSchema={object({
+          name: string()
+            .max(31, "Mustn't exceed 31 characters")
+            .required('Required'),
+          email: string().email('Invalid email').required('Required'),
+          message: string().required('Required'),
+        })}
+        onSubmit={async (values) => {
+          await new Promise((resolve) => setTimeout(resolve, 2000))
+          console.log(values)
+        }}>
+        {(formik) => (
+          <Form noValidate className='form mt-3' onSubmit={formik.handleSubmit}>
+            <Input
+              label='Name'
+              name='name'
+              type='text'
+              placeholder="What's your name?"
+            />
+            <Input
+              label='Email address'
+              name='email'
+              type='email'
+              placeholder="What's your email?"
+              autoComplete='username'
+            />
+            <Input
+              as='textarea'
+              label='Message'
+              name='message'
+              type='text'
+              placeholder='What do you have to say?'
+            />
+            <Button
+              variant='outline-danger'
+              type='submit'
+              className='px-4 mt-2'
+              disabled={formik.isSubmitting}>
+              Send
+            </Button>
+          </Form>
+        )}
+      </Formik>
     </div>
   )
 }
