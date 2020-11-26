@@ -3,7 +3,7 @@ import { useField } from 'formik'
 import Form from 'react-bootstrap/Form'
 import PropTypes from 'prop-types'
 
-const Input = ({ className, label, autoComplete, ...props }) => {
+const Input = ({ as, className, label, autoComplete, ...props }) => {
   const [field, meta] = useField(props)
   const { name, onChange, onBlur, value } = field
   const { type } = props
@@ -11,6 +11,8 @@ const Input = ({ className, label, autoComplete, ...props }) => {
     <Form.Group controlId={name} className={className}>
       <Form.Label>{label}</Form.Label>
       <Form.Control
+        as={as || 'input'}
+        rows={as && 4}
         name={name}
         type={type}
         onChange={onChange}
@@ -26,6 +28,7 @@ const Input = ({ className, label, autoComplete, ...props }) => {
 }
 
 Input.propTypes = {
+  as: PropTypes.string,
   className: PropTypes.string,
   label: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
@@ -33,6 +36,7 @@ Input.propTypes = {
 }
 
 Input.defaultProps = {
+  as: '',
   className: '',
   autoComplete: '',
 }
