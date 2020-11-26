@@ -3,9 +3,13 @@ import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import { Formik } from 'formik'
 import { object, string } from 'yup'
+import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
 import Input from '../layout/Input'
+import { addDeck } from '../../actions/decksPage'
+import { getDeck } from '../../util/api'
 
-const CreateDeck = () => {
+const CreateDeck = ({ addDeck }) => {
   return (
     <div className='create-deck'>
       <h1 className='display-5 mb-1'>Create a new deck</h1>
@@ -25,9 +29,8 @@ const CreateDeck = () => {
             .max(100, "Mustn't exceed 100 characters")
             .required('Required'),
         })}
-        onSubmit={async (values) => {
-          await new Promise((resolve) => setTimeout(resolve, 2000))
-          console.log(values)
+        onSubmit={({ deckName, deckDesc }) => {
+          addDeck({ ...getDeck(), name: deckName, desc: deckDesc })
         }}>
         {(formik) => (
           <Form
@@ -59,4 +62,8 @@ const CreateDeck = () => {
   )
 }
 
-export default CreateDeck
+CreateDeck.propTypes = {
+  addDeck: PropTypes.func.isRequired,
+}
+
+export default connect(null, { addDeck })(CreateDeck)

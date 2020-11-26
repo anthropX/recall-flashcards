@@ -1,6 +1,7 @@
 import {
   SET_DECK_INDEX,
   SET_DECKS,
+  ADD_DECK,
   ADD_CARD,
   SET_CARD,
   DELETE_CARD,
@@ -18,6 +19,8 @@ export default function (state = initialState, { type, payload }) {
       return { ...state, deckIndex: payload }
     case SET_DECKS:
       return { ...state, decks: payload }
+    case ADD_DECK:
+      return { ...state, decks: [...state.decks, payload] }
     case ADD_CARD:
       return {
         ...state,

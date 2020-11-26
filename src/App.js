@@ -18,7 +18,7 @@ import CreateCard from './components/cardActions/CreateCard'
 import PlayArea from './components/play/PlayArea'
 import dashboardImg from './img/dashboard-background.jpg'
 import { setDecks } from './actions/decksPage'
-import getDecks from './util/api'
+import { getDecks } from './util/api'
 
 const App = ({ setDecks, isDark }) => {
   const wallOverlay = ['#302d2db5', '#302d2d59']
