@@ -24,8 +24,8 @@ const RenameDeck = ({
 
       <Formik
         initialValues={{
-          deckName: '',
-          deckDesc: '',
+          deckName: deck.name,
+          deckDesc: deck.desc,
         }}
         validationSchema={object({
           deckName: string()
