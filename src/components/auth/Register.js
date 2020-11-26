@@ -31,7 +31,20 @@ const Register = () => {
           email: string().email('Invalid email').required('Required'),
           password: string()
             .min(6, 'Password must have atleast 6 characters')
-            .required('Required'),
+            .required('Required')
+            .test(
+              'limitedTo',
+              'Can only contain ASCII characters',
+              (val) => !/[^ -~]/.test(val),
+            )
+            .test(
+              'mixOf',
+              'Must be a mix of letters, numbers, & special characters',
+              (val) =>
+                /\d/.test(val) &&
+                /[ -/:-@[-`{-~]/.test(val) &&
+                /[A-Za-z]/.test(val),
+            ),
           confirm: string()
             .oneOf([ref('password'), null], 'Passwords must match')
             .required('Required'),
