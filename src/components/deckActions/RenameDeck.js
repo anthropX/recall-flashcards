@@ -3,10 +3,20 @@ import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import { Formik } from 'formik'
 import { object, string } from 'yup'
+import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
 import Input from '../layout/Input'
+import { setDeck } from '../../actions/decksPage'
 
-const RenameDeck = () => {
-  return (
+const RenameDeck = ({
+  setDeck,
+  match: {
+    params: { deckIndex },
+  },
+  decks,
+}) => {
+  const deck = decks[deckIndex]
+  return deck ? (
     <div className='rename-deck'>
       <h1 className='display-5 mb-1'>Rename Deck</h1>
       <p>Fill in updated details for your deck!</p>
@@ -25,9 +35,8 @@ const RenameDeck = () => {
             .max(100, "Mustn't exceed 100 characters")
             .required('Required'),
         })}
-        onSubmit={async (values) => {
-          await new Promise((resolve) => setTimeout(resolve, 2000))
-          console.log(values)
+        onSubmit={({ deckName, deckDesc }) => {
+          setDeck({ deckIndex: parseInt(deckIndex, 10), deckName, deckDesc })
         }}>
         {(formik) => (
           <Form
@@ -56,7 +65,41 @@ const RenameDeck = () => {
         )}
       </Formik>
     </div>
-  )
+  ) : null
 }
 
-export default RenameDeck
+RenameDeck.propTypes = {
+  setDeck: PropTypes.func.isRequired,
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      deckIndex: PropTypes.string.isRequired,
+    }).isRequired,
+  }).isRequired,
+  decks: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      desc: PropTypes.string.isRequired,
+      cards: PropTypes.arrayOf(
+        PropTypes.shape({
+          question: PropTypes.string.isRequired,
+          answerTitle: PropTypes.string.isRequired,
+          answerImage: PropTypes.string.isRequired,
+          answerDesc: PropTypes.string.isRequired,
+        }),
+      ).isRequired,
+      buckets: PropTypes.shape({
+        new: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
+        highFreq: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
+        mdFreq: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
+        lowFreq: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
+        mastered: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
+      }).isRequired,
+    }).isRequired,
+  ).isRequired,
+}
+
+const mapStateToProps = (state) => ({
+  decks: state.decksPage.decks,
+})
+
+export default connect(mapStateToProps, { setDeck })(RenameDeck)

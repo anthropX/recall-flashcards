@@ -2,6 +2,7 @@ import {
   SET_DECK_INDEX,
   SET_DECKS,
   ADD_DECK,
+  SET_DECK,
   ADD_CARD,
   SET_CARD,
   DELETE_CARD,
@@ -21,6 +22,15 @@ export default function (state = initialState, { type, payload }) {
       return { ...state, decks: payload }
     case ADD_DECK:
       return { ...state, decks: [...state.decks, payload] }
+    case SET_DECK:
+      return {
+        ...state,
+        decks: state.decks.map((deck, deckIndex) =>
+          deckIndex === payload.deckIndex
+            ? { ...deck, name: payload.deckName, desc: payload.deckDesc }
+            : deck,
+        ),
+      }
     case ADD_CARD:
       return {
         ...state,

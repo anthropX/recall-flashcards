@@ -71,9 +71,11 @@ const App = ({ setDecks, isDark }) => {
               <CreateDeck />
             </Route>
             <Route exact path='/decks/:deckIndex' component={DeckPage} />
-            <Route exact path='/decks/:id/update'>
-              <RenameDeck />
-            </Route>
+            <Route
+              exact
+              path='/decks/:deckIndex/update'
+              component={RenameDeck}
+            />
             <Route
               exact
               path='/decks/:deckIndex/cards/:cardIndex/update'

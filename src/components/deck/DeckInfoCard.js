@@ -8,6 +8,9 @@ import Form from 'react-bootstrap/Form'
 
 const DeckInfoCard = ({
   setSidebarOverlaid,
+  match: {
+    params: { deckIndex },
+  },
   history,
   deck: { name, desc, cards },
   isSidebarOverlaid,
@@ -56,7 +59,7 @@ const DeckInfoCard = ({
             <Row>
               <Col xs='3' md='4' className='pl-2 pr-0 flex-grow-0'>
                 <Link
-                  to='/decks/0/update'
+                  to={`/decks/${deckIndex}/update`}
                   className='aside__option text-decoration-none d-flex flex-column align-items-center p-2'>
                   <i className='aside__icon fas fa-edit' />
                   <p className='p2 mt-2 mb-0'>Rename</p>
@@ -119,6 +122,11 @@ const DeckInfoCard = ({
 
 DeckInfoCard.propTypes = {
   setSidebarOverlaid: PropTypes.func.isRequired,
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      deckIndex: PropTypes.string.isRequired,
+    }).isRequired,
+  }).isRequired,
   history: PropTypes.shape({
     push: PropTypes.func.isRequired,
   }).isRequired,

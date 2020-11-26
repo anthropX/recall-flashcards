@@ -2,6 +2,7 @@ import {
   SET_DECK_INDEX,
   SET_DECKS,
   ADD_DECK,
+  SET_DECK,
   ADD_CARD,
   SET_CARD,
   DELETE_CARD,
@@ -25,6 +26,13 @@ export function setDecks(decks) {
 export function addDeck(deck) {
   return {
     type: ADD_DECK,
+    payload: deck,
+  }
+}
+
+export function setDeck(deck) {
+  return {
+    type: SET_DECK,
     payload: deck,
   }
 }
