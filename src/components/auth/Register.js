@@ -36,7 +36,10 @@ const Register = () => {
             .oneOf([ref('password'), null], 'Passwords must match')
             .required('Required'),
         })}
-        onSubmit={(values) => console.log(values)}>
+        onSubmit={async (values) => {
+          await new Promise((resolve) => setTimeout(resolve, 2000))
+          console.log(values)
+        }}>
         {(formik) => (
           <Form
             noValidate
@@ -82,7 +85,8 @@ const Register = () => {
             <Button
               className='px-4 mt-2 mb-3'
               variant='outline-danger'
-              type='submit'>
+              type='submit'
+              disabled={formik.isSubmitting}>
               Sign up
             </Button>
           </Form>
