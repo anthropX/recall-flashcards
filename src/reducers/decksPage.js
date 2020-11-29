@@ -9,6 +9,7 @@ import {
   DELETE_CARD,
   SET_BUCKETS,
   ADD_CARD_TO_BUCKETS,
+  REMOVE_CARD_FROM_BUCKETS,
 } from '../actions/types'
 
 const initialState = {
@@ -104,6 +105,37 @@ export default function (state = initialState, { type, payload }) {
                 buckets: {
                   ...deck.buckets,
                   new: [...deck.buckets.new, deck.cards.length - 1],
+                },
+              }
+            : deck,
+        ),
+      }
+    case REMOVE_CARD_FROM_BUCKETS:
+      return {
+        ...state,
+        decks: state.decks.map((deck, deckIndex) =>
+          deckIndex === payload.deckIndex
+            ? {
+                ...deck,
+                buckets: {
+                  new: deck.buckets.new.filter(
+                    (newCardIndex) => newCardIndex !== payload.cardIndex,
+                  ),
+                  highFreq: deck.buckets.highFreq.filter(
+                    (highFreqCardIndex) =>
+                      highFreqCardIndex !== payload.cardIndex,
+                  ),
+                  mdFreq: deck.buckets.mdFreq.filter(
+                    (mdFreqCardIndex) => mdFreqCardIndex !== payload.cardIndex,
+                  ),
+                  lowFreq: deck.buckets.lowFreq.filter(
+                    (lowFreqCardIndex) =>
+                      lowFreqCardIndex !== payload.cardIndex,
+                  ),
+                  mastered: deck.buckets.mastered.filter(
+                    (masteredCardIndex) =>
+                      masteredCardIndex !== payload.cardIndex,
+                  ),
                 },
               }
             : deck,

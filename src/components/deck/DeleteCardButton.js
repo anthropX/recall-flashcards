@@ -3,10 +3,11 @@ import PropTypes from 'prop-types'
 import Button from 'react-bootstrap/Button'
 import Modal from 'react-bootstrap/Modal'
 import { connect } from 'react-redux'
-import { deleteCard } from '../../actions/decksPage'
+import { deleteCard, removeCardFromBuckets } from '../../actions/decksPage'
 
 const DeleteCardButton = ({
   deleteCard,
+  removeCardFromBuckets,
   isDark,
   deckIndex,
   deckName,
@@ -17,7 +18,9 @@ const DeleteCardButton = ({
   const handleShow = () => setShow(true)
 
   const handleConfirmDelete = () => {
-    deleteCard({ deckIndex: parseInt(deckIndex, 10), cardIndex })
+    const payload = { deckIndex: parseInt(deckIndex, 10), cardIndex }
+    deleteCard(payload)
+    removeCardFromBuckets(payload)
     handleClose()
   }
 
@@ -55,6 +58,7 @@ const DeleteCardButton = ({
 
 DeleteCardButton.propTypes = {
   deleteCard: PropTypes.func.isRequired,
+  removeCardFromBuckets: PropTypes.func.isRequired,
   isDark: PropTypes.bool.isRequired,
   deckIndex: PropTypes.string.isRequired,
   deckName: PropTypes.string.isRequired,
@@ -67,4 +71,6 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps, { deleteCard })(DeleteCardButton)
+export default connect(mapStateToProps, { deleteCard, removeCardFromBuckets })(
+  DeleteCardButton,
+)
