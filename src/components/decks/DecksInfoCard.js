@@ -17,8 +17,12 @@ const DecksInfoCard = ({
   const [isResetVisible, setResetVisible] = useState(false)
   let total
   let mastered
-  if (cards) total = cards.length
-  if (buckets) mastered = buckets.mastered.length
+  let isEmpty
+  if (cards && buckets) {
+    total = cards.length
+    mastered = buckets.mastered.length
+    isEmpty = total === buckets.new.length
+  }
 
   const closeSidebar = () => {
     setSidebarOverlaid(false)
@@ -90,7 +94,9 @@ const DecksInfoCard = ({
             </Col>
             <Col xs='3' className='pl-0 pr-md-3'>
               <button
-                className='aside__option text-decoration-none d-flex flex-column align-items-center p-2'
+                className={`aside__option ${
+                  isEmpty && 'link--disabled'
+                } text-decoration-none d-flex flex-column align-items-center p-2`}
                 type='button'
                 onClick={() => setResetVisible(true)}>
                 <i className='aside__icon fas fa-sync-alt' />
