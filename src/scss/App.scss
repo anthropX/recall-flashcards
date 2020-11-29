@@ -62,6 +62,14 @@ $threat: #e65f12;
   text-decoration: underline;
 }
 
+.link--disabled {
+  pointer-events: none;
+  i,
+  p {
+    color: $text-muted;
+  }
+}
+
 // OVERRIDE DEFAULTS
 
 textarea {

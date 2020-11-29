@@ -74,7 +74,8 @@ const DecksInfoCard = ({
             <Col xs='3' className='pl-2 pr-0'>
               <Link
                 to={`/decks/${deckIndex}/play`}
-                className='aside__option text-decoration-none d-flex flex-column align-items-center p-2'>
+                className={`aside__option ${total === 0 && 'link--disabled'}
+                 text-decoration-none d-flex flex-column align-items-center p-2`}>
                 <i className='aside__icon fas fa-play' />
                 <p className='p2 mt-2 mb-0'>Play</p>
               </Link>
