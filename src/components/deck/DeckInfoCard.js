@@ -1,13 +1,17 @@
 import React, { useState } from 'react'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
+import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { Link, withRouter } from 'react-router-dom'
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
+import { setDeckIndex, removeDeck } from '../../actions/decksPage'
 
 const DeckInfoCard = ({
   setSidebarOverlaid,
+  setDeckIndex,
+  removeDeck,
   match: {
     params: { deckIndex },
   },
@@ -21,7 +25,11 @@ const DeckInfoCard = ({
   const handleConfirmationSubmit = (event) => {
     event.preventDefault()
     event.stopPropagation()
-    if (comfirmation === name) history.push('/decks')
+    if (comfirmation === name) {
+      removeDeck(parseInt(deckIndex, 10))
+      setDeckIndex(-1)
+      history.push('/decks')
+    }
   }
 
   const handleSidebarClick = ({ target: { classList } }) =>
@@ -122,6 +130,8 @@ const DeckInfoCard = ({
 
 DeckInfoCard.propTypes = {
   setSidebarOverlaid: PropTypes.func.isRequired,
+  setDeckIndex: PropTypes.func.isRequired,
+  removeDeck: PropTypes.func.isRequired,
   match: PropTypes.shape({
     params: PropTypes.shape({
       deckIndex: PropTypes.string.isRequired,
@@ -145,4 +155,6 @@ DeckInfoCard.propTypes = {
   isSidebarOverlaid: PropTypes.bool.isRequired,
 }
 
-export default withRouter(DeckInfoCard)
+export default withRouter(
+  connect(null, { setDeckIndex, removeDeck })(DeckInfoCard),
+)

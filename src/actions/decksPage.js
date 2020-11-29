@@ -3,6 +3,7 @@ import {
   SET_DECKS,
   ADD_DECK,
   SET_DECK,
+  REMOVE_DECK,
   ADD_CARD,
   SET_CARD,
   DELETE_CARD,
@@ -34,6 +35,13 @@ export function setDeck(deck) {
   return {
     type: SET_DECK,
     payload: deck,
+  }
+}
+
+export function removeDeck(deckIndex) {
+  return {
+    type: REMOVE_DECK,
+    payload: deckIndex,
   }
 }
 

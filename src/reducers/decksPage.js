@@ -3,6 +3,7 @@ import {
   SET_DECKS,
   ADD_DECK,
   SET_DECK,
+  REMOVE_DECK,
   ADD_CARD,
   SET_CARD,
   DELETE_CARD,
@@ -30,6 +31,11 @@ export default function (state = initialState, { type, payload }) {
             ? { ...deck, name: payload.deckName, desc: payload.deckDesc }
             : deck,
         ),
+      }
+    case REMOVE_DECK:
+      return {
+        ...state,
+        decks: state.decks.filter((deck, deckIndex) => deckIndex !== payload),
       }
     case ADD_CARD:
       return {
