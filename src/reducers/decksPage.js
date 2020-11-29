@@ -8,6 +8,7 @@ import {
   SET_CARD,
   DELETE_CARD,
   SET_BUCKETS,
+  ADD_CARD_TO_BUCKETS,
 } from '../actions/types'
 
 const initialState = {
@@ -89,6 +90,21 @@ export default function (state = initialState, { type, payload }) {
             ? {
                 ...deck,
                 buckets: payload.buckets,
+              }
+            : deck,
+        ),
+      }
+    case ADD_CARD_TO_BUCKETS:
+      return {
+        ...state,
+        decks: state.decks.map((deck, deckIndex) =>
+          deckIndex === payload
+            ? {
+                ...deck,
+                buckets: {
+                  ...deck.buckets,
+                  new: [...deck.buckets.new, deck.cards.length - 1],
+                },
               }
             : deck,
         ),

@@ -5,12 +5,13 @@ import PropTypes from 'prop-types'
 import { Link, withRouter } from 'react-router-dom'
 import { CKEditor } from '@ckeditor/ckeditor5-react'
 import BalloonEditor from '@ckeditor/ckeditor5-build-balloon'
-import { addCard } from '../../actions/decksPage'
+import { addCard, addCardToBuckets } from '../../actions/decksPage'
 import editorConfig from '../../config/ckEditorConfig'
 import Spinner from '../layout/Spinner'
 
 const CreateCard = ({
   addCard,
+  addCardToBuckets,
   history,
   match: {
     params: { deckIndex },
@@ -33,6 +34,7 @@ const CreateCard = ({
       deckIndex: parseInt(deckIndex, 10),
       card: { question, answerTitle, answerImage, answerDesc },
     })
+    addCardToBuckets(parseInt(deckIndex, 10))
     history.push(`/decks/${deckIndex}`)
   }
 
@@ -106,6 +108,7 @@ const CreateCard = ({
 
 CreateCard.propTypes = {
   addCard: PropTypes.func.isRequired,
+  addCardToBuckets: PropTypes.func.isRequired,
   history: PropTypes.shape({
     push: PropTypes.func.isRequired,
   }).isRequired,
@@ -141,4 +144,6 @@ const mapStateToProps = (state) => ({
   decks: state.decksPage.decks,
 })
 
-export default withRouter(connect(mapStateToProps, { addCard })(CreateCard))
+export default withRouter(
+  connect(mapStateToProps, { addCard, addCardToBuckets })(CreateCard),
+)

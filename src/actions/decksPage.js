@@ -8,6 +8,7 @@ import {
   SET_CARD,
   DELETE_CARD,
   SET_BUCKETS,
+  ADD_CARD_TO_BUCKETS,
 } from './types'
 
 export function setDeckIndex(deckIndex) {
@@ -70,5 +71,12 @@ export function setBuckets(buckets) {
   return {
     type: SET_BUCKETS,
     payload: buckets,
+  }
+}
+
+export function addCardToBuckets(deckIndex) {
+  return {
+    type: ADD_CARD_TO_BUCKETS,
+    payload: deckIndex,
   }
 }
