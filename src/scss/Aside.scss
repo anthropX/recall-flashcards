@@ -11,12 +11,17 @@
   }
 }
 
-.fluid-box.fluid-box--reset {
-  .aside:first-of-type {
-    display: none;
+.fluid-box {
+  &:focus {
+    outline: none;
   }
-  .aside:last-of-type {
-    display: flex !important;
+  .fluid-box--reset {
+    .aside:first-of-type {
+      display: none;
+    }
+    .aside:last-of-type {
+      display: flex !important;
+    }
   }
 }
 
