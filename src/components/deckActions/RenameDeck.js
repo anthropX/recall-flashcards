@@ -5,11 +5,13 @@ import { Formik } from 'formik'
 import { object, string } from 'yup'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
+import { withRouter } from 'react-router-dom'
 import Input from '../layout/Input'
 import { setDeck } from '../../actions/decksPage'
 
 const RenameDeck = ({
   setDeck,
+  history,
   match: {
     params: { deckIndex },
   },
@@ -37,6 +39,7 @@ const RenameDeck = ({
         })}
         onSubmit={({ deckName, deckDesc }) => {
           setDeck({ deckIndex: parseInt(deckIndex, 10), deckName, deckDesc })
+          history.push(`/decks/${deckIndex}`)
         }}>
         {(formik) => (
           <Form
@@ -70,6 +73,9 @@ const RenameDeck = ({
 
 RenameDeck.propTypes = {
   setDeck: PropTypes.func.isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+  }).isRequired,
   match: PropTypes.shape({
     params: PropTypes.shape({
       deckIndex: PropTypes.string.isRequired,
@@ -102,4 +108,4 @@ const mapStateToProps = (state) => ({
   decks: state.decksPage.decks,
 })
 
-export default connect(mapStateToProps, { setDeck })(RenameDeck)
+export default withRouter(connect(mapStateToProps, { setDeck })(RenameDeck))
