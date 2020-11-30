@@ -15,7 +15,7 @@
   &:focus {
     outline: none;
   }
-  .fluid-box--reset {
+  &.fluid-box--reset {
     .aside:first-of-type {
       display: none;
     }
