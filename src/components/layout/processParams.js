@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { withRouter } from 'react-router-dom'
-import Spinner from './Spinner'
+import NotFound from './NotFound'
 
 const processParams = (ChildComponent) => {
   const ComposedComponent = ({
@@ -19,7 +19,7 @@ const processParams = (ChildComponent) => {
       // eslint-disable-next-line react/jsx-props-no-spreading
       <ChildComponent {...{ deckId, deck, cardId, card, ...rest }} />
     ) : (
-      <Spinner />
+      <NotFound />
     )
   }
 
