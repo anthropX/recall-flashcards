@@ -16,6 +16,7 @@ import RenameDeck from './components/deckActions/RenameDeck'
 import EditCard from './components/cardActions/EditCard'
 import CreateCard from './components/cardActions/CreateCard'
 import PlayArea from './components/play/PlayArea'
+import NotFound from './components/layout/NotFound'
 import dashboardImg from './img/dashboard-background.jpg'
 import { setDecks } from './actions/decksPage'
 import { getDecks } from './util/api'
@@ -83,6 +84,9 @@ const App = ({ setDecks, isDark }) => {
               component={CreateCard}
             />
             <Route exact path='/decks/:deckId/play' component={PlayArea} />
+            <Route>
+              <NotFound />
+            </Route>
           </Switch>
         </Container>
       </div>
