@@ -80,6 +80,7 @@ FlippableCard.propTypes = {
     PropTypes.shape({ current: PropTypes.instanceOf(Element) }),
   ]).isRequired,
   card: PropTypes.shape({
+    cardId: PropTypes.string.isRequired,
     question: PropTypes.string.isRequired,
     answerTitle: PropTypes.string.isRequired,
     answerImage: PropTypes.string.isRequired,

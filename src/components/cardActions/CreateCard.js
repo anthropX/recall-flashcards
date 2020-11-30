@@ -126,6 +126,7 @@ CreateCard.propTypes = {
       desc: PropTypes.string.isRequired,
       cards: PropTypes.arrayOf(
         PropTypes.shape({
+          cardId: PropTypes.string.isRequired,
           question: PropTypes.string.isRequired,
           answerTitle: PropTypes.string.isRequired,
           answerImage: PropTypes.string.isRequired,
@@ -133,11 +134,11 @@ CreateCard.propTypes = {
         }),
       ).isRequired,
       buckets: PropTypes.shape({
-        new: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
-        highFreq: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
-        mdFreq: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
-        lowFreq: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
-        mastered: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
+        new: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+        highFreq: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+        mdFreq: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+        lowFreq: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+        mastered: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
       }).isRequired,
     }).isRequired,
   ).isRequired,
