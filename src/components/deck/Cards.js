@@ -24,6 +24,7 @@ Cards.propTypes = {
   deckName: PropTypes.string.isRequired,
   cards: PropTypes.arrayOf(
     PropTypes.shape({
+      cardId: PropTypes.string.isRequired,
       question: PropTypes.string.isRequired,
       answerTitle: PropTypes.string.isRequired,
       answerImage: PropTypes.string.isRequired,

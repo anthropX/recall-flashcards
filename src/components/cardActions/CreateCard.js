@@ -5,6 +5,7 @@ import PropTypes from 'prop-types'
 import { Link, withRouter } from 'react-router-dom'
 import { CKEditor } from '@ckeditor/ckeditor5-react'
 import BalloonEditor from '@ckeditor/ckeditor5-build-balloon'
+import { v4 as uuidv4 } from 'uuid'
 import { addCard, addCardToBuckets } from '../../actions/decksPage'
 import editorConfig from '../../config/ckEditorConfig'
 import Spinner from '../layout/Spinner'
@@ -19,6 +20,8 @@ const CreateCard = ({
   decks,
 }) => {
   const deck = decks[deckIndex]
+  // TODO: get cardId from API response
+  const cardId = uuidv4()
   const [question, setQuestion] = useState(
     '<h5>Your <i>question</i> goes in here.</h5>',
   )
@@ -32,9 +35,9 @@ const CreateCard = ({
   const handleSave = () => {
     addCard({
       deckIndex: parseInt(deckIndex, 10),
-      card: { question, answerTitle, answerImage, answerDesc },
+      card: { cardId, question, answerTitle, answerImage, answerDesc },
     })
-    addCardToBuckets(parseInt(deckIndex, 10))
+    addCardToBuckets({ deckIndex: parseInt(deckIndex, 10), cardId })
     history.push(`/decks/${deckIndex}`)
   }
 

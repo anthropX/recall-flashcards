@@ -155,10 +155,10 @@ export default class PlayAreaService {
 
   getCardFromNew() {
     const bucketIndex = Math.floor(Math.random() * this.buckets.new.length)
-    const cardIndex = this.buckets.new[bucketIndex]
+    const cardId = this.buckets.new[bucketIndex]
     this.cardLocale = { bucketName: 'new', bucketIndex }
     this.card = {
-      ...this.cards[cardIndex],
+      ...this.cards.filter((card) => card.cardId === cardId)[0],
       badge: { bucket: 'New', variant: 'secondary' },
     }
     return this.card
@@ -175,10 +175,10 @@ export default class PlayAreaService {
 
   getCardFromMastered() {
     const bucketIndex = Math.floor(Math.random() * this.buckets.mastered.length)
-    const cardIndex = this.buckets.mastered[bucketIndex]
+    const cardId = this.buckets.mastered[bucketIndex]
     this.cardLocale = { bucketName: 'mastered', bucketIndex }
     this.card = {
-      ...this.cards[cardIndex],
+      ...this.cards.filter((card) => card.cardId === cardId)[0],
       badge: { bucket: 'Mastered', variant: 'success' },
     }
     return this.card
@@ -186,18 +186,18 @@ export default class PlayAreaService {
 
   getCardFromLearning(rand) {
     let bucketIndex
-    let cardIndex
+    let cardId
     let badge
     if (rand - this.hfBucketWeight < 0) {
       // high freq bucket
       bucketIndex = Math.floor(rand / this.hfCardWeight)
-      cardIndex = this.buckets.highFreq[bucketIndex]
+      cardId = this.buckets.highFreq[bucketIndex]
       badge = { bucket: 'Learning', variant: 'danger' }
       this.cardLocale = { bucketName: 'highFreq', bucketIndex }
     } else if (rand - this.hfBucketWeight - this.mfBucketWeight < 0) {
       // md freq bucket
       bucketIndex = Math.floor((rand - this.hfBucketWeight) / this.mfCardWeight)
-      cardIndex = this.buckets.mdFreq[bucketIndex]
+      cardId = this.buckets.mdFreq[bucketIndex]
       badge = { bucket: 'Revising', variant: 'threat' }
       this.cardLocale = { bucketName: 'mdFreq', bucketIndex }
     } else if (
@@ -208,11 +208,14 @@ export default class PlayAreaService {
       bucketIndex = Math.floor(
         (rand - this.hfBucketWeight - this.mfBucketWeight) / this.lfCardWeight,
       )
-      cardIndex = this.buckets.lowFreq[bucketIndex]
+      cardId = this.buckets.lowFreq[bucketIndex]
       badge = { bucket: 'Mastering', variant: 'warning' }
       this.cardLocale = { bucketName: 'lowFreq', bucketIndex }
     }
-    this.card = { ...this.cards[cardIndex], badge }
+    this.card = {
+      ...this.cards.filter((card) => card.cardId === cardId)[0],
+      badge,
+    }
     return this.card
   }
 

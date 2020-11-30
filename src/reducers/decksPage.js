@@ -58,12 +58,8 @@ export default function (state = initialState, { type, payload }) {
           deckIndex === payload.deckIndex
             ? {
                 ...deck,
-                cards: deck.cards.map((card, cardIndex) =>
-                  cardIndex === payload.cardIndex
-                    ? {
-                        ...payload.card,
-                      }
-                    : card,
+                cards: deck.cards.map((card) =>
+                  card.cardId === payload.card.cardId ? payload.card : card,
                 ),
               }
             : deck,
@@ -77,7 +73,7 @@ export default function (state = initialState, { type, payload }) {
             ? {
                 ...deck,
                 cards: deck.cards.filter(
-                  (card, cardIndex) => cardIndex !== payload.cardIndex,
+                  (card) => card.cardId !== payload.cardId,
                 ),
               }
             : deck,
@@ -99,12 +95,12 @@ export default function (state = initialState, { type, payload }) {
       return {
         ...state,
         decks: state.decks.map((deck, deckIndex) =>
-          deckIndex === payload
+          deckIndex === payload.deckIndex
             ? {
                 ...deck,
                 buckets: {
                   ...deck.buckets,
-                  new: [...deck.buckets.new, deck.cards.length - 1],
+                  new: [...deck.buckets.new, payload.cardId],
                 },
               }
             : deck,
@@ -119,22 +115,19 @@ export default function (state = initialState, { type, payload }) {
                 ...deck,
                 buckets: {
                   new: deck.buckets.new.filter(
-                    (newCardIndex) => newCardIndex !== payload.cardIndex,
+                    (newCardId) => newCardId !== payload.cardId,
                   ),
                   highFreq: deck.buckets.highFreq.filter(
-                    (highFreqCardIndex) =>
-                      highFreqCardIndex !== payload.cardIndex,
+                    (highFreqCardId) => highFreqCardId !== payload.cardId,
                   ),
                   mdFreq: deck.buckets.mdFreq.filter(
-                    (mdFreqCardIndex) => mdFreqCardIndex !== payload.cardIndex,
+                    (mdFreqCardId) => mdFreqCardId !== payload.cardId,
                   ),
                   lowFreq: deck.buckets.lowFreq.filter(
-                    (lowFreqCardIndex) =>
-                      lowFreqCardIndex !== payload.cardIndex,
+                    (lowFreqCardId) => lowFreqCardId !== payload.cardId,
                   ),
                   mastered: deck.buckets.mastered.filter(
-                    (masteredCardIndex) =>
-                      masteredCardIndex !== payload.cardIndex,
+                    (masteredCardId) => masteredCardId !== payload.cardId,
                   ),
                 },
               }

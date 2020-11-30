@@ -12,13 +12,12 @@ import Spinner from '../layout/Spinner'
 const EditCard = ({
   setCard,
   match: {
-    params: { deckIndex, cardIndex },
+    params: { deckIndex, cardId },
   },
   decks,
 }) => {
   const deck = decks[deckIndex]
-  const card = deck && deck.cards[cardIndex]
-
+  const card = deck && deck.cards.filter((card) => cardId === card.cardId)[0]
   const [question, setQuestion] = useState(card.question)
   const [answerTitle, setAnswerTitle] = useState(card.answerTitle)
   const { answerImage } = card
@@ -26,8 +25,7 @@ const EditCard = ({
   const handleSave = () => {
     setCard({
       deckIndex: parseInt(deckIndex, 10),
-      cardIndex: parseInt(cardIndex, 10),
-      card: { question, answerTitle, answerImage, answerDesc },
+      card: { cardId, question, answerTitle, answerImage, answerDesc },
     })
   }
 
@@ -112,7 +110,7 @@ EditCard.propTypes = {
   match: PropTypes.shape({
     params: PropTypes.shape({
       deckIndex: PropTypes.string.isRequired,
-      cardIndex: PropTypes.string.isRequired,
+      cardId: PropTypes.string.isRequired,
     }).isRequired,
   }).isRequired,
   decks: PropTypes.arrayOf(
@@ -121,6 +119,7 @@ EditCard.propTypes = {
       desc: PropTypes.string.isRequired,
       cards: PropTypes.arrayOf(
         PropTypes.shape({
+          cardId: PropTypes.string.isRequired,
           question: PropTypes.string.isRequired,
           answerTitle: PropTypes.string.isRequired,
           answerImage: PropTypes.string.isRequired,

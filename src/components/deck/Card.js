@@ -7,7 +7,7 @@ const Card = ({
   deckIndex,
   deckName,
   cardIndex,
-  card: { question, answerTitle, answerDesc, answerImage },
+  card: { cardId, question, answerTitle, answerDesc, answerImage },
 }) => {
   return (
     <div className='cards__card pb-4 mt-n2'>
@@ -53,7 +53,7 @@ const Card = ({
       </div>
       <div className='card__buttons'>
         <Link
-          to={`/decks/${deckIndex}/cards/${cardIndex}/update`}
+          to={`/decks/${deckIndex}/cards/${cardId}/update`}
           className='btn btn-outline-danger mr-2'>
           Edit Card
         </Link>
@@ -61,6 +61,7 @@ const Card = ({
           deckName={deckName}
           deckIndex={deckIndex}
           cardIndex={cardIndex}
+          cardId={cardId}
         />
       </div>
     </div>
@@ -72,6 +73,7 @@ Card.propTypes = {
   deckName: PropTypes.string.isRequired,
   cardIndex: PropTypes.number.isRequired,
   card: PropTypes.shape({
+    cardId: PropTypes.string.isRequired,
     question: PropTypes.string.isRequired,
     answerTitle: PropTypes.string.isRequired,
     answerImage: PropTypes.string.isRequired,

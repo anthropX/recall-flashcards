@@ -78,7 +78,7 @@ const App = ({ setDecks, isDark }) => {
             />
             <Route
               exact
-              path='/decks/:deckIndex/cards/:cardIndex/update'
+              path='/decks/:deckIndex/cards/:cardId/update'
               component={EditCard}
             />
             <Route

@@ -75,16 +75,16 @@ export function setBuckets(buckets) {
   }
 }
 
-export function addCardToBuckets(deckIndex) {
+export function addCardToBuckets(card) {
   return {
     type: ADD_CARD_TO_BUCKETS,
-    payload: deckIndex,
+    payload: card,
   }
 }
 
-export function removeCardFromBuckets(deckIndex) {
+export function removeCardFromBuckets(card) {
   return {
     type: REMOVE_CARD_FROM_BUCKETS,
-    payload: deckIndex,
+    payload: card,
   }
 }
