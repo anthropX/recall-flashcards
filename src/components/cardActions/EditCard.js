@@ -17,7 +17,9 @@ const EditCard = ({
   decks,
 }) => {
   const deck = decks.filter((deck) => deck.deckId === deckId)[0]
-  const card = deck && deck.cards.filter((card) => cardId === card.cardId)[0]
+  const card = deck
+    ? deck.cards.filter((card) => cardId === card.cardId)[0]
+    : {}
   const [question, setQuestion] = useState(card.question)
   const [answerTitle, setAnswerTitle] = useState(card.answerTitle)
   const { answerImage } = card
