@@ -3,13 +3,13 @@ import PropTypes from 'prop-types'
 import { v4 as uuidv4 } from 'uuid'
 import Card from './Card'
 
-const Cards = ({ deckIndex, deckName, cards }) => {
+const Cards = ({ deckId, deckName, cards }) => {
   return (
     <div className='cards mt-4'>
       {cards.map((card, cardIndex) => (
         <Card
           key={uuidv4()}
-          deckIndex={deckIndex}
+          deckId={deckId}
           deckName={deckName}
           cardIndex={cardIndex}
           card={card}
@@ -20,7 +20,7 @@ const Cards = ({ deckIndex, deckName, cards }) => {
 }
 
 Cards.propTypes = {
-  deckIndex: PropTypes.string.isRequired,
+  deckId: PropTypes.string.isRequired,
   deckName: PropTypes.string.isRequired,
   cards: PropTypes.arrayOf(
     PropTypes.shape({

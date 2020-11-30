@@ -70,23 +70,19 @@ const App = ({ setDecks, isDark }) => {
             <Route exact path='/decks/new'>
               <CreateDeck />
             </Route>
-            <Route exact path='/decks/:deckIndex' component={DeckPage} />
+            <Route exact path='/decks/:deckId' component={DeckPage} />
+            <Route exact path='/decks/:deckId/update' component={RenameDeck} />
             <Route
               exact
-              path='/decks/:deckIndex/update'
-              component={RenameDeck}
-            />
-            <Route
-              exact
-              path='/decks/:deckIndex/cards/:cardId/update'
+              path='/decks/:deckId/cards/:cardId/update'
               component={EditCard}
             />
             <Route
               exact
-              path='/decks/:deckIndex/cards/new'
+              path='/decks/:deckId/cards/new'
               component={CreateCard}
             />
-            <Route exact path='/decks/:deckIndex/play' component={PlayArea} />
+            <Route exact path='/decks/:deckId/play' component={PlayArea} />
           </Switch>
         </Container>
       </div>

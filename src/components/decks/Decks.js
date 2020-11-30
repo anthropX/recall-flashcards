@@ -6,17 +6,12 @@ import { v4 as uuidv4 } from 'uuid'
 import { connect } from 'react-redux'
 import DeckNew from './DeckNew'
 import DeckGraphic from './DeckGraphic'
-import { setDeckIndex } from '../../actions/decksPage'
+import { setDeckId } from '../../actions/decksPage'
 
-const Decks = ({
-  setDeckIndex,
-  setSidebarOverlaid,
-  selectedDeckIndex,
-  decks,
-}) => {
-  const handleDeckGraphicFocus = (deckIndex) => {
+const Decks = ({ setDeckId, setSidebarOverlaid, selectedDeckId, decks }) => {
+  const handleDeckGraphicFocus = (deckId) => {
     setSidebarOverlaid(true)
-    setDeckIndex(deckIndex)
+    setDeckId(deckId)
   }
 
   return (
@@ -31,13 +26,13 @@ const Decks = ({
         <DeckNew />
       </Col>
 
-      {decks.map(({ name }, deckIndex) => (
+      {decks.map(({ deckId, name }) => (
         <Col key={uuidv4()} lg='4' md='6' sm='4' xs='6'>
           <DeckGraphic
-            deckIndex={deckIndex}
+            deckId={deckId}
             name={name}
             handleDeckGraphicFocus={handleDeckGraphicFocus}
-            isDeckGraphicOpened={deckIndex === selectedDeckIndex}
+            isDeckGraphicOpened={deckId === selectedDeckId}
           />
         </Col>
       ))}
@@ -46,11 +41,12 @@ const Decks = ({
 }
 
 Decks.propTypes = {
-  setDeckIndex: PropTypes.func.isRequired,
+  setDeckId: PropTypes.func.isRequired,
   setSidebarOverlaid: PropTypes.func.isRequired,
-  selectedDeckIndex: PropTypes.number.isRequired,
+  selectedDeckId: PropTypes.string.isRequired,
   decks: PropTypes.arrayOf(
     PropTypes.shape({
+      deckId: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired,
       desc: PropTypes.string.isRequired,
       cards: PropTypes.arrayOf(
@@ -74,8 +70,8 @@ Decks.propTypes = {
 }
 
 const mapStateToProps = (state) => ({
-  selectedDeckIndex: state.decksPage.deckIndex,
+  selectedDeckId: state.decksPage.deckId,
   decks: state.decksPage.decks,
 })
 
-export default connect(mapStateToProps, { setDeckIndex })(Decks)
+export default connect(mapStateToProps, { setDeckId })(Decks)

@@ -8,11 +8,11 @@ import Spinner from '../layout/Spinner'
 
 const DeckPage = ({
   match: {
-    params: { deckIndex },
+    params: { deckId },
   },
   decks,
 }) => {
-  const deck = decks[deckIndex]
+  const deck = decks.filter((deck) => deck.deckId === deckId)[0]
   const [isSidebarOverlaid, setSidebarOverlaid] = useState(false)
   return deck ? (
     <>
@@ -28,7 +28,7 @@ const DeckPage = ({
             </button>
           </h1>
           <p className='p1 mb-0 pr-0 pr-md-5'>{deck.desc}</p>
-          <CardNew deckIndex={deckIndex} />
+          <CardNew deckId={deckId} />
         </div>
         <DeckInfoCard
           deck={deck}
@@ -36,7 +36,7 @@ const DeckPage = ({
           setSidebarOverlaid={setSidebarOverlaid}
         />
       </div>
-      <Cards deckIndex={deckIndex} deckName={deck.name} cards={deck.cards} />
+      <Cards deckId={deckId} deckName={deck.name} cards={deck.cards} />
     </>
   ) : (
     <Spinner />
@@ -46,11 +46,12 @@ const DeckPage = ({
 DeckPage.propTypes = {
   match: PropTypes.shape({
     params: PropTypes.shape({
-      deckIndex: PropTypes.string.isRequired,
+      deckId: PropTypes.string.isRequired,
     }).isRequired,
   }).isRequired,
   decks: PropTypes.arrayOf(
     PropTypes.shape({
+      deckId: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired,
       desc: PropTypes.string.isRequired,
       cards: PropTypes.arrayOf(

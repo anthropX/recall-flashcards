@@ -1,5 +1,5 @@
 import {
-  SET_DECK_INDEX,
+  SET_DECK_ID,
   SET_DECKS,
   ADD_DECK,
   SET_DECK,
@@ -13,14 +13,14 @@ import {
 } from '../actions/types'
 
 const initialState = {
-  deckIndex: -1,
+  deckId: '',
   decks: [],
 }
 
 export default function (state = initialState, { type, payload }) {
   switch (type) {
-    case SET_DECK_INDEX:
-      return { ...state, deckIndex: payload }
+    case SET_DECK_ID:
+      return { ...state, deckId: payload }
     case SET_DECKS:
       return { ...state, decks: payload }
     case ADD_DECK:
@@ -28,8 +28,8 @@ export default function (state = initialState, { type, payload }) {
     case SET_DECK:
       return {
         ...state,
-        decks: state.decks.map((deck, deckIndex) =>
-          deckIndex === payload.deckIndex
+        decks: state.decks.map((deck) =>
+          deck.deckId === payload.deckId
             ? { ...deck, name: payload.deckName, desc: payload.deckDesc }
             : deck,
         ),
@@ -37,13 +37,13 @@ export default function (state = initialState, { type, payload }) {
     case REMOVE_DECK:
       return {
         ...state,
-        decks: state.decks.filter((deck, deckIndex) => deckIndex !== payload),
+        decks: state.decks.filter((deck) => deck.deckId !== payload),
       }
     case ADD_CARD:
       return {
         ...state,
-        decks: state.decks.map((deck, deckIndex) =>
-          deckIndex === payload.deckIndex
+        decks: state.decks.map((deck) =>
+          deck.deckId === payload.deckId
             ? {
                 ...deck,
                 cards: [payload.card, ...deck.cards],
@@ -54,8 +54,8 @@ export default function (state = initialState, { type, payload }) {
     case SET_CARD:
       return {
         ...state,
-        decks: state.decks.map((deck, deckIndex) =>
-          deckIndex === payload.deckIndex
+        decks: state.decks.map((deck) =>
+          deck.deckId === payload.deckId
             ? {
                 ...deck,
                 cards: deck.cards.map((card) =>
@@ -68,8 +68,8 @@ export default function (state = initialState, { type, payload }) {
     case DELETE_CARD:
       return {
         ...state,
-        decks: state.decks.map((deck, deckIndex) =>
-          deckIndex === payload.deckIndex
+        decks: state.decks.map((deck) =>
+          deck.deckId === payload.deckId
             ? {
                 ...deck,
                 cards: deck.cards.filter(
@@ -82,8 +82,8 @@ export default function (state = initialState, { type, payload }) {
     case SET_BUCKETS:
       return {
         ...state,
-        decks: state.decks.map((deck, deckIndex) =>
-          deckIndex === payload.deckIndex
+        decks: state.decks.map((deck) =>
+          deck.deckId === payload.deckId
             ? {
                 ...deck,
                 buckets: payload.buckets,
@@ -94,8 +94,8 @@ export default function (state = initialState, { type, payload }) {
     case ADD_CARD_TO_BUCKETS:
       return {
         ...state,
-        decks: state.decks.map((deck, deckIndex) =>
-          deckIndex === payload.deckIndex
+        decks: state.decks.map((deck) =>
+          deck.deckId === payload.deckId
             ? {
                 ...deck,
                 buckets: {
@@ -109,8 +109,8 @@ export default function (state = initialState, { type, payload }) {
     case REMOVE_CARD_FROM_BUCKETS:
       return {
         ...state,
-        decks: state.decks.map((deck, deckIndex) =>
-          deckIndex === payload.deckIndex
+        decks: state.decks.map((deck) =>
+          deck.deckId === payload.deckId
             ? {
                 ...deck,
                 buckets: {

@@ -10,18 +10,18 @@ import { setBuckets } from '../../actions/decksPage'
 const PlayArea = ({
   setBuckets,
   match: {
-    params: { deckIndex },
+    params: { deckId },
   },
   decks,
 }) => {
-  const deck = decks[deckIndex]
+  const deck = decks.filter((deck) => deck.deckId === deckId)[0]
   const [service, setService] = useState(null)
   if (deck && !service) setService(new PlayAreaService(deck))
   const [isCardFocused, setCardFocused] = useState(false)
   const cardRef = useRef(null)
 
   const handleResponse = (isAffirmation) => {
-    setBuckets({ deckIndex, buckets: service.updateBuckets(isAffirmation) })
+    setBuckets({ deckId, buckets: service.updateBuckets(isAffirmation) })
     setCardFocused(false)
     cardRef.current.blur()
   }
@@ -80,11 +80,12 @@ PlayArea.propTypes = {
   setBuckets: PropTypes.func.isRequired,
   match: PropTypes.shape({
     params: PropTypes.shape({
-      deckIndex: PropTypes.string.isRequired,
+      deckId: PropTypes.string.isRequired,
     }).isRequired,
   }).isRequired,
   decks: PropTypes.arrayOf(
     PropTypes.shape({
+      deckId: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired,
       desc: PropTypes.string.isRequired,
       cards: PropTypes.arrayOf(

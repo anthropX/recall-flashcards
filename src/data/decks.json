@@ -1,5 +1,6 @@
 [
   {
+    "deckId": "5fc5071c0a42ff6c552c552f",
     "name": "Periodic Table",
     "desc": "Learn atomic numbers and classifications of elements of the periodic table",
     "cards": [],
@@ -12,6 +13,7 @@
     }
   },
   {
+    "deckId": "5fc5071c0a42ff6c552c5530",
     "name": "Asian Countries",
     "desc": "Learn capitals, flags, and other details about Asian countries",
     "buckets": {
@@ -418,6 +420,7 @@
     ]
   },
   {
+    "deckId": "5fc5071c0a42ff6c552c5531",
     "name": "GRE Words",
     "desc": "Master the top 100 GRE words",
     "cards": [],
@@ -430,6 +433,7 @@
     }
   },
   {
+    "deckId": "5fc5071c0a42ff6c552c5532",
     "name": "Pokemon",
     "desc": "Memorize Pokedex numbers and types of the original 151 pokemons",
     "cards": [],

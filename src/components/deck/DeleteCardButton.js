@@ -9,7 +9,7 @@ const DeleteCardButton = ({
   deleteCard,
   removeCardFromBuckets,
   isDark,
-  deckIndex,
+  deckId,
   deckName,
   cardIndex,
   cardId,
@@ -19,7 +19,7 @@ const DeleteCardButton = ({
   const handleShow = () => setShow(true)
 
   const handleConfirmDelete = () => {
-    const payload = { deckIndex: parseInt(deckIndex, 10), cardId }
+    const payload = { deckId, cardId }
     deleteCard(payload)
     removeCardFromBuckets(payload)
     handleClose()
@@ -61,7 +61,7 @@ DeleteCardButton.propTypes = {
   deleteCard: PropTypes.func.isRequired,
   removeCardFromBuckets: PropTypes.func.isRequired,
   isDark: PropTypes.bool.isRequired,
-  deckIndex: PropTypes.string.isRequired,
+  deckId: PropTypes.string.isRequired,
   deckName: PropTypes.string.isRequired,
   cardIndex: PropTypes.number.isRequired,
   cardId: PropTypes.string.isRequired,

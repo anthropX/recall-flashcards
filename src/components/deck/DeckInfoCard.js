@@ -6,14 +6,14 @@ import PropTypes from 'prop-types'
 import { Link, withRouter } from 'react-router-dom'
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
-import { setDeckIndex, removeDeck } from '../../actions/decksPage'
+import { setDeckId, removeDeck } from '../../actions/decksPage'
 
 const DeckInfoCard = ({
   setSidebarOverlaid,
-  setDeckIndex,
+  setDeckId,
   removeDeck,
   match: {
-    params: { deckIndex },
+    params: { deckId },
   },
   history,
   deck: { name, desc, cards },
@@ -26,8 +26,8 @@ const DeckInfoCard = ({
     event.preventDefault()
     event.stopPropagation()
     if (comfirmation === name) {
-      removeDeck(parseInt(deckIndex, 10))
-      setDeckIndex(-1)
+      removeDeck(deckId)
+      setDeckId('')
       history.push('/decks')
     }
   }
@@ -67,7 +67,7 @@ const DeckInfoCard = ({
             <Row>
               <Col xs='3' md='4' className='pl-2 pr-0 flex-grow-0'>
                 <Link
-                  to={`/decks/${deckIndex}/update`}
+                  to={`/decks/${deckId}/update`}
                   className='aside__option text-decoration-none d-flex flex-column align-items-center p-2'>
                   <i className='aside__icon fas fa-edit' />
                   <p className='p2 mt-2 mb-0'>Rename</p>
@@ -130,17 +130,18 @@ const DeckInfoCard = ({
 
 DeckInfoCard.propTypes = {
   setSidebarOverlaid: PropTypes.func.isRequired,
-  setDeckIndex: PropTypes.func.isRequired,
+  setDeckId: PropTypes.func.isRequired,
   removeDeck: PropTypes.func.isRequired,
   match: PropTypes.shape({
     params: PropTypes.shape({
-      deckIndex: PropTypes.string.isRequired,
+      deckId: PropTypes.string.isRequired,
     }).isRequired,
   }).isRequired,
   history: PropTypes.shape({
     push: PropTypes.func.isRequired,
   }).isRequired,
   deck: PropTypes.shape({
+    deckId: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     desc: PropTypes.string.isRequired,
     cards: PropTypes.arrayOf(
@@ -157,5 +158,5 @@ DeckInfoCard.propTypes = {
 }
 
 export default withRouter(
-  connect(null, { setDeckIndex, removeDeck })(DeckInfoCard),
+  connect(null, { setDeckId, removeDeck })(DeckInfoCard),
 )

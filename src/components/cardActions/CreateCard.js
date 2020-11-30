@@ -15,11 +15,11 @@ const CreateCard = ({
   addCardToBuckets,
   history,
   match: {
-    params: { deckIndex },
+    params: { deckId },
   },
   decks,
 }) => {
-  const deck = decks[deckIndex]
+  const deck = decks.filter((deck) => deck.deckId === deckId)[0]
   // TODO: get cardId from API response
   const cardId = uuidv4()
   const [question, setQuestion] = useState(
@@ -34,11 +34,11 @@ const CreateCard = ({
   )
   const handleSave = () => {
     addCard({
-      deckIndex: parseInt(deckIndex, 10),
+      deckId,
       card: { cardId, question, answerTitle, answerImage, answerDesc },
     })
-    addCardToBuckets({ deckIndex: parseInt(deckIndex, 10), cardId })
-    history.push(`/decks/${deckIndex}`)
+    addCardToBuckets({ deckId, cardId })
+    history.push(`/decks/${deckId}`)
   }
 
   return deck ? (
@@ -94,7 +94,7 @@ const CreateCard = ({
         </div>
         <div className='selected-card__buttons'>
           <Link
-            to={`/decks/${deckIndex}/`}
+            to={`/decks/${deckId}/`}
             className='btn btn-outline-secondary mr-2'>
             Discard Changes
           </Link>
@@ -117,11 +117,12 @@ CreateCard.propTypes = {
   }).isRequired,
   match: PropTypes.shape({
     params: PropTypes.shape({
-      deckIndex: PropTypes.string.isRequired,
+      deckId: PropTypes.string.isRequired,
     }).isRequired,
   }).isRequired,
   decks: PropTypes.arrayOf(
     PropTypes.shape({
+      deckId: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired,
       desc: PropTypes.string.isRequired,
       cards: PropTypes.arrayOf(

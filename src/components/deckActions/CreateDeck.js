@@ -6,11 +6,12 @@ import { object, string } from 'yup'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { withRouter } from 'react-router-dom'
+import { v4 as uuid4 } from 'uuid'
 import Input from '../layout/Input'
 import { addDeck } from '../../actions/decksPage'
 import { getDeck } from '../../util/api'
 
-const CreateDeck = ({ addDeck, history, deckIndex }) => {
+const CreateDeck = ({ addDeck, history }) => {
   return (
     <div className='create-deck'>
       <h1 className='display-5 mb-1'>Create a new deck</h1>
@@ -31,8 +32,10 @@ const CreateDeck = ({ addDeck, history, deckIndex }) => {
             .required('Required'),
         })}
         onSubmit={({ deckName, deckDesc }) => {
-          addDeck({ ...getDeck(), name: deckName, desc: deckDesc })
-          history.push(`/decks/${deckIndex}`)
+          // TODO: get deckId from API response
+          const deckId = uuid4()
+          addDeck({ ...getDeck(), deckId, name: deckName, desc: deckDesc })
+          history.push(`/decks/${deckId}`)
         }}>
         {(formik) => (
           <Form
@@ -69,11 +72,6 @@ CreateDeck.propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func.isRequired,
   }).isRequired,
-  deckIndex: PropTypes.number.isRequired,
 }
 
-const mapStateToProps = (state) => ({
-  deckIndex: state.decksPage.decks.length,
-})
-
-export default withRouter(connect(mapStateToProps, { addDeck })(CreateDeck))
+export default withRouter(connect(null, { addDeck })(CreateDeck))

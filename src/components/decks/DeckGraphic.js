@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 
 const DeckGraphic = ({
   handleDeckGraphicFocus,
-  deckIndex,
+  deckId,
   name,
   isDeckGraphicOpened,
 }) => {
@@ -13,7 +13,7 @@ const DeckGraphic = ({
         isDeckGraphicOpened && 'deck-graphic--opened'
       } my-3`}
       tabIndex='-1'
-      onFocus={() => handleDeckGraphicFocus(deckIndex)}>
+      onFocus={() => handleDeckGraphicFocus(deckId)}>
       <div className='deck-graphic__cards position-relative mt-2'>
         <div className='deck-graphic__card position-absolute' />
         <div className='deck-graphic__card position-absolute' />
@@ -26,7 +26,7 @@ const DeckGraphic = ({
 
 DeckGraphic.propTypes = {
   handleDeckGraphicFocus: PropTypes.func.isRequired,
-  deckIndex: PropTypes.number.isRequired,
+  deckId: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   isDeckGraphicOpened: PropTypes.bool.isRequired,
 }

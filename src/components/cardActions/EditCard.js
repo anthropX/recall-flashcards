@@ -12,11 +12,11 @@ import Spinner from '../layout/Spinner'
 const EditCard = ({
   setCard,
   match: {
-    params: { deckIndex, cardId },
+    params: { deckId, cardId },
   },
   decks,
 }) => {
-  const deck = decks[deckIndex]
+  const deck = decks.filter((deck) => deck.deckId === deckId)[0]
   const card = deck && deck.cards.filter((card) => cardId === card.cardId)[0]
   const [question, setQuestion] = useState(card.question)
   const [answerTitle, setAnswerTitle] = useState(card.answerTitle)
@@ -24,7 +24,7 @@ const EditCard = ({
   const [answerDesc, setAnswerDesc] = useState(card.answerDesc)
   const handleSave = () => {
     setCard({
-      deckIndex: parseInt(deckIndex, 10),
+      deckId,
       card: { cardId, question, answerTitle, answerImage, answerDesc },
     })
   }
@@ -90,7 +90,7 @@ const EditCard = ({
         </div>
         <div className='selected-card__buttons'>
           <Link
-            to={`/decks/${deckIndex}/`}
+            to={`/decks/${deckId}/`}
             className='btn btn-outline-secondary mr-2'>
             Back to Deck
           </Link>
@@ -109,12 +109,13 @@ EditCard.propTypes = {
   setCard: PropTypes.func.isRequired,
   match: PropTypes.shape({
     params: PropTypes.shape({
-      deckIndex: PropTypes.string.isRequired,
+      deckId: PropTypes.string.isRequired,
       cardId: PropTypes.string.isRequired,
     }).isRequired,
   }).isRequired,
   decks: PropTypes.arrayOf(
     PropTypes.shape({
+      deckId: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired,
       desc: PropTypes.string.isRequired,
       cards: PropTypes.arrayOf(

@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import DeleteCardButton from './DeleteCardButton'
 
 const Card = ({
-  deckIndex,
+  deckId,
   deckName,
   cardIndex,
   card: { cardId, question, answerTitle, answerDesc, answerImage },
@@ -53,13 +53,13 @@ const Card = ({
       </div>
       <div className='card__buttons'>
         <Link
-          to={`/decks/${deckIndex}/cards/${cardId}/update`}
+          to={`/decks/${deckId}/cards/${cardId}/update`}
           className='btn btn-outline-danger mr-2'>
           Edit Card
         </Link>
         <DeleteCardButton
           deckName={deckName}
-          deckIndex={deckIndex}
+          deckId={deckId}
           cardIndex={cardIndex}
           cardId={cardId}
         />
@@ -69,7 +69,7 @@ const Card = ({
 }
 
 Card.propTypes = {
-  deckIndex: PropTypes.string.isRequired,
+  deckId: PropTypes.string.isRequired,
   deckName: PropTypes.string.isRequired,
   cardIndex: PropTypes.number.isRequired,
   card: PropTypes.shape({

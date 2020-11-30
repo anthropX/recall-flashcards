@@ -9,11 +9,12 @@ import Button from 'react-bootstrap/Button'
 
 const DecksInfoCard = ({
   setSidebarOverlaid,
-  deckIndex,
+  deckId,
   decks,
   isSidebarOverlaid,
 }) => {
-  const { name, desc, cards, buckets } = deckIndex !== -1 && decks[deckIndex]
+  const { name, desc, buckets, cards } =
+    deckId && decks.filter((deck) => deck.deckId === deckId)[0]
   const [isResetVisible, setResetVisible] = useState(false)
   let total
   let mastered
@@ -77,7 +78,7 @@ const DecksInfoCard = ({
           <Row>
             <Col xs='3' className='pl-2 pr-0'>
               <Link
-                to={`/decks/${deckIndex}/play`}
+                to={`/decks/${deckId}/play`}
                 className={`aside__option ${total === 0 && 'link--disabled'}
                  text-decoration-none d-flex flex-column align-items-center p-2`}>
                 <i className='aside__icon fas fa-play' />
@@ -86,7 +87,7 @@ const DecksInfoCard = ({
             </Col>
             <Col xs='3' className='pl-0 pr-md-3'>
               <Link
-                to={`/decks/${deckIndex}`}
+                to={`/decks/${deckId}`}
                 className='aside__option text-decoration-none d-flex flex-column align-items-center p-2'>
                 <i className='aside__icon fas fa-cog' />
                 <p className='p2 mt-2 mb-0'>Configure</p>
@@ -136,9 +137,10 @@ const DecksInfoCard = ({
 
 DecksInfoCard.propTypes = {
   setSidebarOverlaid: PropTypes.func.isRequired,
-  deckIndex: PropTypes.number.isRequired,
+  deckId: PropTypes.string.isRequired,
   decks: PropTypes.arrayOf(
     PropTypes.shape({
+      deckId: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired,
       desc: PropTypes.string.isRequired,
       cards: PropTypes.arrayOf(
@@ -163,7 +165,7 @@ DecksInfoCard.propTypes = {
 }
 
 const mapStateToProps = (state) => ({
-  deckIndex: state.decksPage.deckIndex,
+  deckId: state.decksPage.deckId,
   decks: state.decksPage.decks,
 })
 

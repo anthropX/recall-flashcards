@@ -1,5 +1,5 @@
 export const TOGGLE_DARK = 'TOGGLE_DARK'
-export const SET_DECK_INDEX = 'SET_DECK_INDEX'
+export const SET_DECK_ID = 'SET_DECK_ID'
 export const SET_DECKS = 'SET_DECKS'
 export const ADD_DECK = 'ADD_DECK'
 export const SET_DECK = 'SET_DECK'

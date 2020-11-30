@@ -13,11 +13,11 @@ const RenameDeck = ({
   setDeck,
   history,
   match: {
-    params: { deckIndex },
+    params: { deckId },
   },
   decks,
 }) => {
-  const deck = decks[deckIndex]
+  const deck = decks.filter((deck) => deck.deckId === deckId)[0]
   return deck ? (
     <div className='rename-deck'>
       <h1 className='display-5 mb-1'>Rename Deck</h1>
@@ -38,8 +38,8 @@ const RenameDeck = ({
             .required('Required'),
         })}
         onSubmit={({ deckName, deckDesc }) => {
-          setDeck({ deckIndex: parseInt(deckIndex, 10), deckName, deckDesc })
-          history.push(`/decks/${deckIndex}`)
+          setDeck({ deckId, deckName, deckDesc })
+          history.push(`/decks/${deckId}`)
         }}>
         {(formik) => (
           <Form
@@ -78,11 +78,12 @@ RenameDeck.propTypes = {
   }).isRequired,
   match: PropTypes.shape({
     params: PropTypes.shape({
-      deckIndex: PropTypes.string.isRequired,
+      deckId: PropTypes.string.isRequired,
     }).isRequired,
   }).isRequired,
   decks: PropTypes.arrayOf(
     PropTypes.shape({
+      deckId: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired,
       desc: PropTypes.string.isRequired,
       cards: PropTypes.arrayOf(

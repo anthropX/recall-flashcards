@@ -1,5 +1,5 @@
 import {
-  SET_DECK_INDEX,
+  SET_DECK_ID,
   SET_DECKS,
   ADD_DECK,
   SET_DECK,
@@ -12,10 +12,10 @@ import {
   REMOVE_CARD_FROM_BUCKETS,
 } from './types'
 
-export function setDeckIndex(deckIndex) {
+export function setDeckId(deckId) {
   return {
-    type: SET_DECK_INDEX,
-    payload: deckIndex,
+    type: SET_DECK_ID,
+    payload: deckId,
   }
 }
 
@@ -40,10 +40,10 @@ export function setDeck(deck) {
   }
 }
 
-export function removeDeck(deckIndex) {
+export function removeDeck(deckId) {
   return {
     type: REMOVE_DECK,
-    payload: deckIndex,
+    payload: deckId,
   }
 }
 
