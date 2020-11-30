@@ -46,7 +46,7 @@ export default function (state = initialState, { type, payload }) {
           deckIndex === payload.deckIndex
             ? {
                 ...deck,
-                cards: [...deck.cards, payload.card],
+                cards: [payload.card, ...deck.cards],
               }
             : deck,
         ),
@@ -100,7 +100,7 @@ export default function (state = initialState, { type, payload }) {
                 ...deck,
                 buckets: {
                   ...deck.buckets,
-                  new: [...deck.buckets.new, payload.cardId],
+                  new: [payload.cardId, ...deck.buckets.new],
                 },
               }
             : deck,
