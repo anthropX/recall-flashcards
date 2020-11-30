@@ -6,15 +6,9 @@ import FlippableCard from './FlippableCard'
 import Spinner from '../layout/Spinner'
 import PlayAreaService from './PlayAreaService'
 import { setBuckets } from '../../actions/decksPage'
+import processParams from '../layout/processParams'
 
-const PlayArea = ({
-  setBuckets,
-  match: {
-    params: { deckId },
-  },
-  decks,
-}) => {
-  const deck = decks.filter((deck) => deck.deckId === deckId)[0]
+const PlayArea = ({ setBuckets, deckId, deck }) => {
   const [service, setService] = useState(null)
   if (deck && !service) setService(new PlayAreaService(deck))
   const [isCardFocused, setCardFocused] = useState(false)
@@ -78,38 +72,28 @@ const PlayArea = ({
 
 PlayArea.propTypes = {
   setBuckets: PropTypes.func.isRequired,
-  match: PropTypes.shape({
-    params: PropTypes.shape({
-      deckId: PropTypes.string.isRequired,
+  deckId: PropTypes.string.isRequired,
+  deck: PropTypes.shape({
+    deckId: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    desc: PropTypes.string.isRequired,
+    cards: PropTypes.arrayOf(
+      PropTypes.shape({
+        cardId: PropTypes.string.isRequired,
+        question: PropTypes.string.isRequired,
+        answerTitle: PropTypes.string.isRequired,
+        answerImage: PropTypes.string.isRequired,
+        answerDesc: PropTypes.string.isRequired,
+      }),
+    ).isRequired,
+    buckets: PropTypes.shape({
+      new: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+      highFreq: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+      mdFreq: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+      lowFreq: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+      mastered: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
     }).isRequired,
   }).isRequired,
-  decks: PropTypes.arrayOf(
-    PropTypes.shape({
-      deckId: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      desc: PropTypes.string.isRequired,
-      cards: PropTypes.arrayOf(
-        PropTypes.shape({
-          cardId: PropTypes.string.isRequired,
-          question: PropTypes.string.isRequired,
-          answerTitle: PropTypes.string.isRequired,
-          answerImage: PropTypes.string.isRequired,
-          answerDesc: PropTypes.string.isRequired,
-        }),
-      ).isRequired,
-      buckets: PropTypes.shape({
-        new: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
-        highFreq: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
-        mdFreq: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
-        lowFreq: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
-        mastered: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
-      }).isRequired,
-    }).isRequired,
-  ).isRequired,
 }
 
-const mapStateToProps = (state) => ({
-  decks: state.decksPage.decks,
-})
-
-export default connect(mapStateToProps, { setBuckets })(PlayArea)
+export default connect(null, { setBuckets })(processParams(PlayArea))

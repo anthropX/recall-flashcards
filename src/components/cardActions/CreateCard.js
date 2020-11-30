@@ -8,18 +8,9 @@ import BalloonEditor from '@ckeditor/ckeditor5-build-balloon'
 import { v4 as uuidv4 } from 'uuid'
 import { addCard, addCardToBuckets } from '../../actions/decksPage'
 import editorConfig from '../../config/ckEditorConfig'
-import Spinner from '../layout/Spinner'
+import processParams from '../layout/processParams'
 
-const CreateCard = ({
-  addCard,
-  addCardToBuckets,
-  history,
-  match: {
-    params: { deckId },
-  },
-  decks,
-}) => {
-  const deck = decks.filter((deck) => deck.deckId === deckId)[0]
+const CreateCard = ({ addCard, addCardToBuckets, history, deckId, deck }) => {
   // TODO: get cardId from API response
   const cardId = uuidv4()
   const [question, setQuestion] = useState(
@@ -41,7 +32,7 @@ const CreateCard = ({
     history.push(`/decks/${deckId}`)
   }
 
-  return deck ? (
+  return (
     <>
       <div className='create-card'>
         <h1 className='display-5 mb-1'>{deck.name} Deck</h1>
@@ -104,8 +95,6 @@ const CreateCard = ({
         </div>
       </div>
     </>
-  ) : (
-    <Spinner />
   )
 }
 
@@ -115,40 +104,30 @@ CreateCard.propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func.isRequired,
   }).isRequired,
-  match: PropTypes.shape({
-    params: PropTypes.shape({
-      deckId: PropTypes.string.isRequired,
+  deckId: PropTypes.string.isRequired,
+  deck: PropTypes.shape({
+    deckId: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    desc: PropTypes.string.isRequired,
+    cards: PropTypes.arrayOf(
+      PropTypes.shape({
+        cardId: PropTypes.string.isRequired,
+        question: PropTypes.string.isRequired,
+        answerTitle: PropTypes.string.isRequired,
+        answerImage: PropTypes.string.isRequired,
+        answerDesc: PropTypes.string.isRequired,
+      }),
+    ).isRequired,
+    buckets: PropTypes.shape({
+      new: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+      highFreq: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+      mdFreq: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+      lowFreq: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+      mastered: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
     }).isRequired,
   }).isRequired,
-  decks: PropTypes.arrayOf(
-    PropTypes.shape({
-      deckId: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      desc: PropTypes.string.isRequired,
-      cards: PropTypes.arrayOf(
-        PropTypes.shape({
-          cardId: PropTypes.string.isRequired,
-          question: PropTypes.string.isRequired,
-          answerTitle: PropTypes.string.isRequired,
-          answerImage: PropTypes.string.isRequired,
-          answerDesc: PropTypes.string.isRequired,
-        }),
-      ).isRequired,
-      buckets: PropTypes.shape({
-        new: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
-        highFreq: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
-        mdFreq: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
-        lowFreq: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
-        mastered: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
-      }).isRequired,
-    }).isRequired,
-  ).isRequired,
 }
 
-const mapStateToProps = (state) => ({
-  decks: state.decksPage.decks,
-})
-
 export default withRouter(
-  connect(mapStateToProps, { addCard, addCardToBuckets })(CreateCard),
+  connect(null, { addCard, addCardToBuckets })(processParams(CreateCard)),
 )

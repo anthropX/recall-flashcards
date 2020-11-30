@@ -8,16 +8,9 @@ import PropTypes from 'prop-types'
 import { withRouter } from 'react-router-dom'
 import Input from '../layout/Input'
 import { setDeck } from '../../actions/decksPage'
+import processParams from '../layout/processParams'
 
-const RenameDeck = ({
-  setDeck,
-  history,
-  match: {
-    params: { deckId },
-  },
-  decks,
-}) => {
-  const deck = decks.filter((deck) => deck.deckId === deckId)[0]
+const RenameDeck = ({ setDeck, history, deckId, deck }) => {
   return deck ? (
     <div className='rename-deck'>
       <h1 className='display-5 mb-1'>Rename Deck</h1>
@@ -76,38 +69,28 @@ RenameDeck.propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func.isRequired,
   }).isRequired,
-  match: PropTypes.shape({
-    params: PropTypes.shape({
-      deckId: PropTypes.string.isRequired,
+  deckId: PropTypes.string.isRequired,
+  deck: PropTypes.shape({
+    deckId: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    desc: PropTypes.string.isRequired,
+    cards: PropTypes.arrayOf(
+      PropTypes.shape({
+        cardId: PropTypes.string.isRequired,
+        question: PropTypes.string.isRequired,
+        answerTitle: PropTypes.string.isRequired,
+        answerImage: PropTypes.string.isRequired,
+        answerDesc: PropTypes.string.isRequired,
+      }),
+    ).isRequired,
+    buckets: PropTypes.shape({
+      new: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+      highFreq: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+      mdFreq: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+      lowFreq: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+      mastered: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
     }).isRequired,
   }).isRequired,
-  decks: PropTypes.arrayOf(
-    PropTypes.shape({
-      deckId: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      desc: PropTypes.string.isRequired,
-      cards: PropTypes.arrayOf(
-        PropTypes.shape({
-          cardId: PropTypes.string.isRequired,
-          question: PropTypes.string.isRequired,
-          answerTitle: PropTypes.string.isRequired,
-          answerImage: PropTypes.string.isRequired,
-          answerDesc: PropTypes.string.isRequired,
-        }),
-      ).isRequired,
-      buckets: PropTypes.shape({
-        new: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
-        highFreq: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
-        mdFreq: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
-        lowFreq: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
-        mastered: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
-      }).isRequired,
-    }).isRequired,
-  ).isRequired,
 }
 
-const mapStateToProps = (state) => ({
-  decks: state.decksPage.decks,
-})
-
-export default withRouter(connect(mapStateToProps, { setDeck })(RenameDeck))
+export default withRouter(connect(null, { setDeck })(processParams(RenameDeck)))
