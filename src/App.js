@@ -53,24 +53,12 @@ const App = ({ setDecks, isDark }) => {
         }}>
         <Container>
           <Switch>
-            <Route exact path='/'>
-              <Dashboard />
-            </Route>
-            <Route path='/about'>
-              <About />
-            </Route>
-            <Route path='/login'>
-              <Login />
-            </Route>
-            <Route path='/register'>
-              <Register />
-            </Route>
-            <Route exact path='/decks'>
-              <DecksPage />
-            </Route>
-            <Route exact path='/decks/new'>
-              <CreateDeck />
-            </Route>
+            <Route exact path='/' component={Dashboard} />
+            <Route path='/about' component={About} />
+            <Route path='/login' component={Login} />
+            <Route path='/register' component={Register} />
+            <Route exact path='/decks' component={DecksPage} />
+            <Route exact path='/decks/new' component={CreateDeck} />
             <Route exact path='/decks/:deckId' component={DeckPage} />
             <Route exact path='/decks/:deckId/update' component={RenameDeck} />
             <Route
@@ -84,9 +72,7 @@ const App = ({ setDecks, isDark }) => {
               component={CreateCard}
             />
             <Route exact path='/decks/:deckId/play' component={PlayArea} />
-            <Route>
-              <NotFound />
-            </Route>
+            <Route component={NotFound} />
           </Switch>
         </Container>
       </div>
