@@ -9,8 +9,16 @@ import { v4 as uuidv4 } from 'uuid'
 import { addCard, addCardToBuckets } from '../../actions/decksPage'
 import editorConfig from '../../config/ckEditorConfig'
 import processParams from '../layout/processParams'
+import { showAlert } from '../../actions/alerts'
 
-const CreateCard = ({ addCard, addCardToBuckets, history, deckId, deck }) => {
+const CreateCard = ({
+  showAlert,
+  addCard,
+  addCardToBuckets,
+  history,
+  deckId,
+  deck,
+}) => {
   // TODO: get cardId from API response
   const cardId = uuidv4()
   const [question, setQuestion] = useState(
@@ -30,6 +38,7 @@ const CreateCard = ({ addCard, addCardToBuckets, history, deckId, deck }) => {
     })
     addCardToBuckets({ deckId, cardId })
     history.push(`/decks/${deckId}`)
+    showAlert('success', `Card added to ${deck.name} deck!`)
   }
 
   return (
@@ -99,6 +108,7 @@ const CreateCard = ({ addCard, addCardToBuckets, history, deckId, deck }) => {
 }
 
 CreateCard.propTypes = {
+  showAlert: PropTypes.func.isRequired,
   addCard: PropTypes.func.isRequired,
   addCardToBuckets: PropTypes.func.isRequired,
   history: PropTypes.shape({
@@ -129,5 +139,7 @@ CreateCard.propTypes = {
 }
 
 export default withRouter(
-  connect(null, { addCard, addCardToBuckets })(processParams(CreateCard)),
+  connect(null, { showAlert, addCard, addCardToBuckets })(
+    processParams(CreateCard),
+  ),
 )

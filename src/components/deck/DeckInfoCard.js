@@ -7,8 +7,10 @@ import { Link, withRouter } from 'react-router-dom'
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
 import { setDeckId, removeDeck } from '../../actions/decksPage'
+import { showAlert } from '../../actions/alerts'
 
 const DeckInfoCard = ({
+  showAlert,
   setSidebarOverlaid,
   setDeckId,
   removeDeck,
@@ -29,6 +31,7 @@ const DeckInfoCard = ({
       removeDeck(deckId)
       setDeckId('')
       history.push('/decks')
+      showAlert('success', `${name} deck deleted!`)
     }
   }
 
@@ -129,6 +132,7 @@ const DeckInfoCard = ({
 }
 
 DeckInfoCard.propTypes = {
+  showAlert: PropTypes.func.isRequired,
   setSidebarOverlaid: PropTypes.func.isRequired,
   setDeckId: PropTypes.func.isRequired,
   removeDeck: PropTypes.func.isRequired,
@@ -158,5 +162,5 @@ DeckInfoCard.propTypes = {
 }
 
 export default withRouter(
-  connect(null, { setDeckId, removeDeck })(DeckInfoCard),
+  connect(null, { showAlert, setDeckId, removeDeck })(DeckInfoCard),
 )

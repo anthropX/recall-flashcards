@@ -9,8 +9,9 @@ import { withRouter } from 'react-router-dom'
 import Input from '../layout/Input'
 import { setDeck } from '../../actions/decksPage'
 import processParams from '../layout/processParams'
+import { showAlert } from '../../actions/alerts'
 
-const RenameDeck = ({ setDeck, history, deckId, deck }) => {
+const RenameDeck = ({ showAlert, setDeck, history, deckId, deck }) => {
   return deck ? (
     <div className='rename-deck'>
       <h1 className='display-5 mb-1'>Rename Deck</h1>
@@ -33,6 +34,7 @@ const RenameDeck = ({ setDeck, history, deckId, deck }) => {
         onSubmit={({ deckName, deckDesc }) => {
           setDeck({ deckId, deckName, deckDesc })
           history.push(`/decks/${deckId}`)
+          showAlert('success', `Deck details updated!`)
         }}>
         {(formik) => (
           <Form
@@ -65,6 +67,7 @@ const RenameDeck = ({ setDeck, history, deckId, deck }) => {
 }
 
 RenameDeck.propTypes = {
+  showAlert: PropTypes.func.isRequired,
   setDeck: PropTypes.func.isRequired,
   history: PropTypes.shape({
     push: PropTypes.func.isRequired,
@@ -93,4 +96,6 @@ RenameDeck.propTypes = {
   }).isRequired,
 }
 
-export default withRouter(connect(null, { setDeck })(processParams(RenameDeck)))
+export default withRouter(
+  connect(null, { showAlert, setDeck })(processParams(RenameDeck)),
+)

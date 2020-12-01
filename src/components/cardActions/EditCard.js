@@ -8,8 +8,9 @@ import BalloonEditor from '@ckeditor/ckeditor5-build-balloon'
 import { setCard } from '../../actions/decksPage'
 import editorConfig from '../../config/ckEditorConfig'
 import processParams from '../layout/processParams'
+import { showAlert } from '../../actions/alerts'
 
-const EditCard = ({ setCard, deckId, deck, cardId, card }) => {
+const EditCard = ({ showAlert, setCard, deckId, deck, cardId, card }) => {
   const [question, setQuestion] = useState(card.question)
   const [answerTitle, setAnswerTitle] = useState(card.answerTitle)
   const { answerImage } = card
@@ -19,6 +20,7 @@ const EditCard = ({ setCard, deckId, deck, cardId, card }) => {
       deckId,
       card: { cardId, question, answerTitle, answerImage, answerDesc },
     })
+    showAlert('success', `Card updated successfully!`)
   }
 
   return (
@@ -96,6 +98,7 @@ const EditCard = ({ setCard, deckId, deck, cardId, card }) => {
 }
 
 EditCard.propTypes = {
+  showAlert: PropTypes.func.isRequired,
   setCard: PropTypes.func.isRequired,
   deckId: PropTypes.string.isRequired,
   deck: PropTypes.shape({
@@ -129,4 +132,4 @@ EditCard.propTypes = {
   }).isRequired,
 }
 
-export default connect(null, { setCard })(processParams(EditCard))
+export default connect(null, { showAlert, setCard })(processParams(EditCard))

@@ -10,8 +10,9 @@ import { v4 as uuid4 } from 'uuid'
 import Input from '../layout/Input'
 import { addDeck } from '../../actions/decksPage'
 import { getDeck } from '../../util/api'
+import { showAlert } from '../../actions/alerts'
 
-const CreateDeck = ({ addDeck, history }) => {
+const CreateDeck = ({ showAlert, addDeck, history }) => {
   return (
     <div className='create-deck'>
       <h1 className='display-5 mb-1'>Create a new deck</h1>
@@ -36,6 +37,7 @@ const CreateDeck = ({ addDeck, history }) => {
           const deckId = uuid4()
           addDeck({ ...getDeck(), deckId, name: deckName, desc: deckDesc })
           history.push(`/decks/${deckId}`)
+          showAlert('success', `${deckName} deck created successfully!`)
         }}>
         {(formik) => (
           <Form
@@ -68,10 +70,11 @@ const CreateDeck = ({ addDeck, history }) => {
 }
 
 CreateDeck.propTypes = {
+  showAlert: PropTypes.func.isRequired,
   addDeck: PropTypes.func.isRequired,
   history: PropTypes.shape({
     push: PropTypes.func.isRequired,
   }).isRequired,
 }
 
-export default withRouter(connect(null, { addDeck })(CreateDeck))
+export default withRouter(connect(null, { showAlert, addDeck })(CreateDeck))

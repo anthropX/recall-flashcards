@@ -4,8 +4,10 @@ import Button from 'react-bootstrap/Button'
 import Modal from 'react-bootstrap/Modal'
 import { connect } from 'react-redux'
 import { deleteCard, removeCardFromBuckets } from '../../actions/decksPage'
+import { showAlert } from '../../actions/alerts'
 
 const DeleteCardButton = ({
+  showAlert,
   deleteCard,
   removeCardFromBuckets,
   isDark,
@@ -23,6 +25,7 @@ const DeleteCardButton = ({
     deleteCard(payload)
     removeCardFromBuckets(payload)
     handleClose()
+    showAlert('success', `Card deleted from ${deckName} deck!`)
   }
 
   return (
@@ -58,6 +61,7 @@ const DeleteCardButton = ({
 }
 
 DeleteCardButton.propTypes = {
+  showAlert: PropTypes.func.isRequired,
   deleteCard: PropTypes.func.isRequired,
   removeCardFromBuckets: PropTypes.func.isRequired,
   isDark: PropTypes.bool.isRequired,
@@ -71,6 +75,8 @@ const mapStateToProps = (state) => ({
   isDark: state.isDark,
 })
 
-export default connect(mapStateToProps, { deleteCard, removeCardFromBuckets })(
-  DeleteCardButton,
-)
+export default connect(mapStateToProps, {
+  showAlert,
+  deleteCard,
+  removeCardFromBuckets,
+})(DeleteCardButton)
