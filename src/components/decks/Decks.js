@@ -8,9 +8,16 @@ import DeckNew from './DeckNew'
 import DeckGraphic from './DeckGraphic'
 import { setDeckId } from '../../actions/decksPage'
 
-const Decks = ({ setDeckId, setSidebarOverlaid, selectedDeckId, decks }) => {
+const Decks = ({
+  setDeckId,
+  setSidebarOverlaid,
+  setResetVisible,
+  selectedDeckId,
+  decks,
+}) => {
   const handleDeckGraphicFocus = (deckId) => {
     setSidebarOverlaid(true)
+    setResetVisible(false)
     setDeckId(deckId)
   }
 
@@ -43,6 +50,7 @@ const Decks = ({ setDeckId, setSidebarOverlaid, selectedDeckId, decks }) => {
 Decks.propTypes = {
   setDeckId: PropTypes.func.isRequired,
   setSidebarOverlaid: PropTypes.func.isRequired,
+  setResetVisible: PropTypes.func.isRequired,
   selectedDeckId: PropTypes.string.isRequired,
   decks: PropTypes.arrayOf(
     PropTypes.shape({

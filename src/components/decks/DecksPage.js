@@ -4,6 +4,7 @@ import DecksInfoCard from './DecksInfoCard'
 
 const DecksPage = () => {
   const [isSidebarOverlaid, setSidebarOverlaid] = useState(false)
+  const [isResetVisible, setResetVisible] = useState(false)
 
   return (
     <div className='decks-page d-flex flex-column flex-md-row'>
@@ -13,11 +14,16 @@ const DecksPage = () => {
           Here’s a collection of all your decks. Choose a deck to view more
           details or create a new deck!
         </p>
-        <Decks setSidebarOverlaid={setSidebarOverlaid} />
+        <Decks
+          setSidebarOverlaid={setSidebarOverlaid}
+          setResetVisible={setResetVisible}
+        />
       </div>
       <DecksInfoCard
-        isSidebarOverlaid={isSidebarOverlaid}
         setSidebarOverlaid={setSidebarOverlaid}
+        isSidebarOverlaid={isSidebarOverlaid}
+        setResetVisible={setResetVisible}
+        isResetVisible={isResetVisible}
       />
     </div>
   )

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import ProgressBar from 'react-bootstrap/ProgressBar'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
@@ -12,14 +12,15 @@ import { showAlert } from '../../actions/alerts'
 const DecksInfoCard = ({
   showAlert,
   setSidebarOverlaid,
+  setResetVisible,
   resetBuckets,
   deckId,
   decks,
   isSidebarOverlaid,
+  isResetVisible,
 }) => {
   const { name, desc, buckets, cards } =
     deckId && decks.filter((deck) => deck.deckId === deckId)[0]
-  const [isResetVisible, setResetVisible] = useState(false)
   let total
   let mastered
   let isEmpty
@@ -149,6 +150,7 @@ const DecksInfoCard = ({
 DecksInfoCard.propTypes = {
   showAlert: PropTypes.func.isRequired,
   setSidebarOverlaid: PropTypes.func.isRequired,
+  setResetVisible: PropTypes.func.isRequired,
   resetBuckets: PropTypes.func.isRequired,
   deckId: PropTypes.string.isRequired,
   decks: PropTypes.arrayOf(
@@ -175,6 +177,7 @@ DecksInfoCard.propTypes = {
     }).isRequired,
   ).isRequired,
   isSidebarOverlaid: PropTypes.bool.isRequired,
+  isResetVisible: PropTypes.bool.isRequired,
 }
 
 const mapStateToProps = (state) => ({
