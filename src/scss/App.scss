@@ -40,6 +40,10 @@ $threat: #e65f12;
   font-size: 0.9rem;
 }
 
+.p15 {
+  font-size: 0.85rem;
+}
+
 .p2 {
   font-size: 0.8rem;
 }
@@ -99,6 +103,16 @@ textarea {
 
 .main-content {
   padding-bottom: 7.5rem;
+
+  .alert {
+    margin: 1px 0 0 0;
+    .close {
+      display: flex;
+      align-items: center;
+      height: 100%;
+      outline: none;
+    }
+  }
 
   &--dark {
     background: $bg-dark-mode;

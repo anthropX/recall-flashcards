@@ -20,6 +20,7 @@ import NotFound from './components/layout/NotFound'
 import dashboardImg from './img/dashboard-background.jpg'
 import { setDecks } from './actions/decksPage'
 import { getDecks } from './util/api'
+import Alerts from './components/layout/Alerts'
 
 const App = ({ setDecks, isDark }) => {
   const wallOverlay = ['#302d2db5', '#302d2d59']
@@ -52,6 +53,7 @@ const App = ({ setDecks, isDark }) => {
           backgroundPosition: 'left 0px',
         }}>
         <Container>
+          <Alerts />
           <Switch>
             <Route exact path='/' component={Dashboard} />
             <Route path='/about' component={About} />
