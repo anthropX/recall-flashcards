@@ -6,9 +6,13 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import Button from 'react-bootstrap/Button'
+import { resetBuckets } from '../../actions/decksPage'
+import { showAlert } from '../../actions/alerts'
 
 const DecksInfoCard = ({
+  showAlert,
   setSidebarOverlaid,
+  resetBuckets,
   deckId,
   decks,
   isSidebarOverlaid,
@@ -39,6 +43,13 @@ const DecksInfoCard = ({
   const getProgressPercentage = () => {
     if (total === 0) return 0
     return Math.floor((mastered / total) * 100)
+  }
+
+  const handleResetConfirmation = () => {
+    resetBuckets(deckId)
+    setResetVisible(false)
+    setSidebarOverlaid(false)
+    showAlert('success', `You've successfully reset progress for ${name} deck`)
   }
 
   return (
@@ -126,7 +137,7 @@ const DecksInfoCard = ({
             variant='outline-danger'
             type='submit'
             className='px-4 mt-2 mb-3'
-            onClick={() => setResetVisible(false)}>
+            onClick={handleResetConfirmation}>
             Confirm
           </Button>
         </aside>
@@ -136,7 +147,9 @@ const DecksInfoCard = ({
 }
 
 DecksInfoCard.propTypes = {
+  showAlert: PropTypes.func.isRequired,
   setSidebarOverlaid: PropTypes.func.isRequired,
+  resetBuckets: PropTypes.func.isRequired,
   deckId: PropTypes.string.isRequired,
   decks: PropTypes.arrayOf(
     PropTypes.shape({
@@ -169,4 +182,6 @@ const mapStateToProps = (state) => ({
   decks: state.decksPage.decks,
 })
 
-export default connect(mapStateToProps)(DecksInfoCard)
+export default connect(mapStateToProps, { showAlert, resetBuckets })(
+  DecksInfoCard,
+)

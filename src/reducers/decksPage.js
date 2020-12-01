@@ -7,6 +7,7 @@ import {
   ADD_CARD,
   SET_CARD,
   DELETE_CARD,
+  RESET_BUCKETS,
   SET_BUCKETS,
   ADD_CARD_TO_BUCKETS,
   REMOVE_CARD_FROM_BUCKETS,
@@ -87,6 +88,24 @@ export default (state = initialState, { type, payload }) => {
             ? {
                 ...deck,
                 buckets: payload.buckets,
+              }
+            : deck,
+        ),
+      }
+    case RESET_BUCKETS:
+      return {
+        ...state,
+        decks: state.decks.map((deck) =>
+          deck.deckId === payload
+            ? {
+                ...deck,
+                buckets: {
+                  new: deck.cards.map(({ cardId }) => cardId),
+                  highFreq: [],
+                  mdFreq: [],
+                  lowFreq: [],
+                  mastered: [],
+                },
               }
             : deck,
         ),

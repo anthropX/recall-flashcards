@@ -7,6 +7,7 @@ import {
   ADD_CARD,
   SET_CARD,
   DELETE_CARD,
+  RESET_BUCKETS,
   SET_BUCKETS,
   ADD_CARD_TO_BUCKETS,
   REMOVE_CARD_FROM_BUCKETS,
@@ -50,6 +51,11 @@ export const setCard = (card) => ({
 export const deleteCard = (payload) => ({
   type: DELETE_CARD,
   payload,
+})
+
+export const resetBuckets = (deckId) => ({
+  type: RESET_BUCKETS,
+  payload: deckId,
 })
 
 export const setBuckets = (buckets) => ({
