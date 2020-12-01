@@ -1,5 +1,4 @@
 import {
-  SET_DECK_ID,
   SET_DECKS,
   ADD_DECK,
   SET_DECK,
@@ -12,11 +11,6 @@ import {
   ADD_CARD_TO_BUCKETS,
   REMOVE_CARD_FROM_BUCKETS,
 } from './types'
-
-export const setDeckId = (deckId) => ({
-  type: SET_DECK_ID,
-  payload: deckId,
-})
 
 export const setDecks = (decks) => ({
   type: SET_DECKS,

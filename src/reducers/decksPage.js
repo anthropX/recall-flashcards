@@ -1,5 +1,4 @@
 import {
-  SET_DECK_ID,
   SET_DECKS,
   ADD_DECK,
   SET_DECK,
@@ -14,14 +13,11 @@ import {
 } from '../actions/types'
 
 const initialState = {
-  deckId: '',
   decks: [],
 }
 
 export default (state = initialState, { type, payload }) => {
   switch (type) {
-    case SET_DECK_ID:
-      return { ...state, deckId: payload }
     case SET_DECKS:
       return { ...state, decks: payload }
     case ADD_DECK:

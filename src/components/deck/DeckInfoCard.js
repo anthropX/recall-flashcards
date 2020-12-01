@@ -6,13 +6,12 @@ import PropTypes from 'prop-types'
 import { Link, withRouter } from 'react-router-dom'
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
-import { setDeckId, removeDeck } from '../../actions/decksPage'
+import { removeDeck } from '../../actions/decksPage'
 import { showAlert } from '../../actions/alerts'
 
 const DeckInfoCard = ({
   showAlert,
   setSidebarOverlaid,
-  setDeckId,
   removeDeck,
   match: {
     params: { deckId },
@@ -29,7 +28,6 @@ const DeckInfoCard = ({
     event.stopPropagation()
     if (comfirmation === name) {
       removeDeck(deckId)
-      setDeckId('')
       history.push('/decks')
       showAlert('success', `${name} deck deleted!`)
     }
@@ -134,7 +132,6 @@ const DeckInfoCard = ({
 DeckInfoCard.propTypes = {
   showAlert: PropTypes.func.isRequired,
   setSidebarOverlaid: PropTypes.func.isRequired,
-  setDeckId: PropTypes.func.isRequired,
   removeDeck: PropTypes.func.isRequired,
   match: PropTypes.shape({
     params: PropTypes.shape({
@@ -162,5 +159,5 @@ DeckInfoCard.propTypes = {
 }
 
 export default withRouter(
-  connect(null, { showAlert, setDeckId, removeDeck })(DeckInfoCard),
+  connect(null, { showAlert, removeDeck })(DeckInfoCard),
 )

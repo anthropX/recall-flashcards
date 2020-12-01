@@ -181,7 +181,6 @@ DecksInfoCard.propTypes = {
 }
 
 const mapStateToProps = (state) => ({
-  deckId: state.decksPage.deckId,
   decks: state.decksPage.decks,
 })
 

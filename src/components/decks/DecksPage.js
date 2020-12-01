@@ -3,6 +3,7 @@ import Decks from './Decks'
 import DecksInfoCard from './DecksInfoCard'
 
 const DecksPage = () => {
+  const [deckId, setDeckId] = useState('')
   const [isSidebarOverlaid, setSidebarOverlaid] = useState(false)
   const [isResetVisible, setResetVisible] = useState(false)
 
@@ -15,15 +16,18 @@ const DecksPage = () => {
           details or create a new deck!
         </p>
         <Decks
+          deckId={deckId}
+          setDeckId={setDeckId}
           setSidebarOverlaid={setSidebarOverlaid}
           setResetVisible={setResetVisible}
         />
       </div>
       <DecksInfoCard
-        setSidebarOverlaid={setSidebarOverlaid}
+        deckId={deckId}
         isSidebarOverlaid={isSidebarOverlaid}
-        setResetVisible={setResetVisible}
         isResetVisible={isResetVisible}
+        setSidebarOverlaid={setSidebarOverlaid}
+        setResetVisible={setResetVisible}
       />
     </div>
   )
