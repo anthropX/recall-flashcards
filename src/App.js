@@ -87,10 +87,8 @@ App.propTypes = {
   isDark: PropTypes.bool.isRequired,
 }
 
-function mapStateToProps(state) {
-  return {
-    isDark: state.isDark,
-  }
-}
+const mapStateToProps = (state) => ({
+  isDark: state.isDark,
+})
 
 export default connect(mapStateToProps, { setDecks })(App)

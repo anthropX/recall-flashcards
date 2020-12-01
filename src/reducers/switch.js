@@ -1,6 +1,6 @@
 import { TOGGLE_DARK } from '../actions/types'
 
-export default function (state = false, { type }) {
+export default (state = false, { type }) => {
   switch (type) {
     case TOGGLE_DARK:
       return !state

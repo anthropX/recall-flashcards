@@ -67,11 +67,9 @@ DeleteCardButton.propTypes = {
   cardId: PropTypes.string.isRequired,
 }
 
-function mapStateToProps(state) {
-  return {
-    isDark: state.isDark,
-  }
-}
+const mapStateToProps = (state) => ({
+  isDark: state.isDark,
+})
 
 export default connect(mapStateToProps, { deleteCard, removeCardFromBuckets })(
   DeleteCardButton,

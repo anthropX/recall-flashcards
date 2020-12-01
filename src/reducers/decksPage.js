@@ -17,7 +17,7 @@ const initialState = {
   decks: [],
 }
 
-export default function (state = initialState, { type, payload }) {
+export default (state = initialState, { type, payload }) => {
   switch (type) {
     case SET_DECK_ID:
       return { ...state, deckId: payload }
