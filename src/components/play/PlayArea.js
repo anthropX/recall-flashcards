@@ -5,7 +5,7 @@ import ProgressBar from 'react-bootstrap/ProgressBar'
 import FlippableCard from './FlippableCard'
 import Spinner from '../layout/Spinner'
 import PlayAreaService from './PlayAreaService'
-import { setBuckets } from '../../actions/decksPage'
+import { setBuckets } from '../../actions/decks'
 import processParams from '../layout/processParams'
 
 const PlayArea = ({ setBuckets, deckId, deck }) => {

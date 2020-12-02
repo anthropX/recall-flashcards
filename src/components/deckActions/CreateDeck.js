@@ -8,7 +8,7 @@ import PropTypes from 'prop-types'
 import { withRouter } from 'react-router-dom'
 import { v4 as uuid4 } from 'uuid'
 import Input from '../layout/Input'
-import { addDeck } from '../../actions/decksPage'
+import { addDeck } from '../../actions/decks'
 import { getDeck } from '../../util/api'
 import { showAlert } from '../../actions/alerts'
 

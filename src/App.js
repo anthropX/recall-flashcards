@@ -18,7 +18,7 @@ import CreateCard from './components/cardActions/CreateCard'
 import PlayArea from './components/play/PlayArea'
 import NotFound from './components/layout/NotFound'
 import dashboardImg from './img/dashboard-background.jpg'
-import { setDecks } from './actions/decksPage'
+import { setDecks } from './actions/decks'
 import { getDecks } from './util/api'
 import Alerts from './components/layout/Alerts'
 

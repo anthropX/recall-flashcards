@@ -6,7 +6,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import Button from 'react-bootstrap/Button'
-import { resetBuckets } from '../../actions/decksPage'
+import { resetBuckets } from '../../actions/decks'
 import { showAlert } from '../../actions/alerts'
 
 const DecksInfoCard = ({
@@ -181,7 +181,7 @@ DecksInfoCard.propTypes = {
 }
 
 const mapStateToProps = (state) => ({
-  decks: state.decksPage.decks,
+  decks: state.decks,
 })
 
 export default connect(mapStateToProps, { showAlert, resetBuckets })(

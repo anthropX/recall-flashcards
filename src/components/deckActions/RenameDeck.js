@@ -7,7 +7,7 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { withRouter } from 'react-router-dom'
 import Input from '../layout/Input'
-import { setDeck } from '../../actions/decksPage'
+import { setDeck } from '../../actions/decks'
 import processParams from '../layout/processParams'
 import { showAlert } from '../../actions/alerts'
 

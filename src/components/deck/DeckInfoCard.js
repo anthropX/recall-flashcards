@@ -6,7 +6,7 @@ import PropTypes from 'prop-types'
 import { Link, withRouter } from 'react-router-dom'
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
-import { removeDeck } from '../../actions/decksPage'
+import { removeDeck } from '../../actions/decks'
 import { showAlert } from '../../actions/alerts'
 
 const DeckInfoCard = ({

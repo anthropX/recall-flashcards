@@ -56,7 +56,7 @@ const processParams = (ChildComponent) => {
   }
 
   const mapStateToProps = (state) => ({
-    decks: state.decksPage.decks,
+    decks: state.decks,
   })
 
   return withRouter(connect(mapStateToProps)(ComposedComponent))
