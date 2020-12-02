@@ -40,7 +40,7 @@ const EditCard = ({ showAlert, setCard, deckId, deck, cardId, card }) => {
                 id='card-front__question'
                 editor={BalloonEditor}
                 data={card.question}
-                onBlur={(event, editor) => setQuestion(editor.getData())}
+                onChange={(event, editor) => setQuestion(editor.getData())}
                 config={editorConfig}
               />
             </div>
@@ -52,7 +52,7 @@ const EditCard = ({ showAlert, setCard, deckId, deck, cardId, card }) => {
                   id='card-back__title'
                   editor={BalloonEditor}
                   data={card.answerTitle}
-                  onBlur={(event, editor) => setAnswerTitle(editor.getData())}
+                  onChange={(event, editor) => setAnswerTitle(editor.getData())}
                   config={editorConfig}
                 />
                 {card.answerImage !== '' ? (
@@ -76,7 +76,7 @@ const EditCard = ({ showAlert, setCard, deckId, deck, cardId, card }) => {
                 id='card-back__desc'
                 editor={BalloonEditor}
                 data={card.answerDesc}
-                onBlur={(event, editor) => setAnswerDesc(editor.getData())}
+                onChange={(event, editor) => setAnswerDesc(editor.getData())}
                 config={editorConfig}
               />
             </div>
@@ -88,7 +88,15 @@ const EditCard = ({ showAlert, setCard, deckId, deck, cardId, card }) => {
             className='btn btn-outline-secondary mr-2'>
             Back to Deck
           </Link>
-          <Button variant='outline-danger' onClick={handleSave}>
+          <Button
+            variant='outline-danger'
+            onClick={handleSave}
+            disabled={
+              question === card.question &&
+              answerTitle === card.answerTitle &&
+              answerDesc === card.answerDesc &&
+              answerImage === card.answerImage
+            }>
             Save Changes
           </Button>
         </div>
