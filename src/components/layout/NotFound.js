@@ -4,7 +4,9 @@ const NotFound = () => {
   return (
     <div className='not-found d-flex justify-content-center align-items-center'>
       <div className='not-found-message position-relative d-flex align-items-center'>
-        <h1 className='display-5 display-5-0 text-danger m-0 mt-0'>404</h1>
+        <h1 className='display-5 display-5-0 text-nowrap text-danger m-0 mt-0'>
+          404
+        </h1>
         <div className='vertical-line bg-danger mx-3' />
         <p className='lead m-0'>Requested page couldn&apos;t be found.</p>
       </div>
