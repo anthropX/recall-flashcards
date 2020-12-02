@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import Button from 'react-bootstrap/Button'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
-import { Link } from 'react-router-dom'
+import { Link, Prompt } from 'react-router-dom'
 import { CKEditor } from '@ckeditor/ckeditor5-react'
 import BalloonEditor from '@ckeditor/ckeditor5-build-balloon'
 import { setCard } from '../../actions/decks'
@@ -23,8 +23,18 @@ const EditCard = ({ showAlert, setCard, deckId, deck, cardId, card }) => {
     showAlert('success', `Card updated successfully!`)
   }
 
+  const isDirty = () =>
+    question !== card.question ||
+    answerTitle !== card.answerTitle ||
+    answerDesc !== card.answerDesc ||
+    answerImage !== card.answerImage
+
   return (
     <>
+      <Prompt
+        when={isDirty()}
+        message='You have unsaved changes, are you sure you want to leave?'
+      />
       <div className='edit-card'>
         <h1 className='display-5 mb-1'>{deck.name} Deck</h1>
         <p className='p1 mb-0 pr-0 pr-md-5'>{deck.desc}</p>
@@ -91,12 +101,7 @@ const EditCard = ({ showAlert, setCard, deckId, deck, cardId, card }) => {
           <Button
             variant='outline-danger'
             onClick={handleSave}
-            disabled={
-              question === card.question &&
-              answerTitle === card.answerTitle &&
-              answerDesc === card.answerDesc &&
-              answerImage === card.answerImage
-            }>
+            disabled={!isDirty()}>
             Save Changes
           </Button>
         </div>
