@@ -22,9 +22,9 @@ export const addDeck = (deck) => ({
   payload: deck,
 })
 
-export const setDeck = (deck) => ({
+export const setDeck = ({ deckId, deckName, deckDesc }) => ({
   type: SET_DECK,
-  payload: deck,
+  payload: { deckId, deckName, deckDesc },
 })
 
 export const removeDeck = (deckId) => ({
@@ -32,19 +32,19 @@ export const removeDeck = (deckId) => ({
   payload: deckId,
 })
 
-export const addCard = (card) => ({
+export const addCard = ({ deckId, card }) => ({
   type: ADD_CARD,
-  payload: card,
+  payload: { deckId, card },
 })
 
-export const setCard = (card) => ({
+export const setCard = ({ deckId, card }) => ({
   type: SET_CARD,
-  payload: card,
+  payload: { deckId, card },
 })
 
-export const deleteCard = (payload) => ({
+export const deleteCard = ({ deckId, cardId }) => ({
   type: DELETE_CARD,
-  payload,
+  payload: { deckId, cardId },
 })
 
 export const resetBuckets = (deckId) => ({
@@ -52,17 +52,17 @@ export const resetBuckets = (deckId) => ({
   payload: deckId,
 })
 
-export const setBuckets = (buckets) => ({
+export const setBuckets = ({ deckId, buckets }) => ({
   type: SET_BUCKETS,
-  payload: buckets,
+  payload: { deckId, buckets },
 })
 
-export const addCardToBuckets = (card) => ({
+export const addCardToBuckets = ({ deckId, cardId }) => ({
   type: ADD_CARD_TO_BUCKETS,
-  payload: card,
+  payload: { deckId, cardId },
 })
 
-export const removeCardFromBuckets = (card) => ({
+export const removeCardFromBuckets = ({ deckId, cardId }) => ({
   type: REMOVE_CARD_FROM_BUCKETS,
-  payload: card,
+  payload: { deckId, cardId },
 })
