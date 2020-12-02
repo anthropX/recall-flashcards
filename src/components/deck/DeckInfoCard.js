@@ -23,6 +23,11 @@ const DeckInfoCard = ({
   const [comfirmation, setConfirmation] = useState('')
   const [isDeleteVisible, setDeleteVisible] = useState(false)
 
+  const handleDeleteCancellation = () => {
+    setConfirmation('')
+    setDeleteVisible(false)
+  }
+
   const handleConfirmationSubmit = (event) => {
     event.preventDefault()
     event.stopPropagation()
@@ -113,7 +118,7 @@ const DeckInfoCard = ({
               variant='outline-secondary'
               type='button'
               className='px-4 mt-2 mb-3 mr-2'
-              onClick={() => setDeleteVisible(false)}>
+              onClick={handleDeleteCancellation}>
               Cancel
             </Button>
             <Button
