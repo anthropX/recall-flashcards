@@ -8,7 +8,7 @@ const NotFound = () => {
           404
         </h1>
         <div className='vertical-line bg-danger mx-3' />
-        <p className='lead m-0'>Requested page couldn&apos;t be found.</p>
+        <p className='lead m-0'>Requested page could not be found.</p>
       </div>
     </div>
   )
