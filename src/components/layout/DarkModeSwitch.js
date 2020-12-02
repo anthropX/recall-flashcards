@@ -1,20 +1,9 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import toggleDark from '../../actions/switch'
 
 const DarkModeSwitch = ({ toggleDark, isDark }) => {
-  useEffect(() => {
-    console.log('DarkModeSwitch useEffect!')
-    if (localStorage.isDark === 'true') toggleDark()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
-
-  const handleChange = () => {
-    localStorage.setItem('isDark', !isDark)
-    toggleDark()
-  }
-
   return (
     <label
       htmlFor='switch__input'
@@ -24,7 +13,7 @@ const DarkModeSwitch = ({ toggleDark, isDark }) => {
         type='checkbox'
         id='switch__input'
         className='switch__input'
-        onChange={handleChange}
+        onChange={() => toggleDark()}
         checked={isDark}
       />
       <div className='switch__slider bg-white'>

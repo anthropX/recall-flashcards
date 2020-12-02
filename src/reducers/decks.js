@@ -11,10 +11,9 @@ import {
   ADD_CARD_TO_BUCKETS,
   REMOVE_CARD_FROM_BUCKETS,
 } from '../actions/types'
+import decks from '../data/decks.json'
 
-const initialState = []
-
-export default (state = initialState, { type, payload }) => {
+export default (state = decks, { type, payload }) => {
   switch (type) {
     case SET_DECKS:
       return payload
