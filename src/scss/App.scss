@@ -199,4 +199,10 @@ footer {
   .dashboard__text {
     width: 100% !important;
   }
+
+  .not-found-message .vertical-line {
+    margin-top: 0.275rem;
+    width: 2px !important;
+    height: 3rem !important;
+  }
 }
