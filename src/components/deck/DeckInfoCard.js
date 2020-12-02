@@ -69,7 +69,7 @@ const DeckInfoCard = ({
             </p>
 
             <p className='p1 mt-3 mb-0 d-md-none'>{desc}</p>
-            <hr className='hr mt-2 mb-4 d-md-none ml-0' />
+            <hr className='hr hr--100 mt-2 mb-4 d-md-none ml-0' />
             <Row>
               <Col xs='3' md='4' className='pl-2 pr-0 flex-grow-0'>
                 <Link

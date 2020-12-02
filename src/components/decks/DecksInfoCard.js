@@ -86,7 +86,7 @@ const DecksInfoCard = ({
             srOnly={getProgressPercentage() < 6}
           />
           <p className='p1 mt-3 mb-0'>{desc}</p>
-          <hr className='hr mt-2 mb-4 ml-0' />
+          <hr className='hr hr--100 mt-2 mb-4 ml-0' />
           <Row>
             <Col xs='3' className='pl-2 pr-0'>
               <Link

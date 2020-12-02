@@ -51,6 +51,10 @@ $threat: #e65f12;
 .hr {
   margin-top: 2rem;
   max-width: 30rem;
+
+  &--100 {
+    max-width: unset;
+  }
 }
 
 .form {
