@@ -38,25 +38,33 @@ const PlayArea = ({ setBuckets, deckId, deck }) => {
               <ProgressBar
                 variant='danger'
                 now={service.getProgressPercentage('highFreq')}
-                label={`${service.getProgressPercentage('highFreq')}%`}
+                label={`${Math.round(
+                  service.getProgressPercentage('highFreq'),
+                )}%`}
                 srOnly={service.getProgressPercentage('highFreq') < 6}
               />
               <ProgressBar
                 variant='threat'
                 now={service.getProgressPercentage('mdFreq')}
-                label={`${service.getProgressPercentage('mdFreq')}%`}
+                label={`${Math.round(
+                  service.getProgressPercentage('mdFreq'),
+                )}%`}
                 srOnly={service.getProgressPercentage('mdFreq') < 6}
               />
               <ProgressBar
                 variant='warning'
                 now={service.getProgressPercentage('lowFreq')}
-                label={`${service.getProgressPercentage('lowFreq')}%`}
+                label={`${Math.round(
+                  service.getProgressPercentage('lowFreq'),
+                )}%`}
                 srOnly={service.getProgressPercentage('lowFreq') < 6}
               />
               <ProgressBar
                 variant='success'
                 now={service.getProgressPercentage('mastered')}
-                label={`${service.getProgressPercentage('mastered')}%`}
+                label={`${Math.round(
+                  service.getProgressPercentage('mastered'),
+                )}%`}
                 srOnly={service.getProgressPercentage('mastered') < 6}
               />
             </ProgressBar>
