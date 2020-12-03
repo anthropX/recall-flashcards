@@ -1,13 +1,23 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import { Formik } from 'formik'
 import { object, string } from 'yup'
+import { Prompt } from 'react-router-dom'
 import Input from '../layout/Input'
+import FormikDirtyEffect from '../layout/FormikDirtyEffect'
 
 const About = () => {
+  const [isDirty, setDirty] = useState(false)
+  useEffect(() => {
+    window.onbeforeunload = isDirty ? () => true : undefined
+  })
   return (
     <div className='about'>
+      <Prompt
+        when={isDirty}
+        message='You have unsaved changes, are you sure you want to leave?'
+      />
       <h1 className='display-5 mb-1'>About</h1>
       <a
         href='https://vimalpa.tel'
@@ -39,6 +49,7 @@ const About = () => {
         }}>
         {(formik) => (
           <Form noValidate className='form mt-3' onSubmit={formik.handleSubmit}>
+            <FormikDirtyEffect onDirtyChange={(dirty) => setDirty(dirty)} />
             <Input
               label='Name'
               name='name'

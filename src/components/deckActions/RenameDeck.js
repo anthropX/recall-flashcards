@@ -1,19 +1,28 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import { Formik } from 'formik'
 import { object, string } from 'yup'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
-import { withRouter } from 'react-router-dom'
+import { Prompt, withRouter } from 'react-router-dom'
 import Input from '../layout/Input'
 import { setDeck } from '../../actions/decks'
 import processParams from '../layout/processParams'
 import { showAlert } from '../../actions/alerts'
+import FormikDirtyEffect from '../layout/FormikDirtyEffect'
 
 const RenameDeck = ({ showAlert, setDeck, history, deckId, deck }) => {
+  const [isDirty, setDirty] = useState(false)
+  useEffect(() => {
+    window.onbeforeunload = isDirty ? () => true : undefined
+  })
   return deck ? (
     <div className='rename-deck'>
+      <Prompt
+        when={isDirty}
+        message='You have unsaved changes, are you sure you want to leave?'
+      />
       <h1 className='display-5 mb-1'>Rename Deck</h1>
       <p>Fill in updated details for your deck!</p>
       <hr className='hr ml-0' />
@@ -40,6 +49,7 @@ const RenameDeck = ({ showAlert, setDeck, history, deckId, deck }) => {
           <Form
             className='rename-deck__form form'
             onSubmit={formik.handleSubmit}>
+            <FormikDirtyEffect onDirtyChange={(dirty) => setDirty(dirty)} />
             <Input
               label='Deck Name'
               name='deckName'

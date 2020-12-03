@@ -1,8 +1,8 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Button from 'react-bootstrap/Button'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
-import { Link, withRouter } from 'react-router-dom'
+import { Link, Prompt, withRouter } from 'react-router-dom'
 import { CKEditor } from '@ckeditor/ckeditor5-react'
 import BalloonEditor from '@ckeditor/ckeditor5-build-balloon'
 import { v4 as uuidv4 } from 'uuid'
@@ -21,16 +21,21 @@ const CreateCard = ({
 }) => {
   // TODO: get cardId from API response
   const cardId = uuidv4()
-  const [question, setQuestion] = useState(
-    '<h5>Your <i>question</i> goes in here.</h5>',
-  )
-  const [answerTitle, setAnswerTitle] = useState(
-    '<h5>Your <i>answer heading</i> goes in here.&nbsp;</h5>',
-  )
-  const answerImage = ''
-  const [answerDesc, setAnswerDesc] = useState(
-    '<p>Type your<strong> answer description</strong>. &nbsp;Lorem ipsum dolor sit amet consectetur, adipisicing elit. Optio sint consectetur veritatis sunt ab.</p><ol><li>Lorem ipsum dolor sit amet consectetur, adipisicing elit.</li><li>Optio sint consectetur veritatis sunt ab asperiores.</li></ol>',
-  )
+  const initialValues = {
+    question: '<h5>Your <i>question</i> goes in here.</h5>',
+    answerTitle: '<h5>Your <i>answer heading</i> goes in here.&nbsp;</h5>',
+    answerImage: '',
+    answerDesc:
+      '<p>Type your<strong> answer description</strong>. &nbsp;Lorem ipsum dolor sit amet consectetur, adipisicing elit. Optio sint consectetur veritatis sunt ab.</p><ol><li>Lorem ipsum dolor sit amet consectetur, adipisicing elit.</li><li>Optio sint consectetur veritatis sunt ab asperiores.</li></ol>',
+  }
+  const [question, setQuestion] = useState(initialValues.question)
+  const [answerTitle, setAnswerTitle] = useState(initialValues.answerTitle)
+  const { answerImage } = initialValues
+  const [answerDesc, setAnswerDesc] = useState(initialValues.answerDesc)
+  useEffect(() => {
+    window.onbeforeunload = isDirty() ? () => true : undefined
+  })
+
   const handleSave = () => {
     addCard({
       deckId,
@@ -41,8 +46,18 @@ const CreateCard = ({
     showAlert('success', `Card added to ${deck.name} deck!`)
   }
 
+  const isDirty = () =>
+    question !== initialValues.question ||
+    answerTitle !== initialValues.answerTitle ||
+    answerDesc !== initialValues.answerDesc ||
+    answerImage !== initialValues.answerImage
+
   return (
     <>
+      <Prompt
+        when={isDirty()}
+        message='You have unsaved changes, are you sure you want to leave?'
+      />
       <div className='create-card'>
         <h1 className='display-5 mb-1'>{deck.name} Deck</h1>
         <p className='p1 mb-0 pr-0 pr-md-5'>{deck.desc}</p>
@@ -58,7 +73,7 @@ const CreateCard = ({
                 id='card-front__question'
                 editor={BalloonEditor}
                 data={question}
-                onBlur={(event, editor) => setQuestion(editor.getData())}
+                onChange={(event, editor) => setQuestion(editor.getData())}
                 config={editorConfig}
               />
             </div>
@@ -70,7 +85,7 @@ const CreateCard = ({
                   id='card-back__title'
                   editor={BalloonEditor}
                   data={answerTitle}
-                  onBlur={(event, editor) => setAnswerTitle(editor.getData())}
+                  onChange={(event, editor) => setAnswerTitle(editor.getData())}
                   config={editorConfig}
                 />
                 <div
@@ -86,7 +101,7 @@ const CreateCard = ({
                 id='card-back__desc'
                 editor={BalloonEditor}
                 data={answerDesc}
-                onBlur={(event, editor) => setAnswerDesc(editor.getData())}
+                onChange={(event, editor) => setAnswerDesc(editor.getData())}
                 config={editorConfig}
               />
             </div>

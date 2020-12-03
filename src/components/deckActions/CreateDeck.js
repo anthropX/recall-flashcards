@@ -1,20 +1,29 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import { Formik } from 'formik'
 import { object, string } from 'yup'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
-import { withRouter } from 'react-router-dom'
+import { Prompt, withRouter } from 'react-router-dom'
 import { v4 as uuid4 } from 'uuid'
 import Input from '../layout/Input'
 import { addDeck } from '../../actions/decks'
 import { getDeck } from '../../util/api'
 import { showAlert } from '../../actions/alerts'
+import FormikDirtyEffect from '../layout/FormikDirtyEffect'
 
 const CreateDeck = ({ showAlert, addDeck, history }) => {
+  const [isDirty, setDirty] = useState(false)
+  useEffect(() => {
+    window.onbeforeunload = isDirty ? () => true : undefined
+  })
   return (
     <div className='create-deck'>
+      <Prompt
+        when={isDirty}
+        message='You have unsaved changes, are you sure you want to leave?'
+      />
       <h1 className='display-5 mb-1'>Create a new deck</h1>
       <p>Fill in details for your new deck!</p>
       <hr className='hr ml-0' />
@@ -43,6 +52,7 @@ const CreateDeck = ({ showAlert, addDeck, history }) => {
           <Form
             className='create-deck__form form'
             onSubmit={formik.handleSubmit}>
+            <FormikDirtyEffect onDirtyChange={(dirty) => setDirty(dirty)} />
             <Input
               label='Deck Name'
               name='deckName'

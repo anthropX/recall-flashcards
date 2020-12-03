@@ -1,18 +1,26 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, { useState, useEffect } from 'react'
+import { Link, Prompt } from 'react-router-dom'
 import Form from 'react-bootstrap/Form'
 import { Formik } from 'formik'
 import { object, string, ref } from 'yup'
 import Button from 'react-bootstrap/Button'
 import Input from '../layout/Input'
+import FormikDirtyEffect from '../layout/FormikDirtyEffect'
 
 const Register = () => {
+  const [isDirty, setDirty] = useState(false)
+  useEffect(() => {
+    window.onbeforeunload = isDirty ? () => true : undefined
+  })
   return (
     <div className='register'>
+      <Prompt
+        when={isDirty}
+        message='You have unsaved changes, are you sure you want to leave?'
+      />
       <h1 className='display-5 mb-1'>Register</h1>
       <p>Please enter details for registration</p>
       <hr className='hr ml-0' />
-
       <Formik
         initialValues={{
           firstName: '',
@@ -58,6 +66,7 @@ const Register = () => {
             noValidate
             className='register__form form'
             onSubmit={formik.handleSubmit}>
+            <FormikDirtyEffect onDirtyChange={(dirty) => setDirty(dirty)} />
             <div className='d-flex'>
               <Input
                 className='w-50 mr-4'
