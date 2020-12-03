@@ -54,12 +54,15 @@ const CreateDeck = ({ showAlert, addDeck, history }) => {
             onSubmit={formik.handleSubmit}>
             <FormikDirtyEffect onDirtyChange={(dirty) => setDirty(dirty)} />
             <Input
+              as='textarea'
+              rows={1}
               label='Deck Name'
               name='deckName'
               type='text'
               placeholder='What do you want to call your deck?'
             />
             <Input
+              as='textarea'
               label='Deck Description'
               name='deckDesc'
               type='text'
