@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Button from 'react-bootstrap/Button'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
@@ -15,6 +15,10 @@ const EditCard = ({ showAlert, setCard, deckId, deck, cardId, card }) => {
   const [answerTitle, setAnswerTitle] = useState(card.answerTitle)
   const { answerImage } = card
   const [answerDesc, setAnswerDesc] = useState(card.answerDesc)
+  useEffect(() => {
+    window.onbeforeunload = isDirty() ? () => true : undefined
+  })
+
   const handleSave = () => {
     setCard({
       deckId,
