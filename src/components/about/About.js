@@ -65,6 +65,7 @@ const About = () => {
             />
             <Input
               as='textarea'
+              rows={4}
               label='Message'
               name='message'
               type='text'

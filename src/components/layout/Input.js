@@ -38,7 +38,7 @@ Input.propTypes = {
 
 Input.defaultProps = {
   as: '',
-  rows: 4,
+  rows: 2,
   className: '',
   autoComplete: '',
 }
